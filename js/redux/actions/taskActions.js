@@ -7,14 +7,12 @@ const addTask = (task) => {
     superagent
       .post('/task')
       .send({ task })
-      .then(
-        dispatch({
-          type: 'ADD_TASK_SUCCESS', data: null
-        }),
-        dispatch({
-          type: 'ADD_TASK_FAILURE', data: error
-        }),
-      );
+      .then((response) => {
+        dispatch({ type: 'ADD_TASK_SUCCESS', data: null })
+      })
+      .catch((error) => {
+        dispatch({ type: 'ADD_TASK_FAILURE', data: error })
+      });
   };
 };
 
@@ -25,14 +23,12 @@ const getTasks = () => {
     superagent
       .get('/tasks')
       //.query()
-      .then(
-        dispatch({
-          type: 'GET_TASKS_SUCCESS', data: response.body.tasks
-        }),
-        dispatch({
-          type: 'GET_TASKS_FAILURE', data: error
-        }),
-      );
+      .then((response) => {
+        dispatch({ type: 'GET_TASKS_SUCCESS', data: response.body.tasks })
+      })
+      .catch((error) => {
+        dispatch({ type: 'GET_TASKS_FAILURE', data: error })
+      });
   };
 };
 

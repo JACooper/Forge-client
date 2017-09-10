@@ -1,7 +1,8 @@
 import React from 'react';
-import Task from '../components/Task.js';
+import { connect } from 'react-redux';
 
-import TaskActions from '../../redux/actions/taskActions.js';
+import Task from '../components/Task.js';
+import * as TaskActions from '../../redux/actions/taskActions.js';
 
 @connect((store) => {
   return {
@@ -15,7 +16,7 @@ class App extends React.Component {
     this.submitTask = this.submitTask.bind(this);
 
     this.state = {
-      taskTitle: 'Enter a new task',
+      taskTitle: '',
     }
   }
 
@@ -29,6 +30,7 @@ class App extends React.Component {
         <input
           type='text'
           value={this.state.taskTitle}
+          placeholder='Enter a new task'
           onChange={(e) => {this.setState({taskTitle: e.target.value})}}
         />
         <input type='button' value='Submit task' onClick={this.submitTask}/>
@@ -38,7 +40,9 @@ class App extends React.Component {
   }
 
   submitTask() {
-    TaskActions.addTask({title: this.state.taskTitle});
+    if (this.state.taskTitle !== '') {
+      this.props.dispatch(TaskActions.addTask({title: this.state.taskTitle}));
+    }
   }
 }
 

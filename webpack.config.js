@@ -10,14 +10,15 @@ const config = {
     filename: '[name]-bundle.js',
     path: path.resolve(__dirname + '/build')
   },
-  plugins: [
-    // If you create multiple bundles with "overlapping" code, this will take
-    //  that code and put it into a common bundle, allowing fewer re-downloads
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      file: 'common.js'
-    })
-  ],
+  // Waiting to include commons chunk until it's needed
+  // plugins: [
+  //   // If you create multiple bundles with "overlapping" code, this will take
+  //   //  that code and put it into a common bundle, allowing fewer re-downloads
+  //   new webpack.optimize.CommonsChunkPlugin({
+  //     name: 'common',
+  //     file: 'common.js'
+  //   })
+  // ],
   module: {
     rules: [
       {
