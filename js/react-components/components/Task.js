@@ -6,9 +6,11 @@ class Task extends React.Component {
   }
 
   render() {
-    <div className='task-wrapper'>
-      <p className='task-title'>{this.props.title}</p>
-    </div>
+    return (
+      <div className='task-wrapper'>
+        <p className='task-title'>{this.props.title}</p>
+      </div>
+    );
   }
 }
 

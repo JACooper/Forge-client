@@ -1,9 +1,10 @@
 const initialState = {
   tasks: [],
-  addingTask: false,
-  gettingTasks: false,
-  addTaskError: null,
-  getTasksError: null,
+  addingTask: false,      // Display progress spinner, should stop after success/failure
+  addTaskError: null,     // Display error, should go away after success/new attempt (or X amount of time?)
+  shouldGetTasks: true,
+  gettingTasks: false,    // Display progress spinner, should stop after success/failure
+  getTasksError: null,    // Display error, should go away after success/new attempt (or X amount of time?)
 };
 
 export default function reduce(state = initialState, action) {
@@ -18,6 +19,7 @@ export default function reduce(state = initialState, action) {
     return {
       ...state,
       addingTask: false,
+      shouldGetTasks: true,
       addTaskError: null,
     };
   case 'ADD_TASK_FAILURE':
@@ -30,6 +32,7 @@ export default function reduce(state = initialState, action) {
   case 'GET_TASKS_START':
     return {
       ...state,
+      shouldGetTasks: false,
       gettingTasks: true,
       getTasksError: null,
     };

@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store.js'; // Calls CreateStore, since that's the default export
 
-import App from './react-components/pages/App.js';
+import Wrapper from './react-components/pages/Wrapper.js';
 
 const init = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <Wrapper />
     </Provider>,
     document.querySelector('#app'),
     () => {
