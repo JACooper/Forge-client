@@ -17,6 +17,7 @@ import * as ViewActions from '../../redux/actions/viewActions.js';
     showTaskForm: store.view.showTaskForm,
     sortType: store.view.sortType,
     sortBy: store.view.sortBy,
+    emphasis: store.view.emphasis,
   };
 })
 class App extends React.Component {
@@ -28,8 +29,10 @@ class App extends React.Component {
     this.submitTask     = this.submitTask.bind(this);
     this.getTasks       = this.getTasks.bind(this);
     this.logout         = this.logout.bind(this);
+    
     this.changeSortType = this.changeSortType.bind(this);
     this.changeSortBy   = this.changeSortBy.bind(this);
+    this.changeEmphasis   = this.changeEmphasis.bind(this);
   }
 
   componentWillMount() {
@@ -62,8 +65,10 @@ class App extends React.Component {
           shouldUpdate={this.props.shouldGetTasks}
           changeSortType={this.changeSortType}
           changeSortBy={this.changeSortBy}
+          changeEmphasis={this.changeEmphasis}
           sortTypeValue={this.props.sortType}
           sortByValue={this.props.sortBy}
+          emphasisValue={this.props.emphasis}
         />
       </div>
     );
@@ -95,6 +100,10 @@ class App extends React.Component {
 
   changeSortBy(sortBy) {
     this.props.dispatch(ViewActions.changeSortBy(sortBy));
+  }
+
+  changeEmphasis(emphasis) {
+    this.props.dispatch(ViewActions.changeEmphasis(emphasis));
   }
 }
 

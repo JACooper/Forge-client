@@ -26,7 +26,15 @@ const changeSortBy = (sortBy) => {
   };
 };
 
-module.exports.showTaskForm = showTaskForm;
-module.exports.hideTaskForm = hideTaskForm;
+const changeEmphasis = (emphasis) => {
+  return {
+    type: 'CHANGE_EMPHASIS',
+    data: { emphasis },
+  };
+};
+
+module.exports.showTaskForm   = showTaskForm;
+module.exports.hideTaskForm   = hideTaskForm;
 module.exports.changeSortType = changeSortType;
-module.exports.changeSortBy = changeSortBy;
+module.exports.changeSortBy   = changeSortBy;
+module.exports.changeEmphasis = changeEmphasis;

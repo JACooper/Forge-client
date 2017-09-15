@@ -1,7 +1,8 @@
 const initialState = {
   showTaskForm: false,
   sortType: 'ascending',
-  sortBy: 'sum,'
+  sortBy: 'sum',
+  emphasis: 'none',
 };
 
 export default function reduce(state = initialState, action) {
@@ -27,6 +28,11 @@ export default function reduce(state = initialState, action) {
     return {
       ...state,
       sortBy: action.data.sortBy,
+    };
+  case 'CHANGE_EMPHASIS':
+    return {
+      ...state,
+      emphasis: action.data.emphasis,
     };
   }
 

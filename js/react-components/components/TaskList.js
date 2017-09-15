@@ -57,6 +57,17 @@ class TaskList extends React.Component {
     return (
       <div className='task-list-wrapper'>
         <div className='list-sort-controls'>
+          <label>Emphasize:</label>
+          <select
+            value={this.props.emphasisValue}
+            onChange={(e) => {this.props.changeEmphasis(e.target.value)}}
+          >
+            <option value='none'>None</option>
+            <option value='time'>Time</option>
+            <option value='effort'>Effort</option>
+            <option value='focus'>Focus</option>
+          </select>
+
           <label>Sort type:</label>
           <select
             value={this.props.sortTypeValue}
@@ -83,21 +94,45 @@ class TaskList extends React.Component {
   }
 
   sortSum(task1, task2) {
-    const sum1 = task1.time + task1.effort + task1.focus;
-    const sum2 = task2.time + task2.effort + task2.focus;
+    let sum1 = task1.time + task1.effort + task1.focus;
+    let sum2 = task2.time + task2.effort + task2.focus;
+
+    switch (this.props.emphasis) {
+      case 'time':
+        sum1 += task1.time;
+        sum2 += task2.time;
+        break;
+      case 'effort':
+        sum1 += task1.effort;
+        sum2 += task2.effort;
+        break;
+      case 'focus':
+        sum1 += task1.focus;
+        sum2 += task2.focus;
+        break;
+    }
 
     return sum1 - sum2;
   }
 
   sortTime(task1, task2) {
+    if (this.props.emphasis === 'time') {
+      return task1.time * 2 - task2.time * 2;
+    }
     return task1.time - task2.time;
   }
 
   sortEffort(task1, task2) {
+    if (this.props.emphasis === 'effort') {
+      return task1.effort * 2 - task2.effort * 2;
+    }
     return task1.effort - task2.effort;
   }
   
   sortFocus(task1, task2) {
+    if (this.props.emphasis === 'focus') {
+      return task1.focus * 2 - task2.focus * 2;
+    }
     return task1.focus - task2.focus;
   }
   
