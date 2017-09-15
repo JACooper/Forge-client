@@ -14,7 +14,7 @@ import * as TaskActions from '../../redux/actions/taskActions.js';
 })
 class Wrapper extends React.Component {
   constructor(props) {
-    super();
+    super(props);
   }
 
   componentWillMount() {

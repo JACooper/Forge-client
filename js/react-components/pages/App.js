@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Task from '../components/Task.js';
+import TaskForm from '../components/TaskForm.js';
 import TaskList from '../components/TaskList.js';
+
 import * as TaskActions from '../../redux/actions/taskActions.js';
 import * as AuthActions from '../../redux/actions/authActions.js';
 
@@ -10,22 +12,36 @@ import * as AuthActions from '../../redux/actions/authActions.js';
   return {
     tasks: store.task.tasks,
     shouldGetTasks: store.task.shouldGetTasks,
+    showTaskForm: store.task.showTaskForm,
+    addTaskSuccess: store.task.addTaskSuccess,
   };
 })
 class App extends React.Component {
   constructor(props) {
-    super();
+    super(props);
 
+    this.showTaskForm = this.showTaskForm.bind(this);
+    this.hideTaskForm = this.hideTaskForm.bind(this);
     this.submitTask = this.submitTask.bind(this);
     this.getTasks = this.getTasks.bind(this);
     this.logout = this.logout.bind(this);
+  }
 
-    this.state = {
-      taskTitle: '',
+  componentWillMount() {
+    if (this.props.addTaskSuccess) {
+      this.closeTaskForm();
     }
   }
 
   render() {
+    const taskForm = (this.props.showTaskForm) ? (
+      <TaskForm submit={this.submitTask} cancel={this.hideTaskForm}/>
+    ) : (null);
+
+    const showFormButton = !(this.props.showTaskForm) ? (
+      <input type='button' value='Create task' onClick={this.showTaskForm}/>
+    ) : (null);
+
     return (
       <div>
         <input
@@ -33,13 +49,8 @@ class App extends React.Component {
           value='Logout'
           onClick={this.logout}
         />
-        <input
-          type='text'
-          value={this.state.taskTitle}
-          placeholder='Enter a new task'
-          onChange={(e) => {this.setState({taskTitle: e.target.value})}}
-        />
-        <input type='button' value='Submit task' onClick={this.submitTask}/>
+        {showFormButton}
+        {taskForm}
         <TaskList
           tasks={this.props.tasks}
           update={this.getTasks}
@@ -49,10 +60,16 @@ class App extends React.Component {
     );
   }
 
-  submitTask() {
-    if (this.state.taskTitle !== '') {
-      this.props.dispatch(TaskActions.addTask({title: this.state.taskTitle}));
-    }
+  showTaskForm() {
+    this.props.dispatch(TaskActions.showTaskForm());
+  }
+
+  hideTaskForm() {
+    this.props.dispatch(TaskActions.hideTaskForm());
+  }
+
+  submitTask(taskParams) {
+    this.props.dispatch(TaskActions.addTask(taskParams));
   }
 
   getTasks() {
