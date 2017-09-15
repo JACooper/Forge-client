@@ -6,7 +6,6 @@ const initialState = {
   shouldGetTasks: true,
   gettingTasks: false,    // Display progress spinner, should stop after success/failure
   getTasksError: null,    // Display error, should go away after success/new attempt (or X amount of time?)
-  showTaskForm: false,
 };
 
 export default function reduce(state = initialState, action) {
@@ -53,17 +52,6 @@ export default function reduce(state = initialState, action) {
       ...state,
       gettingTasks: false,
       getTasksError: action.data.error,
-    };
-
-  case 'SHOW_TASK_FORM':
-    return {
-      ...state,
-      showTaskForm: true,
-    };
-  case 'HIDE_TASK_FORM':
-    return {
-      ...state,
-      showTaskForm: false,
     };
   }
 

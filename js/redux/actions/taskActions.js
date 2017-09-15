@@ -39,21 +39,5 @@ const getTasks = () => {
   };
 };
 
-const showTaskForm = () => {
-  return {
-    type: 'SHOW_TASK_FORM',
-    data: null,
-  };
-};
-
-const hideTaskForm = () => {
-  return {
-    type: 'HIDE_TASK_FORM',
-    data: null,
-  };
-};
-
 module.exports.addTask = addTask;
 module.exports.getTasks = getTasks;
-module.exports.showTaskForm = showTaskForm;
-module.exports.hideTaskForm = hideTaskForm;

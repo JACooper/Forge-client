@@ -5,26 +5,31 @@ import Task from '../components/Task.js';
 import TaskForm from '../components/TaskForm.js';
 import TaskList from '../components/TaskList.js';
 
-import * as TaskActions from '../../redux/actions/taskActions.js';
 import * as AuthActions from '../../redux/actions/authActions.js';
+import * as TaskActions from '../../redux/actions/taskActions.js';
+import * as ViewActions from '../../redux/actions/viewActions.js';
 
 @connect((store) => {
   return {
     tasks: store.task.tasks,
     shouldGetTasks: store.task.shouldGetTasks,
-    showTaskForm: store.task.showTaskForm,
     addTaskSuccess: store.task.addTaskSuccess,
+    showTaskForm: store.view.showTaskForm,
+    sortType: store.view.sortType,
+    sortBy: store.view.sortBy,
   };
 })
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.showTaskForm = this.showTaskForm.bind(this);
-    this.hideTaskForm = this.hideTaskForm.bind(this);
-    this.submitTask = this.submitTask.bind(this);
-    this.getTasks = this.getTasks.bind(this);
-    this.logout = this.logout.bind(this);
+    this.showTaskForm   = this.showTaskForm.bind(this);
+    this.hideTaskForm   = this.hideTaskForm.bind(this);
+    this.submitTask     = this.submitTask.bind(this);
+    this.getTasks       = this.getTasks.bind(this);
+    this.logout         = this.logout.bind(this);
+    this.changeSortType = this.changeSortType.bind(this);
+    this.changeSortBy   = this.changeSortBy.bind(this);
   }
 
   componentWillMount() {
@@ -55,17 +60,21 @@ class App extends React.Component {
           tasks={this.props.tasks}
           update={this.getTasks}
           shouldUpdate={this.props.shouldGetTasks}
+          changeSortType={this.changeSortType}
+          changeSortBy={this.changeSortBy}
+          sortTypeValue={this.props.sortType}
+          sortByValue={this.props.sortBy}
         />
       </div>
     );
   }
 
   showTaskForm() {
-    this.props.dispatch(TaskActions.showTaskForm());
+    this.props.dispatch(ViewActions.showTaskForm());
   }
 
   hideTaskForm() {
-    this.props.dispatch(TaskActions.hideTaskForm());
+    this.props.dispatch(ViewActions.hideTaskForm());
   }
 
   submitTask(taskParams) {
@@ -78,6 +87,14 @@ class App extends React.Component {
 
   logout() {
     this.props.dispatch(AuthActions.logout());
+  }
+
+  changeSortType(sortType) {
+    this.props.dispatch(ViewActions.changeSortType(sortType));
+  }
+
+  changeSortBy(sortBy) {
+    this.props.dispatch(ViewActions.changeSortBy(sortBy));
   }
 }
 
