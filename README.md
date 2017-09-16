@@ -24,7 +24,9 @@ This will compile the source into a bundle and output it to the build directly, 
 
 To recompile after making changes, run ```npm run webpack``` again. Letting webpack watch files and automatically recompile on save is recommended. To do this, run
 
-```npm run webpacklive```
+```
+npm run webpacklive
+```
 
 
 License
