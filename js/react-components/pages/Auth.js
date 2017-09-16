@@ -11,7 +11,7 @@ import * as AuthActions from '../../redux/actions/authActions.js';
 })
 class Auth extends React.Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.authAction = this.authAction.bind(this);
     this.swapState = this.swapState.bind(this);
@@ -34,13 +34,17 @@ class Auth extends React.Component {
     const toggleButtonText = this.props.loginState ? 'Register' : 'Login';
 
     const confirmationField = this.props.loginState ? (null) : (
-        <input
-          type='password'
-          value={this.state.confirmation}
-          placeholder='Confirm password'
-          onChange={(e) => {this.setState({confirmation: e.target.value})}}
-        />
-      );
+      <input
+        type='password'
+        value={this.state.confirmation}
+        placeholder='Confirm password'
+        onChange={(e) => {this.setState({confirmation: e.target.value})}}
+      />
+    );
+
+    const errorText = (this.props.loginError) ? (
+      <p className='login-error-text'>{this.props.loginError}</p>
+    ) : (null);
 
     return (
       <div>
@@ -59,6 +63,7 @@ class Auth extends React.Component {
         {confirmationField}
         <input type='button' value={actionButtonText} onClick={this.authAction}/>
         <input type='button' value={toggleButtonText} onClick={this.swapState}/>
+        {errorText}
       </div>
     );
   }
