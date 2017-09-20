@@ -11,15 +11,7 @@ class TaskForm extends React.Component {
       time: 1,
       effort: 1,
       focus: 1,
-    }
-  }
-
-  componentWillMount() {
-    
-  }
-
-  componentWillReceiveProps(newProps) {
-    
+    };
   }
 
   render() {
@@ -30,7 +22,7 @@ class TaskForm extends React.Component {
           type='text'
           value={this.state.title}
           placeholder='Enter a new task'
-          onChange={(e) => {this.setState({title: e.target.value})}}
+          onChange={(e) => {this.setState({title: e.target.value});}}
         />
         <label>Time rating: </label>
         <input
@@ -39,7 +31,7 @@ class TaskForm extends React.Component {
           value={this.state.time}
           min='1'
           max='3'
-          onChange={(e) => {this.setState({time: e.target.value})}}
+          onChange={(e) => {this.setState({time: e.target.value});}}
         />
         <label>Effort rating: </label>
         <input
@@ -48,7 +40,7 @@ class TaskForm extends React.Component {
           value={this.state.effort}
           min='1'
           max='3'
-          onChange={(e) => {this.setState({effort: e.target.value})}}
+          onChange={(e) => {this.setState({effort: e.target.value});}}
         />
         <label>Focus rating: </label>
         <input
@@ -57,7 +49,7 @@ class TaskForm extends React.Component {
           value={this.state.focus}
           min='1'
           max='3'
-          onChange={(e) => {this.setState({focus: e.target.value})}}
+          onChange={(e) => {this.setState({focus: e.target.value});}}
         />
         <input type='button' value='Submit task' onClick={this.submit}/>
         <input type='button' value='Cancel' onClick={this.props.cancel}/>

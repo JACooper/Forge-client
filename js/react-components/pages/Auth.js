@@ -20,7 +20,7 @@ class Auth extends React.Component {
       email: '',
       password: '',
       confirmation: '',
-    }
+    };
   }
 
   componentWillReceiveProps(newProps) {
@@ -38,7 +38,7 @@ class Auth extends React.Component {
         type='password'
         value={this.state.confirmation}
         placeholder='Confirm password'
-        onChange={(e) => {this.setState({confirmation: e.target.value})}}
+        onChange={(e) => {this.setState({confirmation: e.target.value});}}
       />
     );
 
@@ -52,13 +52,13 @@ class Auth extends React.Component {
           type='text'
           value={this.state.email}
           placeholder='Email address'
-          onChange={(e) => {this.setState({email: e.target.value})}}
+          onChange={(e) => {this.setState({email: e.target.value});}}
         />
         <input
           type='password'
           value={this.state.password}
           placeholder='Password'
-          onChange={(e) => {this.setState({password: e.target.value})}}
+          onChange={(e) => {this.setState({password: e.target.value});}}
         />
         {confirmationField}
         <input type='button' value={actionButtonText} onClick={this.authAction}/>
@@ -74,7 +74,6 @@ class Auth extends React.Component {
     // Regex comes from:
     // https://stackoverflow.com/questions/46155/how-to-validate-email-address-in-javascript
     if (!email.search('^[^\s@]+@[^\s@]+\.[^\s@]+$')) {
-      console.log('invalid email!');
       // dispatch invalid email error
     }
 

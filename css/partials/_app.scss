@@ -1,0 +1,21 @@
+// ---------- Dimensions ----------
+
+
+
+// ---------- Individual styling ----------
+
+.main-view {
+	// Flexbox properties
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+	
+	// Dimensions
+	width: 850px;
+
+	// Placing
+	margin: auto;
+}
+
+

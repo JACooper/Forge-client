@@ -20,12 +20,24 @@ npm install
 npm run webpack
 ```
 
-This will compile the source into a bundle and output it to the build directly, as specified in webpack.config.js. Copy this bundle to the hosted directory in the Forge server to use. The specifics of the webpack configuration may be altered as needed, so long as the name of the output file matches with what the server expects (app-bundle.js by default).
+This will compile the source - provided it passes ESlint tests - into a bundle and output it to the build directly, as specified in webpack.config.js. Copy this bundle to the hosted directory of Forge server to use. The specifics of the webpack configuration may be altered as needed, so long as the name of the output file matches with what the server expects (app-bundle.js by default).
 
-To recompile after making changes, run ```npm run webpack``` again. Letting webpack watch files and automatically recompile on save is recommended. To do this, run
+Additionally, this command watches files and automatically recompiles when it detects changes. To run this same process for production, run
 
 ```
-npm run webpacklive
+npm run webpack-prod
+```
+
+This will compile and minify the source. To compile and test locally (of limited use unless you mock or remove logins), run
+
+```
+npm start
+```
+
+to start webpack dev server (reachable on localhost:8080, as specified in webpack.config.js). Lastly, if you wish to run ESlint _without_ running webpack (helpful if you want to isolate linter error output from build error output), run
+
+```
+npm run test
 ```
 
 

@@ -1,0 +1,109 @@
+// ---------- Dimensions ----------
+
+$card-size : 240px;
+
+// ---------- Colors ----------
+
+$primary-color       : #FFA726;
+$primary-color-light : #FFD95B;
+$primary-color-dark  : #C77800;
+
+$alt-color           : #E91E63;
+$alt-color-light     : #FF6090;
+$alt-color-dark      : #B0003A;
+
+$flat-white          : #FAFAFA;
+$flat-gray           : #E0E0E0;
+$flat-black          : #303030;
+
+$flat-background     : #ECECEC;
+
+// ---------- Typography ----------
+
+$primary-font      : 'Montserrat', sans-serif;
+
+$logo-font-size    : 26pt;
+$header-large-size : 21pt;
+$header-size       : 16pt;
+$content-size      : 13pt;
+$detail-size       : 10pt;
+
+// ---------- Mixins ----------
+
+@mixin absolute($xinset, $yinset) {
+	position : absolute;
+	left     : $xinset;
+	top      : $yinset;
+}
+
+@mixin absolute-center($xinset, $yinset) {
+	@include absolute($inset, $yinset);
+	transform: translate(-50%, -50%);
+}
+
+@mixin fixed-center($xinset, $yinset) {
+	position  : fixed;
+	left      : $xinset;
+	top       : $yinset;
+	transform : translate(-50%, -50%);
+}
+
+@mixin soften() {
+	border-radius : 4px;
+}
+
+@mixin round() {
+	border-radius : 6px;
+}
+
+@mixin circle() {
+	border-radius : 15px;
+}
+
+@mixin drop-shadow() {
+	box-shadow: 0px 7px 5px rgba(0, 0, 0, 0.5);
+}
+
+@mixin set-colors($bg-color, $fg-color) {
+	background-color : $bg-color;
+	color            : $fg-color;
+}
+
+@mixin set-dimensions($width, $height) {
+	width  : $width;
+	height : $height;
+}
+
+// ---------- "Global" styling ----------
+
+* {
+	margin  : 0;
+	padding : 0;
+}
+
+body {
+	background-color : $flat-background;
+	font-family      : $primary-font;
+	font-size        : $content-size;
+}
+
+.overlay-dim {
+	position   : fixed;
+	top        : 0;
+	left       : 0;
+	right      : 0;
+	bottom     : 0;
+	background : rgba(0, 0, 0, 0.4);
+	z-index    : 1;
+}
+
+.invisible-class {
+	display : none;
+}
+
+.form-input {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 14px;
+}

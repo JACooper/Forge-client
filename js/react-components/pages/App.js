@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Task from '../components/Task.js';
 import TaskForm from '../components/TaskForm.js';
 import TaskList from '../components/TaskList.js';
+import CategoryList from '../components/CategoryList.js';
+import TaskControls from '../components/TaskControls.js';
 
 import * as AuthActions from '../../redux/actions/authActions.js';
 import * as TaskActions from '../../redux/actions/taskActions.js';
@@ -18,6 +19,9 @@ import * as ViewActions from '../../redux/actions/viewActions.js';
     sortType: store.view.sortType,
     sortBy: store.view.sortBy,
     emphasis: store.view.emphasis,
+    
+    activeCategory: store.view.activeCategory,
+    categories: store.view.categories,
   };
 })
 class App extends React.Component {
@@ -30,9 +34,11 @@ class App extends React.Component {
     this.getTasks       = this.getTasks.bind(this);
     this.logout         = this.logout.bind(this);
     
+    this.setActiveCategory = this.setActiveCategory.bind(this);
+
     this.changeSortType = this.changeSortType.bind(this);
     this.changeSortBy   = this.changeSortBy.bind(this);
-    this.changeEmphasis   = this.changeEmphasis.bind(this);
+    this.changeEmphasis = this.changeEmphasis.bind(this);
   }
 
   componentWillMount() {
@@ -43,11 +49,7 @@ class App extends React.Component {
 
   render() {
     const taskForm = (this.props.showTaskForm) ? (
-      <TaskForm submit={this.submitTask} cancel={this.hideTaskForm}/>
-    ) : (null);
-
-    const showFormButton = !(this.props.showTaskForm) ? (
-      <input type='button' value='Create task' onClick={this.showTaskForm}/>
+      <TaskForm className='task-form' submit={this.submitTask} cancel={this.hideTaskForm} />
     ) : (null);
 
     return (
@@ -57,21 +59,36 @@ class App extends React.Component {
           value='Logout'
           onClick={this.logout}
         />
-        {showFormButton}
         {taskForm}
-        <TaskList
-          tasks={this.props.tasks}
-          update={this.getTasks}
-          shouldUpdate={this.props.shouldGetTasks}
-          changeSortType={this.changeSortType}
-          changeSortBy={this.changeSortBy}
-          changeEmphasis={this.changeEmphasis}
-          sortTypeValue={this.props.sortType}
-          sortByValue={this.props.sortBy}
-          emphasisValue={this.props.emphasis}
-        />
+        <div className='main-view'>
+        <div className='sidebar'>
+            <TaskControls
+              showTaskForm={this.showTaskForm}
+              changeSortType={this.changeSortType}
+              changeSortBy={this.changeSortBy}
+              changeEmphasis={this.changeEmphasis}
+            />
+            <CategoryList
+              activeCategory={this.props.activeCategory}
+              categories={this.props.categories}
+            />
+          </div>
+          <TaskList
+            tasks={this.props.tasks}
+            updateTasks={this.getTasks}
+            shouldUpdate={this.props.shouldGetTasks}
+            activeCategory={this.props.activeCategory}
+            sortTypeValue={this.props.sortType}
+            sortByValue={this.props.sortBy}
+            emphasisValue={this.props.emphasis}
+          />
+        </div>
       </div>
     );
+  }
+
+  logout() {
+    this.props.dispatch(AuthActions.logout());
   }
 
   showTaskForm() {
@@ -90,8 +107,8 @@ class App extends React.Component {
     this.props.dispatch(TaskActions.getTasks());
   }
 
-  logout() {
-    this.props.dispatch(AuthActions.logout());
+  setActiveCategory(category) {
+    this.props.dispatch(ViewActions.setActiveCategory(category));
   }
 
   changeSortType(sortType) {

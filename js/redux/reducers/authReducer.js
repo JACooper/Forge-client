@@ -2,7 +2,6 @@ const initialState = {
   loginState: true, // true == login, false == register
   session: null,
   loginError: '',
-  loginError: '',
 };
 
 export default function reduce(state = initialState, action) {
@@ -61,4 +60,4 @@ export default function reduce(state = initialState, action) {
   }
 
   return state;
-};
+}

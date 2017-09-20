@@ -1,5 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 
 const config = {
   entry: {
@@ -10,6 +11,9 @@ const config = {
     filename: '[name]-bundle.js',
     path: path.resolve(__dirname + '/build')
   },
+  devServer: {
+    port: 8080
+  },
   // Waiting to include commons chunk until it's needed
   // plugins: [
   //   // If you create multiple bundles with "overlapping" code, this will take
@@ -18,30 +22,63 @@ const config = {
   //     name: 'common',
   //     file: 'common.js'
   //   }),
-  // // For production
-  // new webpack.DefinePlugin({
-  //   'process.env': {
-  //     NODE_ENV: JSON.stringify('production')
-  //   }
-  // }),
-  // new webpack.optimize.UglifyJsPlugin()
+  //   // For production - specifies React should get built in production mode
+  //   new webpack.DefinePlugin({
+  //     'process.env': {
+  //       NODE_ENV: JSON.stringify('production')
+  //     }
+  //   }),
+  //   new webpack.optimize.UglifyJsPlugin()
   // ],
   module: {
     rules: [
+      {
+        enforce: "pre",  // Force eslint to run before babel
+        test: /\.(js|jsx)$/,
+        include: path.join(__dirname, 'js'),
+        loader: 'eslint-loader',
+      },
       {
         test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'js'),
         loader: 'babel-loader',
         options: { 
           presets: ['es2015', 'stage-0', 'react'],
-          plugins: ['transform-decorators-legacy'], // To allow usage of @connect
+          // transform-decorators-legacy allows use of decorators
+          // transform-class-properties is required to make it work properly
+          // see: https://stackoverflow.com/questions/33801311/webpack-babel-6-es6-decorators
+          plugins: ['transform-decorators-legacy', 'transform-class-properties'],
         }
       },
       {
         test: /\.css$/,
         use: [
           { loader: 'style-loader' },
-          { loader: 'css-loader' }
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function() {
+                return [autoprefixer]
+              }
+            }
+          },
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function() {
+                return [autoprefixer]
+              }
+            }
+          },
+          { loader: 'sass-loader' }
         ]
       },
       {
@@ -49,6 +86,14 @@ const config = {
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function() {
+                return [autoprefixer]
+              }
+            }
+          },
           { loader: 'less-loader' }
         ]
       }

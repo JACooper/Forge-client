@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import App from './App.js';
 import Auth from './Auth.js';
 import * as AuthActions from '../../redux/actions/authActions.js';
-import * as TaskActions from '../../redux/actions/taskActions.js';
 
 @connect((store) => {
   return {
     showLogin: store.auth.showLogin,
     session: store.auth.session,
-  }
+  };
 })
 class Wrapper extends React.Component {
   constructor(props) {

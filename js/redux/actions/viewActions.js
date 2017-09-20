@@ -12,6 +12,13 @@ const hideTaskForm = () => {
   };
 };
 
+const setActiveCategory = (category) => {
+  return {
+    type: 'SET_ACTIVE_CATEOGORY',
+    data: { category },
+  };
+};
+
 const changeSortType = (sortType) => {
   return {
     type: 'CHANGE_SORT_TYPE',
@@ -33,8 +40,11 @@ const changeEmphasis = (emphasis) => {
   };
 };
 
-module.exports.showTaskForm   = showTaskForm;
-module.exports.hideTaskForm   = hideTaskForm;
-module.exports.changeSortType = changeSortType;
-module.exports.changeSortBy   = changeSortBy;
-module.exports.changeEmphasis = changeEmphasis;
+export {
+  showTaskForm,
+  hideTaskForm,
+  setActiveCategory,
+  changeSortType,
+  changeSortBy,
+  changeEmphasis,
+};

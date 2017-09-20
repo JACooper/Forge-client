@@ -12,13 +12,13 @@ class TaskList extends React.Component {
   }
 
   componentWillMount() {
-    this.props.update();
+    this.props.updateTasks();
   }
 
   componentWillReceiveProps(newProps) {
     if (newProps.shouldUpdate
         && !(this.props.shouldUpdate == newProps.shouldUpdate)) {
-      this.props.update();
+      this.props.updateTasks();
     }
   }
 
@@ -26,18 +26,18 @@ class TaskList extends React.Component {
     const sortedTasks = this.props.tasks;
 
     switch(this.props.sortByValue) {
-      case 'sum':
-        sortedTasks.sort(this.sortSum);
-        break;
-      case 'time':
-        sortedTasks.sort(this.sortTime);
-        break;
-      case 'effort':
-        sortedTasks.sort(this.sortEffort);
-        break;
-      case 'focus':
-        sortedTasks.sort(this.sortFocus);
-        break;
+    case 'sum':
+      sortedTasks.sort(this.sortSum);
+      break;
+    case 'time':
+      sortedTasks.sort(this.sortTime);
+      break;
+    case 'effort':
+      sortedTasks.sort(this.sortEffort);
+      break;
+    case 'focus':
+      sortedTasks.sort(this.sortFocus);
+      break;
     }
 
     /*
@@ -51,44 +51,15 @@ class TaskList extends React.Component {
     }
 
     const tasks = sortedTasks.map((task) => {
-      return <Task {...task} key={task._id} />
+      return <Task {...task} key={task._id} />;
     });
 
     return (
       <div className='task-list-wrapper'>
-        <div className='list-sort-controls'>
-          <label>Emphasize:</label>
-          <select
-            value={this.props.emphasisValue}
-            onChange={(e) => {this.props.changeEmphasis(e.target.value)}}
-          >
-            <option value='none'>None</option>
-            <option value='time'>Time</option>
-            <option value='effort'>Effort</option>
-            <option value='focus'>Focus</option>
-          </select>
-
-          <label>Sort type:</label>
-          <select
-            value={this.props.sortTypeValue}
-            onChange={(e) => {this.props.changeSortType(e.target.value)}}
-          >
-            <option value='ascending'>Ascending</option>
-            <option value='descending'>Descending</option>
-          </select>
-
-          <label>Sort by:</label>
-          <select
-            value={this.props.sortByValue}
-            onChange={(e) => {this.props.changeSortBy(e.target.value)}}
-          >
-            <option value='sum'>Sum</option>
-            <option value='time'>Time</option>
-            <option value='effort'>Effort</option>
-            <option value='focus'>Focus</option>
-          </select>
+        
+        <div className='task-list'>
+          {tasks}
         </div>
-        {tasks}
       </div>
     );
   }
@@ -98,18 +69,18 @@ class TaskList extends React.Component {
     let sum2 = task2.time + task2.effort + task2.focus;
 
     switch (this.props.emphasis) {
-      case 'time':
-        sum1 += task1.time;
-        sum2 += task2.time;
-        break;
-      case 'effort':
-        sum1 += task1.effort;
-        sum2 += task2.effort;
-        break;
-      case 'focus':
-        sum1 += task1.focus;
-        sum2 += task2.focus;
-        break;
+    case 'time':
+      sum1 += task1.time;
+      sum2 += task2.time;
+      break;
+    case 'effort':
+      sum1 += task1.effort;
+      sum2 += task2.effort;
+      break;
+    case 'focus':
+      sum1 += task1.focus;
+      sum2 += task2.focus;
+      break;
     }
 
     return sum1 - sum2;

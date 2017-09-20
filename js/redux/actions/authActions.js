@@ -9,14 +9,14 @@ const login = (email, password) => {
       .then((response) => {
         sessionStorage.setItem('session', response.body.id);
         dispatch({ type: 'LOGIN_SUCCESS', data: {
-            id: response.body.id,
-          }
+          id: response.body.id,
+        }
         });
       })
       .catch((error) => {
         dispatch({ type: 'LOGIN_FAILURE', data: {
-            error
-          }
+          error
+        }
         });
       });
   };
@@ -31,15 +31,15 @@ const register = (email, password, passwordConfirm) => {
       .then((response) => {
         sessionStorage.setItem('session', response.body.id);
         dispatch({ type: 'REGISTER_SUCCESS', data: {
-            id: response.body.id,
-          }
+          id: response.body.id,
+        }
         });
       })
       .catch((error) => {
         dispatch({ type: 'REGISTER_FAILURE', data: {
-            error
-          }
-        })
+          error
+        }
+        });
       });
   };
 };
@@ -68,8 +68,10 @@ const swapAuthState = () => {
   };
 };
 
-module.exports.login = login;
-module.exports.register = register;
-module.exports.logout = logout;
-module.exports.setAuth = setAuth;
-module.exports.swapAuthState = swapAuthState;
+export {
+  login,
+  register,
+  logout,
+  setAuth,
+  swapAuthState,
+};
