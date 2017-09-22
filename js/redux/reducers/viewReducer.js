@@ -3,13 +3,16 @@ const initialState = {
   sortType: 'ascending',
   sortBy: 'sum',
   emphasis: 'none',
-  activeCategory: 'Uncategorized',
-  categories: [],
 };
 
 export default function reduce(state = initialState, action) {
   switch (action.type) {
   
+  case 'ADD_TASK_SUCCESS':
+    return {
+      ...state,
+      showTaskForm: false,
+    };
   case 'SHOW_TASK_FORM':
     return {
       ...state,
@@ -19,12 +22,6 @@ export default function reduce(state = initialState, action) {
     return {
       ...state,
       showTaskForm: false,
-    };
-
-  case 'SET_ACTIVE_CATEGORY':
-    return {
-      ...state,
-      activeCategory: action.data.category,
     };
 
   case 'CHANGE_SORT_TYPE':

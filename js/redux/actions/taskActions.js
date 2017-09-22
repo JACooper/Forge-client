@@ -10,10 +10,7 @@ const addTask = (task) => {
         dispatch({ type: 'ADD_TASK_SUCCESS', data: null });
       })
       .catch((error) => {
-        dispatch({ type: 'ADD_TASK_FAILURE', data: {
-          error
-        }
-        });
+        dispatch({ type: 'ADD_TASK_FAILURE', data: { error } });
       });
   };
 };
@@ -25,16 +22,10 @@ const getTasks = () => {
       .get('/tasks')
       //.query()
       .then((response) => {
-        dispatch({ type: 'GET_TASKS_SUCCESS', data: {
-          tasks: response.body.tasks
-        }
-        });
+        dispatch({ type: 'GET_TASKS_SUCCESS', data: { tasks: response.body.tasks } });
       })
       .catch((error) => {
-        dispatch({ type: 'GET_TASKS_FAILURE', data: {
-          error
-        }
-        });
+        dispatch({ type: 'GET_TASKS_FAILURE', data: { error } });
       });
   };
 };

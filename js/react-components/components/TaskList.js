@@ -23,7 +23,11 @@ class TaskList extends React.Component {
   }
 
   render() {
-    const sortedTasks = this.props.tasks;
+    // Use only tasks in activeCategory, or all tasks if activeCategory is unspecified
+    const sortedTasks = (this.props.activeCategory) ?
+      (this.props.tasks.filter((task) => {
+        return task.category.name === this.props.activeCategory;
+      })) : (this.props.tasks);
 
     switch(this.props.sortByValue) {
     case 'sum':

@@ -7,21 +7,24 @@ import CategoryList from '../components/CategoryList.js';
 import TaskControls from '../components/TaskControls.js';
 
 import * as AuthActions from '../../redux/actions/authActions.js';
+import * as CategoryActions from '../../redux/actions/categoryActions.js';
 import * as TaskActions from '../../redux/actions/taskActions.js';
 import * as ViewActions from '../../redux/actions/viewActions.js';
 
 @connect((store) => {
   return {
-    tasks: store.task.tasks,
-    shouldGetTasks: store.task.shouldGetTasks,
-    addTaskSuccess: store.task.addTaskSuccess,
-    showTaskForm: store.view.showTaskForm,
-    sortType: store.view.sortType,
-    sortBy: store.view.sortBy,
-    emphasis: store.view.emphasis,
+    tasks          : store.task.tasks,
+    shouldGetTasks : store.task.shouldGetTasks,
+    addTaskSuccess : store.task.addTaskSuccess,
+
+    showTaskForm : store.view.showTaskForm,
+    sortType     : store.view.sortType,
+    sortBy       : store.view.sortBy,
+    emphasis     : store.view.emphasis,
     
-    activeCategory: store.view.activeCategory,
-    categories: store.view.categories,
+    activeCategory      : store.category.activeCategory,
+    categories          : store.category.categories,
+    shouldGetCategories : store.category.shouldGetCategories,
   };
 })
 class App extends React.Component {
@@ -35,6 +38,8 @@ class App extends React.Component {
     this.logout         = this.logout.bind(this);
     
     this.setActiveCategory = this.setActiveCategory.bind(this);
+    this.addCategory       = this.addCategory.bind(this);
+    this.getCategories     = this.getCategories.bind(this);
 
     this.changeSortType = this.changeSortType.bind(this);
     this.changeSortBy   = this.changeSortBy.bind(this);
@@ -71,6 +76,10 @@ class App extends React.Component {
             <CategoryList
               activeCategory={this.props.activeCategory}
               categories={this.props.categories}
+              shouldUpdate={this.props.shouldGetCategories}
+              setActiveCategory={this.setActiveCategory}
+              addCategory={this.addCategory}
+              getCategories={this.getCategories}
             />
           </div>
           <TaskList
@@ -99,16 +108,25 @@ class App extends React.Component {
     this.props.dispatch(ViewActions.hideTaskForm());
   }
 
+  setActiveCategory(category) {
+    this.props.dispatch(CategoryActions.setActiveCategory(category));
+  }
+
+  addCategory(category) {
+    this.props.dispatch(CategoryActions.addCategory(category));
+  }
+
+  getCategories() {
+    this.props.dispatch(CategoryActions.getCategories());
+  }
+
   submitTask(taskParams) {
-    this.props.dispatch(TaskActions.addTask(taskParams));
+    const category = (this.props.activeCategory) ? this.props.activeCategory : 'Uncategorized';
+    this.props.dispatch(TaskActions.addTask({...taskParams, category}));
   }
 
   getTasks() {
     this.props.dispatch(TaskActions.getTasks());
-  }
-
-  setActiveCategory(category) {
-    this.props.dispatch(ViewActions.setActiveCategory(category));
   }
 
   changeSortType(sortType) {
