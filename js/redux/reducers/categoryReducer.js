@@ -4,7 +4,6 @@ const initialState = {
   addingCategory: false,
   addCategorySuccess: false,
   addCategoryError: null,
-  shouldGetCategories: true,
   gettingCategories: false,
   getCategoriesError: null,
 };
@@ -28,8 +27,8 @@ export default function reduce(state = initialState, action) {
   case 'ADD_CATEGORY_SUCCESS':
     return {
       ...state,
+      categories: state.categories.concat(action.data.category),
       addingCategory: false,
-      shouldGetCategories: true,
       addCategoryError: null,
       addCategorySuccess: true,
     };
@@ -44,7 +43,6 @@ export default function reduce(state = initialState, action) {
   case 'GET_CATEGORIES_START':
     return {
       ...state,
-      shouldGetCategories: false,
       gettingCategories: true,
       getCategoriesError: null,
     };

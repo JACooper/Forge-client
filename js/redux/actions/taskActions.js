@@ -6,8 +6,8 @@ const addTask = (task) => {
     superagent
       .post('/task')
       .send({ task })
-      .then(() => {
-        dispatch({ type: 'ADD_TASK_SUCCESS', data: null });
+      .then((response) => {
+        dispatch({ type: 'ADD_TASK_SUCCESS', data: { task: response.body.task } });
       })
       .catch((error) => {
         dispatch({ type: 'ADD_TASK_FAILURE', data: { error } });

@@ -13,8 +13,8 @@ const addCategory = (category) => {
     superagent
       .post('/category')
       .send({ category })
-      .then(() => {
-        dispatch({ type: 'ADD_CATEGORY_SUCCESS', data: null });
+      .then((response) => {
+        dispatch({ type: 'ADD_CATEGORY_SUCCESS', data: { category: response.body.category } });
       })
       .catch((error) => {
         dispatch({ type: 'ADD_CATEGORY_FAILURE', data: { error } });

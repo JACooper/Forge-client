@@ -14,7 +14,6 @@ import * as ViewActions from '../../redux/actions/viewActions.js';
 @connect((store) => {
   return {
     tasks          : store.task.tasks,
-    shouldGetTasks : store.task.shouldGetTasks,
     addTaskSuccess : store.task.addTaskSuccess,
 
     showTaskForm : store.view.showTaskForm,
@@ -24,7 +23,6 @@ import * as ViewActions from '../../redux/actions/viewActions.js';
     
     activeCategory      : store.category.activeCategory,
     categories          : store.category.categories,
-    shouldGetCategories : store.category.shouldGetCategories,
   };
 })
 class App extends React.Component {
@@ -76,7 +74,6 @@ class App extends React.Component {
             <CategoryList
               activeCategory={this.props.activeCategory}
               categories={this.props.categories}
-              shouldUpdate={this.props.shouldGetCategories}
               setActiveCategory={this.setActiveCategory}
               addCategory={this.addCategory}
               getCategories={this.getCategories}
@@ -85,7 +82,6 @@ class App extends React.Component {
           <TaskList
             tasks={this.props.tasks}
             updateTasks={this.getTasks}
-            shouldUpdate={this.props.shouldGetTasks}
             activeCategory={this.props.activeCategory}
             sortTypeValue={this.props.sortType}
             sortByValue={this.props.sortBy}

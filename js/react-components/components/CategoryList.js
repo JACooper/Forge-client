@@ -16,13 +16,6 @@ class CategoryList extends React.Component {
     this.props.getCategories();
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.shouldUpdate
-        && !(this.props.shouldUpdate == newProps.shouldUpdate)) {
-      this.props.getCategories();
-    }
-  }
-
   render() {
     const categories = this.props.categories.map((category) => {
       if (category.name === this.props.activeCategory) {
@@ -67,6 +60,7 @@ class CategoryList extends React.Component {
           type='text'
           placeholder='New category. . .'
           value={this.state.newCategoryName}
+          maxLength="19"
           onChange={(e) => {
             this.setState({newCategoryName: e.target.value});
           }}

@@ -37,6 +37,9 @@ const config = {
         test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'js'),
         loader: 'eslint-loader',
+        options: {
+          fix: true,
+        }
       },
       {
         test: /\.(js|jsx)$/,

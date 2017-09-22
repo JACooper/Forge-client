@@ -15,13 +15,6 @@ class TaskList extends React.Component {
     this.props.updateTasks();
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.shouldUpdate
-        && !(this.props.shouldUpdate == newProps.shouldUpdate)) {
-      this.props.updateTasks();
-    }
-  }
-
   render() {
     // Use only tasks in activeCategory, or all tasks if activeCategory is unspecified
     const sortedTasks = (this.props.activeCategory) ?
