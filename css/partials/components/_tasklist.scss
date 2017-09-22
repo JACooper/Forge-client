@@ -5,29 +5,47 @@
 // ---------- Individual styling ----------
 
 .task-list-wrapper {
+	// Dimensions
 	width: 650px;
 }
 
-.task-list {
-	
+.task-list {	
+	// Flexbox properties
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	width: 100%;
 }
 
 .task-wrapper {
+	background-color: $flat-white;
 
+	width: 100%;
+
+	margin-bottom: 10px;
+	border-radius: 5px;
+
+	&:hover {
+		background-color: $flat-gray;
+		// cursor: pointer;
+	}
 }
 
 .task-title {
-
+	margin-top: 3px;
+	margin-left: 3px;
 }
 
 .task-time {
-
+	margin-left: 3px;
 }
 
 .task-effort {
-
+	margin-left: 3px;
 }
 
 .task-focus {
-
+	margin-left: 3px;
 }
