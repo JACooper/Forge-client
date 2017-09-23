@@ -43,7 +43,7 @@ class TaskControls extends React.Component {
             <option value='focus'>Focus</option>
           </select>
 
-          <input type='button' value={completeViewText} onClick={this.props.toggleComplete} />
+          <input type='button' value={completeViewText} onClick={this.props.toggleShowComplete} />
         </div>
       </div>
     );

@@ -41,7 +41,7 @@ export default function reduce(state = initialState, action) {
       emphasis: action.data.emphasis,
     };
 
-  case 'TOGGLE_COMPLETE_TASKS':
+  case 'TOGGLE_SHOW_COMPLETE':
     return {
       ...state,
       showComplete: !state.showComplete,

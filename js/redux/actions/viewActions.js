@@ -12,9 +12,9 @@ const hideTaskForm = () => {
   };
 };
 
-const toggleComplete = () => {
+const toggleShowComplete = () => {
   return {
-    type: 'TOGGLE_COMPLETE_TASKS',
+    type: 'TOGGLE_SHOW_COMPLETE',
     data: null,
   };
 };
@@ -43,7 +43,7 @@ const changeEmphasis = (emphasis) => {
 export {
   showTaskForm,
   hideTaskForm,
-  toggleComplete,
+  toggleShowComplete,
   changeSortType,
   changeSortBy,
   changeEmphasis,

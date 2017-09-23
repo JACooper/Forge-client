@@ -5,6 +5,8 @@ const initialState = {
   addTaskSuccess: false,  // Display success message, close window
   gettingTasks: false,    // Display progress spinner, should stop after success/failure
   getTasksError: null,    // Display error, should go away after success/new attempt (or X amount of time?)
+  togglingComplete: false,
+  toggleCompleteError: null,
 };
 
 export default function reduce(state = initialState, action) {
@@ -52,13 +54,13 @@ export default function reduce(state = initialState, action) {
       getTasksError: action.data.error,
     };
 
-  case 'MARK_COMPLETE_START':
+  case 'TOGGLE_COMPLETE_START':
     return {
       ...state,
-      markingComplete: true,
-      markCompleteError: null,
+      togglingComplete: true,
+      toggleCompleteError: null,
     };
-  case 'MARK_COMPLETE_SUCCESS': {
+  case 'TOGGLE_COMPLETE_SUCCESS': {
     const updatedTasks = state.tasks.filter((task) => {
       return task._id !== action.data.task._id;
     });
@@ -67,15 +69,15 @@ export default function reduce(state = initialState, action) {
     return {
       ...state,
       tasks: updatedTasks,
-      markingComplete: false,
-      markCompleteError: null,
+      togglingComplete: false,
+      toggleCompleteError: null,
     };
   }
-  case 'MARK_COMPLETE_FAILURE':
+  case 'TOGGLE_COMPLETE_FAILURE':
     return {
       ...state,
-      markingComplete: false,
-      markCompleteError: action.data.error,
+      togglingComplete: false,
+      toggleCompleteError: action.data.error,
     };
   }
 

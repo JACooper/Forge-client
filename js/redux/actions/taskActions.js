@@ -30,17 +30,17 @@ const getTasks = () => {
   };
 };
 
-const markComplete = (taskID) => {
+const toggleComplete = (taskID) => {
   return (dispatch) => {
-    dispatch({ type: 'MARK_COMPLETE_START', data: null });
+    dispatch({ type: 'TOGGLE_COMPLETE_START', data: null });
     superagent
       .post('/complete')
       .send({ id: taskID })
       .then((response) => {
-        dispatch({ type: 'MARK_COMPLETE_SUCCESS', data: { task: response.body.task } });
+        dispatch({ type: 'TOGGLE_COMPLETE_SUCCESS', data: { task: response.body.task } });
       })
       .catch((error) => {
-        dispatch({ type: 'MARK_COMPLETE_FAILURE', data: { error } });
+        dispatch({ type: 'TOGGLE_COMPLETE_FAILURE', data: { error } });
       });
   };
 };
@@ -48,5 +48,5 @@ const markComplete = (taskID) => {
 export {
   addTask,
   getTasks,
-  markComplete,
+  toggleComplete,
 };
