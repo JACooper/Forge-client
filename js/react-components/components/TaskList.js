@@ -17,10 +17,16 @@ class TaskList extends React.Component {
 
   render() {
     // Use only tasks in activeCategory, or all tasks if activeCategory is unspecified
-    const sortedTasks = (this.props.activeCategory) ?
+    let sortedTasks = (this.props.activeCategory) ?
       (this.props.tasks.filter((task) => {
         return task.category.name === this.props.activeCategory;
       })) : (this.props.tasks);
+
+    if (!(this.props.showComplete)) {
+      sortedTasks = sortedTasks.filter((task) => {
+        return (!task.complete);
+      });
+    }
 
     switch(this.props.sortByValue) {
     case 'sum':
@@ -48,7 +54,7 @@ class TaskList extends React.Component {
     }
 
     const tasks = sortedTasks.map((task) => {
-      return <Task {...task} key={task._id} />;
+      return <Task {...task} key={task._id} markComplete={this.props.markComplete} />;
     });
 
     return (

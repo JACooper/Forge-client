@@ -12,6 +12,13 @@ const hideTaskForm = () => {
   };
 };
 
+const toggleComplete = () => {
+  return {
+    type: 'TOGGLE_COMPLETE_TASKS',
+    data: null,
+  };
+};
+
 const changeSortType = (sortType) => {
   return {
     type: 'CHANGE_SORT_TYPE',
@@ -36,6 +43,7 @@ const changeEmphasis = (emphasis) => {
 export {
   showTaskForm,
   hideTaskForm,
+  toggleComplete,
   changeSortType,
   changeSortBy,
   changeEmphasis,

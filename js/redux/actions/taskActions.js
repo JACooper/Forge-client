@@ -30,7 +30,23 @@ const getTasks = () => {
   };
 };
 
+const markComplete = (taskID) => {
+  return (dispatch) => {
+    dispatch({ type: 'MARK_COMPLETE_START', data: null });
+    superagent
+      .post('/complete')
+      .send({ id: taskID })
+      .then((response) => {
+        dispatch({ type: 'MARK_COMPLETE_SUCCESS', data: { task: response.body.task } });
+      })
+      .catch((error) => {
+        dispatch({ type: 'MARK_COMPLETE_FAILURE', data: { error } });
+      });
+  };
+};
+
 export {
   addTask,
   getTasks,
+  markComplete,
 };

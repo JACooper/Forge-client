@@ -12,6 +12,11 @@ class Task extends React.Component {
         <p className='task-time'>{this.props.time}</p>
         <p className='task-effort'>{this.props.effort}</p>
         <p className='task-focus'>{this.props.focus}</p>
+        <button
+          type='button'
+          className='mark-complete-button'
+          onClick={() => {this.props.markComplete(this.props._id);}}
+        />
       </div>
     );
   }

@@ -51,6 +51,32 @@ export default function reduce(state = initialState, action) {
       gettingTasks: false,
       getTasksError: action.data.error,
     };
+
+  case 'MARK_COMPLETE_START':
+    return {
+      ...state,
+      markingComplete: true,
+      markCompleteError: null,
+    };
+  case 'MARK_COMPLETE_SUCCESS': {
+    const updatedTasks = state.tasks.filter((task) => {
+      return task._id !== action.data.task._id;
+    });
+    updatedTasks.push(action.data.task);
+
+    return {
+      ...state,
+      tasks: updatedTasks,
+      markingComplete: false,
+      markCompleteError: null,
+    };
+  }
+  case 'MARK_COMPLETE_FAILURE':
+    return {
+      ...state,
+      markingComplete: false,
+      markCompleteError: action.data.error,
+    };
   }
 
   return state;
