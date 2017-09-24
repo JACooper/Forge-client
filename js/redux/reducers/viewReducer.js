@@ -1,5 +1,6 @@
 const initialState = {
   showTaskForm: false,
+  showComplete: false,
   sortType: 'ascending',
   sortBy: 'sum',
   emphasis: 'none',
@@ -38,6 +39,12 @@ export default function reduce(state = initialState, action) {
     return {
       ...state,
       emphasis: action.data.emphasis,
+    };
+
+  case 'TOGGLE_SHOW_COMPLETE':
+    return {
+      ...state,
+      showComplete: !state.showComplete,
     };
   }
 

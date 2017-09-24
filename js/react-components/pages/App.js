@@ -17,23 +17,26 @@ import * as ViewActions from '../../redux/actions/viewActions.js';
     addTaskSuccess : store.task.addTaskSuccess,
 
     showTaskForm : store.view.showTaskForm,
+    showComplete : store.view.showComplete,
     sortType     : store.view.sortType,
     sortBy       : store.view.sortBy,
     emphasis     : store.view.emphasis,
     
-    activeCategory      : store.category.activeCategory,
-    categories          : store.category.categories,
+    activeCategory : store.category.activeCategory,
+    categories     : store.category.categories,
   };
 })
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.showTaskForm   = this.showTaskForm.bind(this);
-    this.hideTaskForm   = this.hideTaskForm.bind(this);
-    this.submitTask     = this.submitTask.bind(this);
-    this.getTasks       = this.getTasks.bind(this);
-    this.logout         = this.logout.bind(this);
+    this.showTaskForm       = this.showTaskForm.bind(this);
+    this.hideTaskForm       = this.hideTaskForm.bind(this);
+    this.toggleShowComplete = this.toggleShowComplete.bind(this);
+    this.submitTask         = this.submitTask.bind(this);
+    this.getTasks           = this.getTasks.bind(this);
+    this.toggleComplete     = this.toggleComplete.bind(this);
+    this.logout             = this.logout.bind(this);
     
     this.setActiveCategory = this.setActiveCategory.bind(this);
     this.addCategory       = this.addCategory.bind(this);
@@ -66,26 +69,30 @@ class App extends React.Component {
         <div className='main-view'>
         <div className='sidebar'>
             <TaskControls
-              showTaskForm={this.showTaskForm}
-              changeSortType={this.changeSortType}
-              changeSortBy={this.changeSortBy}
-              changeEmphasis={this.changeEmphasis}
+              showComplete       ={this.props.showComplete}
+              showTaskForm       ={this.showTaskForm}
+              toggleShowComplete ={this.toggleShowComplete}
+              changeSortType     ={this.changeSortType}
+              changeSortBy       ={this.changeSortBy}
+              changeEmphasis     ={this.changeEmphasis}
             />
             <CategoryList
-              activeCategory={this.props.activeCategory}
-              categories={this.props.categories}
-              setActiveCategory={this.setActiveCategory}
-              addCategory={this.addCategory}
-              getCategories={this.getCategories}
+              activeCategory    ={this.props.activeCategory}
+              categories        ={this.props.categories}
+              setActiveCategory ={this.setActiveCategory}
+              addCategory       ={this.addCategory}
+              getCategories     ={this.getCategories}
             />
           </div>
           <TaskList
-            tasks={this.props.tasks}
-            updateTasks={this.getTasks}
-            activeCategory={this.props.activeCategory}
-            sortTypeValue={this.props.sortType}
-            sortByValue={this.props.sortBy}
-            emphasisValue={this.props.emphasis}
+            tasks          ={this.props.tasks}
+            showComplete   ={this.props.showComplete}
+            activeCategory ={this.props.activeCategory}
+            sortTypeValue  ={this.props.sortType}
+            sortByValue    ={this.props.sortBy}
+            emphasisValue  ={this.props.emphasis}
+            updateTasks    ={this.getTasks}
+            toggleComplete ={this.toggleComplete}
           />
         </div>
       </div>
@@ -104,6 +111,10 @@ class App extends React.Component {
     this.props.dispatch(ViewActions.hideTaskForm());
   }
 
+  toggleShowComplete() {
+    this.props.dispatch(ViewActions.toggleShowComplete());
+  }
+
   setActiveCategory(category) {
     this.props.dispatch(CategoryActions.setActiveCategory(category));
   }
@@ -117,12 +128,22 @@ class App extends React.Component {
   }
 
   submitTask(taskParams) {
-    const category = (this.props.activeCategory) ? this.props.activeCategory : 'Uncategorized';
-    this.props.dispatch(TaskActions.addTask({...taskParams, category}));
+    const category = (this.props.activeCategory) ?
+      this.props.categories.find((category) => {
+        return category.name = this.props.activeCategory;
+      })
+      : this.props.categories.find((category) => {
+        return category.name = 'Uncategorized';
+      });
+    this.props.dispatch(TaskActions.addTask({...taskParams, categoryID: category._id}));
   }
 
   getTasks() {
     this.props.dispatch(TaskActions.getTasks());
+  }
+
+  toggleComplete(taskID) {
+    this.props.dispatch(TaskActions.toggleComplete(taskID));
   }
 
   changeSortType(sortType) {

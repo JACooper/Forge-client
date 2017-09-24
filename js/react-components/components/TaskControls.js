@@ -3,10 +3,11 @@ import React from 'react';
 class TaskControls extends React.Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {
+    const completeViewText = (this.props.showComplete) ? 'Hide complete' : 'Show complete';
+
     return (
       <div className='task-controls-wrapper'>
         <div className='list-sort-controls'>
@@ -41,6 +42,8 @@ class TaskControls extends React.Component {
             <option value='effort'>Effort</option>
             <option value='focus'>Focus</option>
           </select>
+
+          <input type='button' value={completeViewText} onClick={this.props.toggleShowComplete} />
         </div>
       </div>
     );

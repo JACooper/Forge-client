@@ -30,7 +30,23 @@ const getTasks = () => {
   };
 };
 
+const toggleComplete = (taskID) => {
+  return (dispatch) => {
+    dispatch({ type: 'TOGGLE_COMPLETE_START', data: null });
+    superagent
+      .post('/complete')
+      .send({ id: taskID })
+      .then((response) => {
+        dispatch({ type: 'TOGGLE_COMPLETE_SUCCESS', data: { task: response.body.task } });
+      })
+      .catch((error) => {
+        dispatch({ type: 'TOGGLE_COMPLETE_FAILURE', data: { error } });
+      });
+  };
+};
+
 export {
   addTask,
   getTasks,
+  toggleComplete,
 };
