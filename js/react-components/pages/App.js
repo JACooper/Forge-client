@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import TaskDetail from '../components/TaskDetail.js';
 import TaskForm from '../components/TaskForm.js';
 import TaskList from '../components/TaskList.js';
 import CategoryList from '../components/CategoryList.js';
@@ -18,6 +19,7 @@ import * as ViewActions from '../../redux/actions/viewActions.js';
 
     showTaskForm : store.view.showTaskForm,
     showComplete : store.view.showComplete,
+    detailView   : store.view.detailView,
     sortType     : store.view.sortType,
     sortBy       : store.view.sortBy,
     emphasis     : store.view.emphasis,
@@ -41,7 +43,10 @@ class App extends React.Component {
     this.setActiveCategory = this.setActiveCategory.bind(this);
     this.addCategory       = this.addCategory.bind(this);
     this.getCategories     = this.getCategories.bind(this);
+    this.changeCategory    = this.changeCategory.bind(this);
 
+    this.openDetail     = this.openDetail.bind(this);
+    this.closeDetail    = this.closeDetail.bind(this);
     this.changeSortType = this.changeSortType.bind(this);
     this.changeSortBy   = this.changeSortBy.bind(this);
     this.changeEmphasis = this.changeEmphasis.bind(this);
@@ -54,8 +59,26 @@ class App extends React.Component {
   }
 
   render() {
+    let taskDetail = null;
+    if (this.props.detailView) {
+      const taskToView = this.props.tasks.find((task) => {
+        return task._id === this.props.detailView;
+      });
+      taskDetail = (taskToView !== undefined) ? (
+        <TaskDetail
+          {...taskToView}
+          categories={this.props.categories}
+          closeDetail={this.closeDetail}
+          toggleComplete={this.toggleComplete}
+          changeCategory={this.changeCategory}
+        />
+      ) : (null);
+    }
+
+    const lightbox = (this.props.detailView) ? (<div className='lightbox-dim' />) : (null);
+
     const taskForm = (this.props.showTaskForm) ? (
-      <TaskForm className='task-form' submit={this.submitTask} cancel={this.hideTaskForm} />
+      <TaskForm submit={this.submitTask} cancel={this.hideTaskForm} />
     ) : (null);
 
     return (
@@ -92,8 +115,11 @@ class App extends React.Component {
             sortByValue    ={this.props.sortBy}
             emphasisValue  ={this.props.emphasis}
             updateTasks    ={this.getTasks}
-            toggleComplete ={this.toggleComplete}
+            openDetail     ={this.openDetail}
+            openDetail     ={this.openDetail}
           />
+        {lightbox}
+        {taskDetail}
         </div>
       </div>
     );
@@ -127,6 +153,10 @@ class App extends React.Component {
     this.props.dispatch(CategoryActions.getCategories());
   }
 
+  changeCategory(taskID, categoryID) {
+    this.props.dispatch(TaskActions.changeCategory(taskID, categoryID));
+  }
+
   submitTask(taskParams) {
     const category = (this.props.activeCategory) ?
       this.props.categories.find((category) => {
@@ -140,6 +170,14 @@ class App extends React.Component {
 
   getTasks() {
     this.props.dispatch(TaskActions.getTasks());
+  }
+
+  openDetail(taskID) {
+    this.props.dispatch(ViewActions.openDetail(taskID));
+  }
+
+  closeDetail() {
+    this.props.dispatch(ViewActions.closeDetail());
   }
 
   toggleComplete(taskID) {

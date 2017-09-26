@@ -9,7 +9,7 @@ const setActiveCategory = (category) => {
 
 const addCategory = (category) => {
   return (dispatch) => {
-    dispatch({type: 'ADD_CATEGORY_START', data: null});
+    dispatch({ type: 'ADD_CATEGORY_START', data: null });
     superagent
       .post('/category')
       .send({ category })
@@ -24,7 +24,7 @@ const addCategory = (category) => {
 
 const getCategories = () => {
   return (dispatch) => {
-    dispatch({type: 'GET_CATEGORIES_START', data: null});
+    dispatch({ type: 'GET_CATEGORIES_START', data: null });
     superagent
       .get('/categories')
       .then((response) => {

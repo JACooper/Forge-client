@@ -79,6 +79,32 @@ export default function reduce(state = initialState, action) {
       togglingComplete: false,
       toggleCompleteError: action.data.error,
     };
+
+  case 'CHANGE_CATEGORY_START':
+    return {
+      ...state,
+      changingCategory: true,
+      changeCategoryError: null,
+    };
+  case 'CHANGE_CATEGORY_SUCCESS': {
+    const updatedTasks = state.tasks.filter((task) => {
+      return task._id !== action.data.task._id;
+    });
+    updatedTasks.push(action.data.task);
+
+    return {
+      ...state,
+      tasks: updatedTasks,
+      changingCategory: false,
+      changeCategoryError: null,
+    };
+  }
+  case 'CHANGE_CATEGORY_FAILURE':
+    return {
+      ...state,
+      changingCategory: false,
+      changeCategoryError: action.data.error,
+    };
   }
 
   return state;

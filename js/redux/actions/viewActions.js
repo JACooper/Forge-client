@@ -1,21 +1,31 @@
 const showTaskForm = () => {
   return {
     type: 'SHOW_TASK_FORM',
-    data: null,
   };
 };
 
 const hideTaskForm = () => {
   return {
     type: 'HIDE_TASK_FORM',
-    data: null,
   };
 };
 
 const toggleShowComplete = () => {
   return {
     type: 'TOGGLE_SHOW_COMPLETE',
-    data: null,
+  };
+};
+
+const openDetail = (taskID) => {
+  return {
+    type: 'OPEN_DETAIL',
+    data: {id: taskID},
+  };
+};
+
+const closeDetail = () => {
+  return {
+    type: 'CLOSE_DETAIL',
   };
 };
 
@@ -44,6 +54,8 @@ export {
   showTaskForm,
   hideTaskForm,
   toggleShowComplete,
+  openDetail,
+  closeDetail,
   changeSortType,
   changeSortBy,
   changeEmphasis,

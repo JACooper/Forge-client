@@ -1,6 +1,7 @@
 const initialState = {
   showTaskForm: false,
   showComplete: false,
+  detailView: null,
   sortType: 'ascending',
   sortBy: 'sum',
   emphasis: 'none',
@@ -45,6 +46,17 @@ export default function reduce(state = initialState, action) {
     return {
       ...state,
       showComplete: !state.showComplete,
+    };
+
+  case 'OPEN_DETAIL':
+    return {
+      ...state,
+      detailView: action.data.id,
+    };
+  case 'CLOSE_DETAIL':
+    return {
+      ...state,
+      detailView: null,
     };
   }
 

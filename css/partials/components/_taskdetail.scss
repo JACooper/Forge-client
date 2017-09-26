@@ -1,0 +1,73 @@
+// ---------- Dimensions ----------
+
+$task-detail-width: 800px;
+$task-detail-height: 750px;
+
+
+// ---------- Individual styling ----------
+
+.task-detail-wrapper {
+	@include fixed-center();
+	@include set-dimensions($task-detail-width, $task-detail-height);
+
+	background-color: $flat-white;
+
+	margin-bottom: 10px;
+	border-radius: 5px;
+	z-index: 2;	// So that detail appears in front of lightbox
+}
+
+.task-detail-title {
+	margin-top: 3px;
+	margin-left: 3px;
+}
+
+.task-detail-time {
+	margin-left: 3px;
+}
+
+.task-detail-effort {
+	margin-left: 3px;
+}
+
+.task-detail-focus {
+	margin-left: 3px;
+}
+
+.mark-complete-button {
+	@include set-dimensions(20px, 20px);
+	float: right;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.mark-uncomplete-button {
+	@include set-dimensions(20px, 20px);
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.close-detail-view {
+	@include set-dimensions(20px, 20px);
+	position: absolute;
+	top: 0px;
+	right: -20px;
+	
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.lightbox-dim {
+	position   : fixed;
+	top        : 0;
+	left       : 0;
+	right      : 0;
+	bottom     : 0;
+	background : rgba(0, 0, 0, 0.5);
+	z-index    : 1;	// So that overlay covers most components
+}

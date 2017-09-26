@@ -29,7 +29,7 @@
 
 	&:hover {
 		background-color: $flat-gray;
-		// cursor: pointer;
+		cursor: pointer;
 	}
 }
 
@@ -48,15 +48,4 @@
 
 .task-focus {
 	margin-left: 3px;
-}
-
-.mark-complete-button {
-	width: 20px;
-	height: 10px;
-	float: right;
-}
-
-.mark-uncomplete-button {
-	width: 20px;
-	height: 10px;
 }

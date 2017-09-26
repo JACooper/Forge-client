@@ -54,7 +54,12 @@ class TaskList extends React.Component {
     }
 
     const tasks = sortedTasks.map((task) => {
-      return <Task {...task} key={task._id} toggleComplete={this.props.toggleComplete} />;
+      return <Task
+          {...task}
+          key={task._id}
+          openDetail={this.props.openDetail}
+          toggleComplete={this.props.toggleComplete}
+        />;
     });
 
     return (
