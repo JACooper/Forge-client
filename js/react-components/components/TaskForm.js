@@ -1,5 +1,7 @@
 import React from 'react';
 
+import DateInput from './dateinput/DateInput.js';
+
 class TaskForm extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,8 @@ class TaskForm extends React.Component {
       time: 1,
       effort: 1,
       focus: 1,
+      startDate: null,
+      dueDate: null,
     };
   }
 
@@ -51,6 +55,17 @@ class TaskForm extends React.Component {
           max='3'
           onChange={(e) => {this.setState({focus: e.target.value});}}
         />
+
+        <label id='start-date-label'>Start Date (optional):</label>
+        <DateInput
+          date={this.state.startDate}
+          submit={(startDate) => {this.setState({ startDate });}} />
+
+        <label id='due-date-label'>Due Date (optional):</label>
+        <DateInput
+          date={this.state.dueDate}
+          submit={(dueDate) => {this.setState({ dueDate });}} />
+
         <input type='button' value='Submit task' onClick={this.submit}/>
         <input type='button' value='Cancel' onClick={this.props.cancel}/>
       </div>
@@ -64,6 +79,14 @@ class TaskForm extends React.Component {
       effort: this.state.effort,
       focus: this.state.focus,
     };
+
+    if (this.state.startDate !== null) {
+      task.startDate = this.state.startDate;
+    }
+
+    if (this.state.dueDate !== null) {
+      task.dueDate = this.state.dueDate;
+    }
 
     if (task.title
         && task.time

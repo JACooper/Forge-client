@@ -7,6 +7,10 @@ const addTask = (task) => {
       .post('/task')
       .send({ task })
       .then((response) => {
+        const task = response.body.task;
+        task.startDate = (task.startDate) ? new Date(task.startDate) : null;
+        task.dueDate = (task.dueDate) ? new Date(task.dueDate) : null;
+
         dispatch({ type: 'ADD_TASK_SUCCESS', data: { task: response.body.task } });
       })
       .catch((error) => {
@@ -20,9 +24,14 @@ const getTasks = () => {
     dispatch({ type: 'GET_TASKS_START' });
     superagent
       .get('/tasks')
-      //.query()
       .then((response) => {
-        dispatch({ type: 'GET_TASKS_SUCCESS', data: { tasks: response.body.tasks } });
+        const tasks = response.body.tasks.map((task) => {
+          task.startDate = (task.startDate) ? new Date(task.startDate) : null;
+          task.dueDate = (task.dueDate) ? new Date(task.dueDate) : null;
+          return task;
+        });
+
+        dispatch({ type: 'GET_TASKS_SUCCESS', data: { tasks } });
       })
       .catch((error) => {
         dispatch({ type: 'GET_TASKS_FAILURE', data: { error } });
@@ -37,7 +46,11 @@ const toggleComplete = (taskID) => {
       .post('/complete')
       .send({ id: taskID })
       .then((response) => {
-        dispatch({ type: 'TOGGLE_COMPLETE_SUCCESS', data: { task: response.body.task } });
+        const task = response.body.task;
+        task.startDate = (task.startDate) ? new Date(task.startDate) : null;
+        task.dueDate = (task.dueDate) ? new Date(task.dueDate) : null;
+
+        dispatch({ type: 'TOGGLE_COMPLETE_SUCCESS', data: { task } });
       })
       .catch((error) => {
         dispatch({ type: 'TOGGLE_COMPLETE_FAILURE', data: { error } });
@@ -52,7 +65,11 @@ const changeCategory = (taskID, categoryID) => {
       .post('/changeCategory')
       .send({ taskID, categoryID })
       .then((response) => {
-        dispatch({ type: 'CHANGE_CATEGORY_SUCCESS', data: { task: response.body.task }});
+        const task = response.body.task;
+        task.startDate = (task.startDate) ? new Date(task.startDate) : null;
+        task.dueDate = (task.dueDate) ? new Date(task.dueDate) : null;
+
+        dispatch({ type: 'CHANGE_CATEGORY_SUCCESS', data: { task }});
       })
       .catch((error) => {
         dispatch({ type: 'CHANGE_CATEGORY_FAILURE', data: { error } });

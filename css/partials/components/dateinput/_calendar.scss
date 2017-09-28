@@ -1,0 +1,92 @@
+// ---------- Dimensions ----------
+
+$calendar-width: 300px;
+$day-col: 40px;
+$day-row: 20px;
+$calendar-header-height: 30px;
+
+// ---------- Individual styling ----------
+
+.calendar-wrapper {
+	position: absolute;
+	width: $calendar-width;
+	z-index: 3;
+	background-color: white;
+	
+	border: 1px solid $flat-dark-gray;
+	border-radius: 3px;
+}
+
+.month-picker {
+	@include set-dimensions($calendar-width, $calendar-header-height);
+	background-color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	line-height: $calendar-header-height;
+}
+
+.month-adjust {
+	width: 20px;
+	border-style: none;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.curr-month {
+	text-align: center;
+}
+
+.week-header {
+	@include set-dimensions($calendar-width, $calendar-header-height);
+	background-color: $flat-gray;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: $day-row;
+	justify-items: center;
+
+	line-height: $calendar-header-height;
+}
+
+.week-header-day {
+	width: $day-col;
+	text-align: center;
+}
+
+.calendar-dates {
+
+}
+
+.calendar-input-week {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: $day-row;
+	justify-items: center;
+	align-items: center;
+	
+	width: $calendar-width;
+	margin-bottom: 4px;
+	text-align: center;
+}
+
+.calendar-day {
+	width: $day-col;
+	border-radius: 2px;
+	text-align: center;
+
+	&:hover {
+		background-color: $flat-blue;
+		cursor: pointer;
+	}
+}
+
+.off-month {
+	color: $flat-gray;
+}
+
+.current-day {
+	border: 1px solid $flat-dark-gray;
+}

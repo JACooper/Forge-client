@@ -1,0 +1,36 @@
+// ---------- Dimensions ----------
+
+$task-form-width: 650px;
+$task-form-height: 650px;
+
+// ---------- Individual styling ----------
+
+.task-form-wrapper {
+	@include fixed-center();
+	@include set-dimensions($task-form-width, $task-form-height);
+
+	background-color: $flat-white;
+
+	border-radius: 5px;
+	z-index: 2;	// Ensure detail appears in front of lightbox
+}
+
+.task-form-title {
+
+}
+
+.task-form-time {
+
+}
+
+.task-form-effort {
+
+}
+
+.task-form-focus {
+
+}
+
+#start-date-label {
+
+}

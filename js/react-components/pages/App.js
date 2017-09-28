@@ -75,7 +75,9 @@ class App extends React.Component {
       ) : (null);
     }
 
-    const lightbox = (this.props.detailView) ? (<div className='lightbox-dim' />) : (null);
+    const lightbox = (this.props.detailView || this.props.showTaskForm) ? (
+        <div className='lightbox-dim' />
+      ) : (null);
 
     const taskForm = (this.props.showTaskForm) ? (
       <TaskForm submit={this.submitTask} cancel={this.hideTaskForm} />

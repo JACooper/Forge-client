@@ -18,7 +18,7 @@ export default function reduce(state = initialState, action) {
       addTaskError: null,
       addTaskSuccess: false,
     };
-  case 'ADD_TASK_SUCCESS':
+  case 'ADD_TASK_SUCCESS': 
     return {
       ...state,
       tasks: state.tasks.concat(action.data.task),

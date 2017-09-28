@@ -1,0 +1,25 @@
+// ---------- Dimensions ----------
+
+
+
+// ---------- Individual styling ----------
+
+.date-input-wrapper {
+
+}
+
+.date-error-text {
+	color: #CF000F;
+	font-size: 10pt;
+}
+
+.date-input-text {
+
+}
+
+.date-input-show-calendar {
+	&:hover {
+		cursor: pointer;
+	}
+}
+
