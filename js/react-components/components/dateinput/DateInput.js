@@ -95,10 +95,33 @@ class DateInput extends React.Component {
   }
 
   restrictInput(event) {
-    const key = (event.key) ? event.key : String.fromCharCode(event.keyCode);
+    if (event.key !== undefined)  {
+      const key = event.key;
 
-    if (/[^\d]/.test(key)) {
-      return false;
+      if (key !== 'ArrowLeft'
+          && key !== 'ArrowRight' 
+          && key !== 'Backspace' 
+          && key !== 'Delete' 
+          && key !== '0' 
+          && key !== '1' 
+          && key !== '2' 
+          && key !== '3' 
+          && key !== '4' 
+          && key !== '5' 
+          && key !== '6' 
+          && key !== '7' 
+          && key !== '8' 
+          && key !== '9') {
+        event.preventDefault();
+        return false;
+      }
+    } else if (event.keyCode !== undefined) {
+      const key = event.keyCode;
+      if (!(key >= 48 && key <= 57) 
+          && (key !== 8 && key !== 46 && key !== 37 && key !== 39)) {
+        event.preventDefault();
+        return false;
+      }
     }
   }
 
@@ -121,7 +144,7 @@ class DateInput extends React.Component {
     }
 
     // e.g. if we had 0 slashes before and have 1 now, we need to advance the cursor past the new slash
-    cursor += (numNewSlashes - numSlashes);
+    cursor += Math.abs(numNewSlashes - numSlashes);
 
     this.setState({dateInput: input, dateInputCursor: cursor});
   }
