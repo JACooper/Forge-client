@@ -7,11 +7,8 @@ const addTask = (task) => {
       .post('/task')
       .send({ task })
       .then((response) => {
-        const task = response.body.task;
-        task.startDate = (task.startDate) ? new Date(task.startDate) : null;
-        task.dueDate = (task.dueDate) ? new Date(task.dueDate) : null;
-
-        dispatch({ type: 'ADD_TASK_SUCCESS', data: { task: response.body.task } });
+        const task = populateTaskDate(response.body.task);
+        dispatch({ type: 'ADD_TASK_SUCCESS', data: { task } });
       })
       .catch((error) => {
         dispatch({ type: 'ADD_TASK_FAILURE', data: { error } });
@@ -26,15 +23,29 @@ const getTasks = () => {
       .get('/tasks')
       .then((response) => {
         const tasks = response.body.tasks.map((task) => {
-          task.startDate = (task.startDate) ? new Date(task.startDate) : null;
-          task.dueDate = (task.dueDate) ? new Date(task.dueDate) : null;
-          return task;
+          return populateTaskDate(task);
         });
 
         dispatch({ type: 'GET_TASKS_SUCCESS', data: { tasks } });
       })
       .catch((error) => {
         dispatch({ type: 'GET_TASKS_FAILURE', data: { error } });
+      });
+  };
+};
+
+const updateTask = (task) => {
+  return (dispatch) => {
+    dispatch({ type: 'UPDATE_TASK_START' });
+    superagent
+      .post('/update')
+      .send({ task })
+      .then((response) => {
+        const task = populateTaskDate(response.body.task);
+        dispatch({ type: 'UPDATE_TASK_SUCCESS', data: { task } });
+      })
+      .catch((error) => {
+        dispatch({ type: 'UPDATE_TASK_FAILURE', data: { error } });
       });
   };
 };
@@ -46,10 +57,7 @@ const toggleComplete = (taskID) => {
       .post('/complete')
       .send({ id: taskID })
       .then((response) => {
-        const task = response.body.task;
-        task.startDate = (task.startDate) ? new Date(task.startDate) : null;
-        task.dueDate = (task.dueDate) ? new Date(task.dueDate) : null;
-
+        const task = populateTaskDate(response.body.task);
         dispatch({ type: 'TOGGLE_COMPLETE_SUCCESS', data: { task } });
       })
       .catch((error) => {
@@ -65,10 +73,7 @@ const changeCategory = (taskID, categoryID) => {
       .post('/changeCategory')
       .send({ taskID, categoryID })
       .then((response) => {
-        const task = response.body.task;
-        task.startDate = (task.startDate) ? new Date(task.startDate) : null;
-        task.dueDate = (task.dueDate) ? new Date(task.dueDate) : null;
-
+        const task = populateTaskDate(response.body.task);
         dispatch({ type: 'CHANGE_CATEGORY_SUCCESS', data: { task }});
       })
       .catch((error) => {
@@ -77,9 +82,18 @@ const changeCategory = (taskID, categoryID) => {
   };
 };
 
+const populateTaskDate = (_task) => {  
+  const task = _task;
+  task.startDate = (task.startDate) ? new Date(task.startDate) : null;
+  task.dueDate = (task.dueDate) ? new Date(task.dueDate) : null;
+
+  return task;
+};
+
 export {
   addTask,
   getTasks,
+  updateTask,
   toggleComplete,
   changeCategory,
 };

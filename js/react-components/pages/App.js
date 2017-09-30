@@ -14,8 +14,10 @@ import * as ViewActions from '../../redux/actions/viewActions.js';
 
 @connect((store) => {
   return {
-    tasks          : store.task.tasks,
-    addTaskSuccess : store.task.addTaskSuccess,
+    tasks             : store.task.tasks,
+    addTaskSuccess    : store.task.addTaskSuccess,
+    updateTaskSuccess : store.task.updateTaskSuccess,
+    updatingTask      : store.task.updatingTask,
 
     showTaskForm : store.view.showTaskForm,
     showComplete : store.view.showComplete,
@@ -37,13 +39,12 @@ class App extends React.Component {
     this.toggleShowComplete = this.toggleShowComplete.bind(this);
     this.submitTask         = this.submitTask.bind(this);
     this.getTasks           = this.getTasks.bind(this);
-    this.toggleComplete     = this.toggleComplete.bind(this);
+    this.updateTask         = this.updateTask.bind(this);
     this.logout             = this.logout.bind(this);
     
     this.setActiveCategory = this.setActiveCategory.bind(this);
     this.addCategory       = this.addCategory.bind(this);
     this.getCategories     = this.getCategories.bind(this);
-    this.changeCategory    = this.changeCategory.bind(this);
 
     this.openDetail     = this.openDetail.bind(this);
     this.closeDetail    = this.closeDetail.bind(this);
@@ -52,9 +53,15 @@ class App extends React.Component {
     this.changeEmphasis = this.changeEmphasis.bind(this);
   }
 
-  componentWillMount() {
-    if (this.props.addTaskSuccess) {
+  componentWillReceiveProps(newProps) {
+    if (newProps.addTaskSuccess !== this.props.addTaskSuccess
+      && newProps.addTaskSuccess) {
       this.closeTaskForm();
+    }
+
+    if (newProps.updateTaskSuccess !== this.props.updateTaskSuccess
+      && newProps.updateTaskSuccess) {
+      this.closeDetail();
     }
   }
 
@@ -66,11 +73,11 @@ class App extends React.Component {
       });
       taskDetail = (taskToView !== undefined) ? (
         <TaskDetail
-          {...taskToView}
+          task={taskToView}
           categories={this.props.categories}
+          updatingTask={this.props.updatingTask}
           closeDetail={this.closeDetail}
-          toggleComplete={this.toggleComplete}
-          changeCategory={this.changeCategory}
+          updateTask={this.updateTask}
         />
       ) : (null);
     }
@@ -155,10 +162,6 @@ class App extends React.Component {
     this.props.dispatch(CategoryActions.getCategories());
   }
 
-  changeCategory(taskID, categoryID) {
-    this.props.dispatch(TaskActions.changeCategory(taskID, categoryID));
-  }
-
   submitTask(taskParams) {
     const category = (this.props.activeCategory) ?
       this.props.categories.find((category) => {
@@ -182,8 +185,8 @@ class App extends React.Component {
     this.props.dispatch(ViewActions.closeDetail());
   }
 
-  toggleComplete(taskID) {
-    this.props.dispatch(TaskActions.toggleComplete(taskID));
+  updateTask(taskParams) {
+    this.props.dispatch(TaskActions.updateTask(taskParams));
   }
 
   changeSortType(sortType) {

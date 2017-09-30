@@ -51,6 +51,24 @@ $task-detail-height: 750px;
 	}
 }
 
+.task-detail-update {
+	border-radius: 3px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.update-disabled {
+	background-color: $flat-gray;
+
+	border: none;
+
+	&:hover {
+		cursor: default;
+	}
+}
+
 .close-detail-view {
 	@include set-dimensions(20px, 20px);
 	position: absolute;
