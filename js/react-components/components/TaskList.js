@@ -5,10 +5,12 @@ class TaskList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.sortSum     = this.sortSum.bind(this);
-    this.sortTime    = this.sortTime.bind(this);
-    this.sortEffort  = this.sortEffort.bind(this);
-    this.sortFocus   = this.sortFocus.bind(this);
+    this.sortSum    = this.sortSum.bind(this);
+    this.sortTime   = this.sortTime.bind(this);
+    this.sortEffort = this.sortEffort.bind(this);
+    this.sortFocus  = this.sortFocus.bind(this);
+    this.sortStart  = this.sortStart.bind(this);
+    this.sortDue    = this.sortDue.bind(this);
   }
 
   componentWillMount() {
@@ -41,15 +43,17 @@ class TaskList extends React.Component {
     case 'focus':
       sortedTasks.sort(this.sortFocus);
       break;
+    case 'start':
+      sortedTasks.sort(this.sortStart);
+      break;
+    case 'due':
+      sortedTasks.sort(this.sortDue);
+      break;
     }
 
-    /*
-      Could have supplied an extra 4 sort functions for ascending/descending sort order
-      and put branching logic in each case above to avoid reversing here. Could also
-      provide a single custom sort function that takes the sortByValue and sortByType as
-      parameters. Went with this to keep logic controlled and readable.
-    */
-    if (this.props.sortTypeValue === 'descending') {
+    if (this.props.sortByValue !== 'start' 
+      && this.props.sortByValue !== 'due' 
+      && this.props.sortTypeValue === 'descending') {
       sortedTasks.reverse();
     }
 
@@ -115,6 +119,45 @@ class TaskList extends React.Component {
     return task1.focus - task2.focus;
   }
   
+  sortStart(task1, task2) {
+    if (task1.startDate !== null && task2.startDate !== null) {
+      const start1 = task1.startDate.getTime();
+      const start2 = task2.startDate.getTime();
+
+      if (start1 === start2) {
+        return this.sortSum(task1, task2);
+      } else {
+        const modifier = (this.props.sortTypeValue === 'descending') ? -1 : 1;
+        return (start1 - start2) * modifier;
+      }
+    } else if (task1.startDate && task2.startDate === null) {
+      return -1;  // tasks with dates are sorted above tasks without
+    } else if (task1.startDate === null && task2.startDate) {
+      return 1;
+    } else {
+      return this.sortSum(task1, task2);
+    }
+  }
+
+  sortDue(task1, task2) {
+    if (task1.dueDate !== null && task2.dueDate !== null) {
+      const due1 = task1.dueDate.getTime();
+      const due2 = task2.dueDate.getTime();
+
+      if (due1 === due2) {
+        return this.sortSum(task1, task2);
+      } else {
+        const modifier = (this.props.sortTypeValue === 'descending') ? -1 : 1;
+        return (due1 - due2) * modifier;
+      }
+    } else if (task1.dueDate && task2.dueDate === null) {
+      return -1;  // tasks with dates are sorted above tasks without
+    } else if (task1.dueDate === null && task2.dueDate) {
+      return 1;
+    } else {
+      return this.sortSum(task1, task2);
+    }
+  }
 }
 
 export default TaskList;

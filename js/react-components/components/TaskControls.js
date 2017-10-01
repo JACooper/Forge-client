@@ -41,6 +41,8 @@ class TaskControls extends React.Component {
             <option value='time'>Time</option>
             <option value='effort'>Effort</option>
             <option value='focus'>Focus</option>
+            <option value='start'>Start date</option>
+            <option value='due'>Due date</option>
           </select>
 
           <button type='button' onClick={this.props.toggleShowComplete}>{completeViewText}</button>
