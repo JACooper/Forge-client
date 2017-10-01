@@ -1,12 +1,18 @@
 const initialState = {
   tasks: [],
   addingTask: false,      // Display progress spinner, should stop after success/failure
-  addTaskError: null,     // Display error, should go away after success/new attempt (or X amount of time?)
   addTaskSuccess: false,  // Display success message, close window
+  addTaskError: null,     // Display error, should go away after success/new attempt (or X amount of time?)
+  
   gettingTasks: false,    // Display progress spinner, should stop after success/failure
   getTasksError: null,    // Display error, should go away after success/new attempt (or X amount of time?)
+  
   togglingComplete: false,
   toggleCompleteError: null,
+  
+  updatingTask: false,
+  updateTaskSuccess: false,
+  updateTaskError: null,
 };
 
 export default function reduce(state = initialState, action) {
@@ -23,8 +29,8 @@ export default function reduce(state = initialState, action) {
       ...state,
       tasks: state.tasks.concat(action.data.task),
       addingTask: false,
-      addTaskError: null,
       addTaskSuccess: true,
+      addTaskError: null,
     };
   case 'ADD_TASK_FAILURE':
     return {
@@ -52,6 +58,35 @@ export default function reduce(state = initialState, action) {
       ...state,
       gettingTasks: false,
       getTasksError: action.data.error,
+    };
+
+  case 'UPDATE_TASK_START':
+    return {
+      ...state,
+      updatingTask: true,
+      updateTaskSuccess: false,
+      updateTaskError: null,
+    };
+  case 'UPDATE_TASK_SUCCESS': { 
+    const updatedTasks = state.tasks.filter((task) => {
+      return task._id !== action.data.task._id;
+    });
+    updatedTasks.push(action.data.task);
+
+    return {
+      ...state,
+      tasks: updatedTasks,
+      updatingTask: false,
+      updateTaskSuccess: true,
+      updateTaskError: null,
+    };
+  }
+  case 'UPDATE_TASK_FAILURE':
+    return {
+      ...state,
+      updatingTask: false,
+      updateTaskSuccess: false,
+      updateTaskError: action.data.error,
     };
 
   case 'TOGGLE_COMPLETE_START':

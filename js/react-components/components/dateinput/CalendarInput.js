@@ -6,20 +6,32 @@ import CalendarInputWeek from './CalendarInputWeek.js';
  * Creates & display calendar widget
  * @prop {Date}     date  Initial date value to populate input with. If null, new Date() will be used
  * @prop {Function} selectDate  Function to call when a date is clicked
+ * @prop {Function} closeCalendar Function to call when the calendar needs to close itself
  */
 class CalendarInput extends React.Component {
   constructor(props) {
     super(props);
 
+    // Set up references to detect when user clicks outside of calendar component
+    // See: https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
+    this.clickOutside = this.clickOutside.bind(this);
+
     this.getMonthString = this.getMonthString.bind(this);
 
     const currentDate = (this.props.date) ? this.props.date : new Date();
-
     this.state = {
       day: currentDate.getDate(),
       month: currentDate.getMonth(),
       year: currentDate.getFullYear(),
     };
+  }
+
+  componentWillMount() {
+    document.addEventListener('click', this.clickOutside);
+  }
+
+  componentWillUnount() {
+    document.removeEventListener('click', this.clickOutside);
   }
 
   componentWillReceiveProps(newProps) {
@@ -81,7 +93,7 @@ class CalendarInput extends React.Component {
     });
 
     return (
-      <div className='calendar-wrapper'>
+      <div className='calendar-wrapper' ref={(wrapper) => {this.wrapperRef = wrapper;}}>
         <div className='month-picker'>
           <button
             className='month-adjust'
@@ -119,6 +131,12 @@ class CalendarInput extends React.Component {
         </div>
       </div>
     );
+  }
+
+  clickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.props.closeCalendar();
+    }
   }
 
   getMonthString() {

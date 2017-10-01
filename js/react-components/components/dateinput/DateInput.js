@@ -51,7 +51,11 @@ class DateInput extends React.Component {
 
   render() {
     const calendar = (this.state.displayCalendar) ? (
-        <CalendarInput selectDate={this.selectDate} date={this.props.date} />
+        <CalendarInput
+          selectDate={this.selectDate}
+          date={this.props.date}
+          closeCalendar={() => {this.setState({displayCalendar: false});}}
+        />
       ) : (null);
 
     const errorDisplay = (this.state.error) ? (
