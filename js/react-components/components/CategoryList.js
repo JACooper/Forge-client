@@ -34,20 +34,17 @@ class CategoryList extends React.Component {
         </p>);
     });
 
-    if (this.props.activeCategory !== '') {
-      categories.unshift(<p
-        key='AllCategories'
-        className='category-item'
-        onClick={() => {this.setActive('');}}>
-          All Categories
-        </p>);
-    } else {
-      categories.unshift(<p
-        key='AllCategories'
-        className='category-item active-category'>
-          All Categories
-        </p>);
+    let allCategoryClass = 'category-item';
+    if (this.props.activeCategory === '') {
+      allCategoryClass += ' active-category';
     }
+
+    categories.unshift(<p
+      key='AllCategories'
+      className={allCategoryClass}
+      onClick={() => {this.setActive('');}}>
+        All Categories
+      </p>);
 
     return (
       <div className='category-list-wrapper'>
