@@ -13,6 +13,10 @@ const initialState = {
   updatingTask: false,
   updateTaskSuccess: false,
   updateTaskError: null,
+
+  addingLog: false,
+  addLogSuccess: false,
+  addLogError: null,
 };
 
 export default function reduce(state = initialState, action) {
@@ -87,6 +91,35 @@ export default function reduce(state = initialState, action) {
       updatingTask: false,
       updateTaskSuccess: false,
       updateTaskError: action.data.error,
+    };
+
+  case 'ADD_LOG_START':
+    return {
+      ...state,
+      addingLog: true,
+      addLogSuccess: false,
+      addLogError: null,
+    };
+  case 'ADD_LOG_SUCCESS': { 
+    const updatedTasks = state.tasks.filter((task) => {
+      return task._id !== action.data.task._id;
+    });
+    updatedTasks.push(action.data.task);
+
+    return {
+      ...state,
+      tasks: updatedTasks,
+      addingLog: false,
+      addLogSuccess: true,
+      addLogError: null,
+    };
+  }
+  case 'ADD_LOG_FAILURE':
+    return {
+      ...state,
+      addingLog: false,
+      addLogSuccess: false,
+      addLogError: action.data.error,
     };
 
   case 'TOGGLE_COMPLETE_START':

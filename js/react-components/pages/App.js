@@ -40,6 +40,7 @@ class App extends React.Component {
     this.submitTask         = this.submitTask.bind(this);
     this.getTasks           = this.getTasks.bind(this);
     this.updateTask         = this.updateTask.bind(this);
+    this.addLog             = this.addLog.bind(this);
     this.logout             = this.logout.bind(this);
     
     this.setActiveCategory = this.setActiveCategory.bind(this);
@@ -78,6 +79,7 @@ class App extends React.Component {
           updatingTask={this.props.updatingTask}
           closeDetail={this.closeDetail}
           updateTask={this.updateTask}
+          addLog={this.addLog}
         />
       ) : (null);
     }
@@ -187,6 +189,10 @@ class App extends React.Component {
 
   updateTask(taskParams) {
     this.props.dispatch(TaskActions.updateTask(taskParams));
+  }
+
+  addLog(log) {
+    this.props.dispatch(TaskActions.addLog(this.props.detailView, log));
   }
 
   changeSortType(sortType) {
