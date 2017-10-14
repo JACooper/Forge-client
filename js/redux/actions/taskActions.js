@@ -50,6 +50,22 @@ const updateTask = (task) => {
   };
 };
 
+const addLog = (taskID, log) => {
+  return (dispatch) => {
+    dispatch({ type: 'ADD_LOG_START' });
+    superagent
+      .post('/log')
+      .send({ taskID, ...log })
+      .then((response) => {
+        const task = populateTaskDate(response.body.task);
+        dispatch({ type: 'ADD_LOG_SUCCESS', data: { task } });
+      })
+      .catch((error) => {
+        dispatch({ type: 'ADD_LOG_FAILURE', data: { error } });
+      });
+  };
+};
+
 const toggleComplete = (taskID) => {
   return (dispatch) => {
     dispatch({ type: 'TOGGLE_COMPLETE_START'});
@@ -86,6 +102,11 @@ const populateTaskDate = (_task) => {
   const task = _task;
   task.startDate = (task.startDate) ? new Date(task.startDate) : null;
   task.dueDate = (task.dueDate) ? new Date(task.dueDate) : null;
+  if (task.log) {
+    task.log.forEach((log) => {
+      log.date = new Date(log.date);
+    });
+  }
 
   return task;
 };
@@ -94,6 +115,7 @@ export {
   addTask,
   getTasks,
   updateTask,
+  addLog,
   toggleComplete,
   changeCategory,
 };
