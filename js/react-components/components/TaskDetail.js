@@ -6,8 +6,6 @@ class TaskDetail extends React.Component {
   constructor(props) {
     super(props);
 
-    this.setStartDate = this.setStartDate.bind(this);
-    this.setDueDate = this.setDueDate.bind(this);
     this.updateTask = this.updateTask.bind(this);
     this.restrictInput = this.restrictInput.bind(this);
     this.addWorkLog = this.addWorkLog.bind(this);
@@ -79,8 +77,8 @@ class TaskDetail extends React.Component {
           type='text'
           value={this.state.title}
           onChange={(e) => {
-            this.setState({title: e.target.value});
-            setTimeout(() => {this.hasChanged();}, 500);
+            this.setState({title: e.target.value},
+            () => {setTimeout(() => {this.hasChanged();}, 500);});
           }}
         />
         <p className='task-detail-time'>Time: {time}</p>
@@ -96,8 +94,8 @@ class TaskDetail extends React.Component {
           className='category-dropdown'
           value={this.state.category._id}
           onChange={(e) => {
-            this.setState({category: e.target.value});
-            setTimeout(() => {this.hasChanged();}, 500);
+            this.setState({category: e.target.value},
+            () => {setTimeout(() => {this.hasChanged();}, 500);});
           }}
         >
           {categoryOptions}
@@ -107,8 +105,8 @@ class TaskDetail extends React.Component {
           className={toggleButtonClass}
           type='button'
           onClick={() => {
-            this.setState({complete: !this.state.complete});
-            setTimeout(() => {this.hasChanged();}, 500);
+            this.setState({complete: !this.state.complete},
+            () => {setTimeout(() => {this.hasChanged();}, 500);});
           }}
         >
           &#10004;
@@ -159,16 +157,6 @@ class TaskDetail extends React.Component {
         </button>
       </div>
     );
-  }
-
-  setStartDate(date) {
-    this.setState({startDate: date});
-    setTimeout(() => {this.hasChanged();}, 500);
-  }
-
-  setDueDate(date) {
-    this.setState({dueDate: date});
-    setTimeout(() => {this.hasChanged();}, 500);
   }
 
   hasChanged() {    
@@ -260,16 +248,16 @@ class TaskDetail extends React.Component {
     const logDesc = this.state.logDesc;
     const logTime = this.state.logTime;
 
-    if (logDesc !== null && logDesc !== undefined && logDesc !== '') {
+    if (logDesc !== undefined && logDesc !== null && logDesc !== '') {
       log.desc = logDesc;
     }
 
-    if (logTime !== null && logTime !== undefined && logTime !== '') {
+    if (logTime !== undefined && logTime !== null && logTime !== '') {
       log.time = logTime;
     }
 
     if (log.date && (log.desc || log.time)) {
-      this.props.addLog({ ...log });
+      this.props.addLog(log);
     }
   }
 }
