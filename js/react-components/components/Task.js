@@ -6,46 +6,105 @@ class Task extends React.Component {
   }
 
   render() {
-    let time = '';
-    let effort = '';
-    let focus = '';
+    // let time = '';
+    // let effort = '';
+    // let focus = '';
+
+    // for (let stars = 1; stars <= 3; stars++) {
+    //   if (stars <= this.props.time) {
+    //     time += '\u2605';
+    //   } else {
+    //     time += '\u2606';
+    //   }
+
+    //   if (stars <= this.props.effort) {
+    //     effort += '\u2605';
+    //   } else {
+    //     effort += '\u2606';
+    //   }
+
+    //   if (stars <= this.props.focus) {
+    //     focus += '\u2605';
+    //   } else {
+    //     focus += '\u2606';
+    //   }
+    // }
+
+    // let timeClass;
+    // switch (this.props.time) {
+    // case 1:
+    //   timeClass = 'task-img task-rating one-star';
+    //   break;
+    // case 2:
+    //   timeClass = 'task-img task-rating two-stars';
+    //   break;
+    // case 3:
+    //   timeClass = 'task-img task-rating three-stars';
+    // }
+
+    // let effortClass;
+    // switch (this.props.effort) {
+    // case 1:
+    //   effortClass = 'task-img task-rating one-star';
+    //   break;
+    // case 2:
+    //   effortClass = 'task-img task-rating two-stars';
+    //   break;
+    // case 3:
+    //   effortClass = 'task-img task-rating three-stars';
+    // }
+
+    // let focusClass;
+    // switch (this.props.focus) {
+    // case 1:
+    //   focusClass = 'task-img task-rating one-star';
+    //   break;
+    // case 2:
+    //   focusClass = 'task-img task-rating two-stars';
+    //   break;
+    // case 3:
+    //   focusClass = 'task-img task-rating three-stars';
+    // }
+
+    const timeRating = [];
+    const effortRating = [];
+    const focusRating = [];
 
     for (let stars = 1; stars <= 3; stars++) {
       if (stars <= this.props.time) {
-        time += '\u2605';
+        timeRating.push(<div className='task-rating-full' key={stars} />);
       } else {
-        time += '\u2606';
+        timeRating.push(<div className='task-rating-empty' key={stars} />);
       }
 
       if (stars <= this.props.effort) {
-        effort += '\u2605';
+        effortRating.push(<div className='task-rating-full' key={stars} />);
       } else {
-        effort += '\u2606';
+        effortRating.push(<div className='task-rating-empty' key={stars} />);
       }
 
       if (stars <= this.props.focus) {
-        focus += '\u2605';
+        focusRating.push(<div className='task-rating-full' key={stars} />);
       } else {
-        focus += '\u2606';
+        focusRating.push(<div className='task-rating-empty' key={stars} />);
       }
     }
-
-    const startDate = (this.props.startDate) ? (
-        <p className='task-start'>Start Date: {this.props.startDate.toDateString()}</p>
-      ) : ( null);
-
-    const dueDate = (this.props.dueDate) ? (
-        <p className='task-due'>Due Date: {this.props.dueDate.toDateString()}</p>
-      ) : ( null);
 
     return (
       <div className='task-wrapper' onClick={() => {this.props.openDetail(this.props._id);}}>
         <p className='task-title'>{this.props.title}</p>
-        <p className='task-time'>Time: {time}</p>
-        <p className='task-effort'>Effort: {effort}</p>
-        <p className='task-focus'>Focus: {focus}</p>
-        {startDate}
-        {dueDate}
+        <div className='task-time'>
+          <div className='task-time-img' />
+          {timeRating}
+        </div>
+        <div className='task-effort'>
+          <div className='task-effort-img' />
+          {effortRating}
+        </div>
+        <div className='task-focus'>
+          <div className='task-focus-img' />
+          {focusRating}
+        </div>
       </div>
     );
   }

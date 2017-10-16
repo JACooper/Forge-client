@@ -99,7 +99,17 @@ const config = {
           },
           { loader: 'less-loader' }
         ]
-      }
+      },
+      {
+        test: /\.(jpg|png|svg)$/,
+        loader: 'url-loader',
+        options: {
+          // Images under this limit are inlined as base64 to reduce requests
+          // Images over the limit are loaded using file-loader
+          limit: 12000,
+          name: '/assets/img/[name].[ext]',
+        },
+      },
     ]
   }
 };
