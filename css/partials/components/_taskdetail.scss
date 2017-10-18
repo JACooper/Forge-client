@@ -53,3 +53,20 @@ $task-title-inset: 5px;
 		margin-left: 4px;
 	}
 }
+
+.log-detail-wrapper {
+	display: grid;
+	grid-template-columns: 160px auto 50px;
+	align-items: center;
+
+	border-top: 1px #6B6B6B solid;
+	margin-bottom: 7px;
+}
+
+.log-detail-date {
+	margin-left: 15px;
+}
+
+.log-detail-time {
+	justify-self: center;
+}
