@@ -1,5 +1,6 @@
 import React from 'react';
 import Task from './Task.js';
+import TaskDetail from './TaskDetail.js';
 
 class TaskList extends React.Component {
   constructor(props) {
@@ -30,6 +31,11 @@ class TaskList extends React.Component {
       });
     }
 
+    // For stable sorting in case of equal sums, etc.
+    for(let i = 0; i < sortedTasks.length; i++) {
+      sortedTasks[i].position = i;
+    }
+
     switch(this.props.sortByValue) {
     case 'sum':
       sortedTasks.sort(this.sortSum);
@@ -58,12 +64,24 @@ class TaskList extends React.Component {
     }
 
     const tasks = sortedTasks.map((task) => {
-      return <Task
-          {...task}
-          key={task._id}
-          openDetail={this.props.openDetail}
-          toggleComplete={this.props.toggleComplete}
-        />;
+      if (task._id === this.props.detailView) {
+        return <TaskDetail
+            {...task}
+            key={task._id}
+            categories={this.props.categories}
+            updatingTask={this.props.updatingTask}
+            closeDetail={this.closeDetail}
+            updateTask={this.props.updateTask}
+            addLog={this.props.addLog}
+          />;
+      } else {
+        return <Task
+            {...task}
+            key={task._id}
+            openDetail={this.props.openDetail}
+            toggleComplete={this.props.toggleComplete}
+          />;
+      }
     });
 
     return (
@@ -95,26 +113,29 @@ class TaskList extends React.Component {
       break;
     }
 
+    if (sum1 === sum2) {
+      return task1.position - task2.position;
+    }
     return sum1 - sum2;
   }
 
   sortTime(task1, task2) {
-    if (this.props.emphasis === 'time') {
-      return task1.time * 2 - task2.time * 2;
+    if (task1.time === task2.time) {
+      return task1.position - task2.position;
     }
     return task1.time - task2.time;
   }
 
   sortEffort(task1, task2) {
-    if (this.props.emphasis === 'effort') {
-      return task1.effort * 2 - task2.effort * 2;
+    if (task1.effort === task2.effort) {
+      return task1.position - task2.position;
     }
     return task1.effort - task2.effort;
   }
   
   sortFocus(task1, task2) {
-    if (this.props.emphasis === 'focus') {
-      return task1.focus * 2 - task2.focus * 2;
+    if (task1.focus === task2.focus) {
+      return task1.position - task2.position;
     }
     return task1.focus - task2.focus;
   }

@@ -195,6 +195,7 @@ class DateInput extends React.Component {
         error: 'Invalid date',
       });
     } else {
+      returnDate.setSeconds(0);
       this.setState({
         error: null,
       });

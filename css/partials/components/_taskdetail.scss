@@ -1,91 +1,55 @@
 // ---------- Dimensions ----------
 
-$task-detail-width: 800px;
-$task-detail-height: 750px;
-
+// $task-detail-width: 800px;
+// $task-detail-height: 750px;
+$task-title-inset: 5px;
 
 // ---------- Individual styling ----------
 
 .task-detail-wrapper {
-	@include fixed-center();
-	@include set-dimensions($task-detail-width, $task-detail-height);
-
 	background-color: $flat-white;
+	font-size: 10pt;
 
-	margin-bottom: 10px;
-	border-radius: 5px;
-	z-index: 2;	// Ensure detail appears in front of lightbox
+	width: 100%;
+
+	margin-bottom: 5px;
 }
 
 .task-detail-title {
-	margin-top: 3px;
-	margin-left: 3px;
-}
-
-.task-detail-time {
-	margin-left: 3px;
-}
-
-.task-detail-effort {
-	margin-left: 3px;
-}
-
-.task-detail-focus {
-	margin-left: 3px;
-}
-
-.mark-complete-button {
-	@include set-dimensions(20px, 20px);
-	float: right;
-
-	&:hover {
-		cursor: pointer;
-	}
-}
-
-.mark-uncomplete-button {
-	@include set-dimensions(20px, 20px);
-
-	&:hover {
-		cursor: pointer;
-	}
-}
-
-.task-detail-update {
-	border-radius: 3px;
-
-	&:hover {
-		cursor: pointer;
-	}
-}
-
-.update-disabled {
-	background-color: $flat-gray;
+	background-color: $flat-white;
+	font-size: 13pt;
+	font-family: $primary-font;
+	
+	width: calc(100% - calc(#{$task-title-inset} * 2));
+	margin-top: 5px;
+	margin-left: $task-title-inset;
 
 	border: none;
+	border-bottom-color: #6B6B6B;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
 
-	&:hover {
-		cursor: default;
+	&:focus {
+		outline: none;
 	}
 }
 
-.close-detail-view {
-	@include set-dimensions(20px, 20px);
-	position: absolute;
-	top: 0px;
-	right: -20px;
-	
-	&:hover {
-		cursor: pointer;
-	}
+.task-detail-attributes {
+	margin-bottom: 10px;
 }
 
-.lightbox-dim {
-	position   : fixed;
-	top        : 0;
-	left       : 0;
-	right      : 0;
-	bottom     : 0;
-	background : rgba(0, 0, 0, 0.5);
-	z-index    : 1;	// So that overlay covers most components
+.task-detail-dates {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	margin-bottom: 10px;
+}
+
+.task-detail-date {
+	margin-left: 40px;
+
+	.date-input-wrapper {
+		margin-left: 4px;
+	}
 }

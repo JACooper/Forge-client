@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import TaskDetail from '../components/TaskDetail.js';
+// import TaskDetail from '../components/TaskDetail.js';
 import TaskForm from '../components/TaskForm.js';
 import TaskList from '../components/TaskList.js';
 import CategoryList from '../components/CategoryList.js';
@@ -60,31 +60,31 @@ class App extends React.Component {
       this.closeTaskForm();
     }
 
-    if (newProps.updateTaskSuccess !== this.props.updateTaskSuccess
-      && newProps.updateTaskSuccess) {
-      this.closeDetail();
-    }
+    // if (newProps.updateTaskSuccess !== this.props.updateTaskSuccess
+    //   && newProps.updateTaskSuccess) {
+    //   this.closeDetail();
+    // }
   }
 
   render() {
-    let taskDetail = null;
-    if (this.props.detailView) {
-      const taskToView = this.props.tasks.find((task) => {
-        return task._id === this.props.detailView;
-      });
-      taskDetail = (taskToView !== undefined) ? (
-        <TaskDetail
-          task={taskToView}
-          categories={this.props.categories}
-          updatingTask={this.props.updatingTask}
-          closeDetail={this.closeDetail}
-          updateTask={this.updateTask}
-          addLog={this.addLog}
-        />
-      ) : (null);
-    }
+    // let taskDetail = null;
+    // if (this.props.detailView) {
+    //   const taskToView = this.props.tasks.find((task) => {
+    //     return task._id === this.props.detailView;
+    //   });
+    //   taskDetail = (taskToView !== undefined) ? (
+    //     <TaskDetail
+    //       task={taskToView}
+    //       categories={this.props.categories}
+    //       updatingTask={this.props.updatingTask}
+    //       closeDetail={this.closeDetail}
+    //       updateTask={this.updateTask}
+    //       addLog={this.addLog}
+    //     />
+    //   ) : (null);
+    // }
 
-    const lightbox = (this.props.detailView || this.props.showTaskForm) ? (
+    const lightbox = (this.props.showTaskForm) ? (
         <div className='lightbox-dim' />
       ) : (null);
 
@@ -127,10 +127,14 @@ class App extends React.Component {
             emphasisValue  ={this.props.emphasis}
             updateTasks    ={this.getTasks}
             openDetail     ={this.openDetail}
-            openDetail     ={this.openDetail}
+            detailView     ={this.props.detailView}
+            categories     ={this.props.categories}
+            updatingTask   ={this.props.updatingTask}
+            closeDetail    ={this.closeDetail}
+            updateTask     ={this.updateTask}
+            addLog         ={this.addLog}
           />
         {lightbox}
-        {taskDetail}
         </div>
       </div>
     );
@@ -187,8 +191,8 @@ class App extends React.Component {
     this.props.dispatch(ViewActions.closeDetail());
   }
 
-  updateTask(taskParams) {
-    this.props.dispatch(TaskActions.updateTask(taskParams));
+  updateTask(taskId, updatedFields) {
+    this.props.dispatch(TaskActions.updateTask(taskId, updatedFields));
   }
 
   addLog(log) {

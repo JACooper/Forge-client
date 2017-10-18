@@ -8,7 +8,7 @@ class LogDetail extends React.Component {
   render() {
     return (
       <div className='log-detail-wrapper'>
-        <p>{this.props.log.date.toUTCString()}</p>
+        <p>{this.props.log.date.toLocaleString()}</p>
         <p>{this.props.log.desc}</p>
         <p>{this.props.log.time}</p>
       </div>

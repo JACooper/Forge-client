@@ -71,15 +71,16 @@ export default function reduce(state = initialState, action) {
       updateTaskSuccess: false,
       updateTaskError: null,
     };
-  case 'UPDATE_TASK_SUCCESS': { 
-    const updatedTasks = state.tasks.filter((task) => {
-      return task._id !== action.data.task._id;
+  case 'UPDATE_TASK_SUCCESS': {
+    const tasks = Array.from(state.tasks);
+    const taskIndex = tasks.findIndex((task) => {
+      return task._id === action.data.task._id;
     });
-    updatedTasks.push(action.data.task);
+    tasks.splice(taskIndex, 1, action.data.task);
 
     return {
       ...state,
-      tasks: updatedTasks,
+      tasks,
       updatingTask: false,
       updateTaskSuccess: true,
       updateTaskError: null,
@@ -100,15 +101,16 @@ export default function reduce(state = initialState, action) {
       addLogSuccess: false,
       addLogError: null,
     };
-  case 'ADD_LOG_SUCCESS': { 
-    const updatedTasks = state.tasks.filter((task) => {
-      return task._id !== action.data.task._id;
+  case 'ADD_LOG_SUCCESS': {
+    const tasks = Array.from(state.tasks);
+    const taskIndex = tasks.findIndex((task) => {
+      return task._id === action.data.task._id;
     });
-    updatedTasks.push(action.data.task);
+    tasks.splice(taskIndex, 1, action.data.task);
 
     return {
       ...state,
-      tasks: updatedTasks,
+      tasks,
       addingLog: false,
       addLogSuccess: true,
       addLogError: null,
@@ -129,14 +131,15 @@ export default function reduce(state = initialState, action) {
       toggleCompleteError: null,
     };
   case 'TOGGLE_COMPLETE_SUCCESS': {
-    const updatedTasks = state.tasks.filter((task) => {
-      return task._id !== action.data.task._id;
+    const tasks = Array.from(state.tasks);
+    const taskIndex = tasks.findIndex((task) => {
+      return task._id === action.data.task._id;
     });
-    updatedTasks.push(action.data.task);
+    tasks.splice(taskIndex, 1, action.data.task);
 
     return {
       ...state,
-      tasks: updatedTasks,
+      tasks,
       togglingComplete: false,
       toggleCompleteError: null,
     };
@@ -155,14 +158,15 @@ export default function reduce(state = initialState, action) {
       changeCategoryError: null,
     };
   case 'CHANGE_CATEGORY_SUCCESS': {
-    const updatedTasks = state.tasks.filter((task) => {
-      return task._id !== action.data.task._id;
+    const tasks = Array.from(state.tasks);
+    const taskIndex = tasks.findIndex((task) => {
+      return task._id === action.data.task._id;
     });
-    updatedTasks.push(action.data.task);
+    tasks.splice(taskIndex, 1, action.data.task);
 
     return {
       ...state,
-      tasks: updatedTasks,
+      tasks,
       changingCategory: false,
       changeCategoryError: null,
     };

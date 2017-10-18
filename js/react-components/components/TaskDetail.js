@@ -1,5 +1,6 @@
 import React from 'react';
 import DateInput from './dateinput/DateInput.js';
+import DateTimeInput from './dateinput/DateTimeInput.js';
 import LogDetail from './LogDetail.js';
 
 class TaskDetail extends React.Component {
@@ -7,121 +8,57 @@ class TaskDetail extends React.Component {
     super(props);
 
     this.updateTask = this.updateTask.bind(this);
-    this.restrictInput = this.restrictInput.bind(this);
     this.addWorkLog = this.addWorkLog.bind(this);
+    this.showLogForm = this.showLogForm.bind(this);
+    this.closeLogForm = this.closeLogForm.bind(this);
 
     // Only use task props for initial state - subsequent form data should come from user input
     this.state = {
-      title: this.props.task.title,
-      time: this.props.task.time,
-      effort: this.props.task.effort,
-      focus: this.props.task.focus,
-      category: this.props.task.category,
-      startDate: this.props.task.startDate,
-      dueDate: this.props.task.dueDate,
-      complete: this.props.task.complete,
+      title: this.props.title,
+      time: this.props.time,
+      effort: this.props.effort,
+      focus: this.props.focus,
+      category: this.props.category,
+      startDate: this.props.startDate,
+      dueDate: this.props.dueDate,
+      complete: this.props.complete,
       logDate: new Date(),
       logDesc: '',
       logTime: '',
+      // showLog: false,
+      showLogForm: false,
       dirty: false,
     };
   }
 
   render() {
-    let time = '';
-    let effort = '';
-    let focus = '';
+    const timeRating = [];
+    const effortRating = [];
+    const focusRating = [];
 
     for (let stars = 1; stars <= 3; stars++) {
-      if (stars <= this.state.time) {
-        time += '\u2605';
+      if (stars <= this.props.time) {
+        timeRating.push(<div className='task-rating-full' key={stars} />);
       } else {
-        time += '\u2606';
+        timeRating.push(<div className='task-rating-empty' key={stars} />);
       }
 
-      if (stars <= this.state.effort) {
-        effort += '\u2605';
+      if (stars <= this.props.effort) {
+        effortRating.push(<div className='task-rating-full' key={stars} />);
       } else {
-        effort += '\u2606';
+        effortRating.push(<div className='task-rating-empty' key={stars} />);
       }
 
-      if (stars <= this.state.focus) {
-        focus += '\u2605';
+      if (stars <= this.props.focus) {
+        focusRating.push(<div className='task-rating-full' key={stars} />);
       } else {
-        focus += '\u2606';
+        focusRating.push(<div className='task-rating-empty' key={stars} />);
       }
     }
 
-    const categoryOptions = this.props.categories.map((category) => {
-      return (<option key={category._id} className='category-option' value={category._id}>
-          {category.name}
-        </option>);
-    });
-
-    let logIndex = 0;
-    const workLog = (this.props.task.log) ? 
-      this.props.task.log.map((log) => {
-        return (<LogDetail key={log.date.getTime().toString() + logIndex++} log={log} />);
-      }) : (null);
-
-    const toggleButtonClass = (this.state.complete) ? 'mark-uncomplete-button' : 'mark-complete-button';
-    let updateClasses = 'task-detail-update';
-    if (!this.state.dirty || this.props.updatingTask){
-      updateClasses += ' update-disabled';
-    }
-
-    return (
-      <div className='task-detail-wrapper'>
-        <input
-          className='task-detail-title'
-          type='text'
-          value={this.state.title}
-          onChange={(e) => {
-            this.setState({title: e.target.value},
-            () => {setTimeout(() => {this.hasChanged();}, 500);});
-          }}
-        />
-        <p className='task-detail-time'>Time: {time}</p>
-        <p className='task-detail-effort'>Effort: {effort}</p>
-        <p className='task-detail-focus'>Focus: {focus}</p>
-
-        <label className='task-detail-label'>Start date</label>
-        <DateInput date={this.state.startDate} submit={this.setStartDate} />
-        <label className='task-detail-label'>Due date</label>
-        <DateInput date={this.state.dueDate} submit={this.setDueDate} />
-
-        <select
-          className='category-dropdown'
-          value={this.state.category._id}
-          onChange={(e) => {
-            this.setState({category: e.target.value},
-            () => {setTimeout(() => {this.hasChanged();}, 500);});
-          }}
-        >
-          {categoryOptions}
-        </select>
-        
-        <button
-          className={toggleButtonClass}
-          type='button'
-          onClick={() => {
-            this.setState({complete: !this.state.complete},
-            () => {setTimeout(() => {this.hasChanged();}, 500);});
-          }}
-        >
-          &#10004;
-        </button>
-
-        <button
-          className={updateClasses}
-          type='button'
-          disabled={!this.state.dirty}
-          onClick={this.updateTask}
-        >
-          Update task
-        </button>
-
-        <DateInput date={this.state.logDate} submit={this.setLogDate} />
+    const addLog = (this.state.showLogForm) ? (
+      <div>
+        <DateTimeInput date={this.state.logDate} submit={this.setLogDate} />
         <input
           className='log-detail-desc'
           type='text'
@@ -146,29 +83,119 @@ class TaskDetail extends React.Component {
           Log work
         </button>
 
-        {workLog}
-
         <button
-          className='close-detail-view'
+          className='cancel-detail-log'
           type='button'
-          onClick={() => {this.props.closeDetail();}}
+          onClick={() => {this.closeLogForm();}}
         >
-          &times;
+          Cancel
         </button>
+        </div>
+      ) : (
+        <button
+          className='show-detail-log'
+          type='button'
+          onClick={() => {this.showLogForm();}}
+        >
+          Log work
+        </button>
+      );
+
+    let logIndex = 0;
+    const workLog = (this.props.log) ? 
+      this.props.log.map((log) => {
+        return (<LogDetail key={log.date.getTime().toString() + logIndex++} log={log} />);
+      }) : (null);
+
+    return (
+      <div className='task-detail-wrapper'>
+        <input
+          className='task-detail-title'
+          type='text'
+          maxLength='70'
+          value={this.state.title}
+          onChange={(e) => {
+            if (e.target.value !== '') {
+              const stateObject ={ title: e.target.value };
+              this.setState(stateObject);
+
+              if (this.titleTimeout) {
+                window.clearTimeout(this.titleTimeout);
+              }
+              this.titleTimeout = setTimeout(() => this.updateTask(stateObject), 500);
+            }
+          }} />
+        <div className='task-detail-attributes'>
+          <div className='task-time'>
+            <div className='task-time-img' />
+            {timeRating}
+          </div>
+          <div className='task-effort'>
+            <div className='task-effort-img' />
+            {effortRating}
+          </div>
+          <div className='task-focus'>
+            <div className='task-focus-img' />
+            {focusRating}
+          </div>
+        </div>
+
+        <div className='task-detail-dates'>
+          <div className='task-detail-date'>
+            <label className='task-detail-label'>Start date</label>
+            <DateInput date={this.state.startDate} submit={
+              (date) => { this.setFieldAndSubmit('startDate', date); }
+            } />
+          </div>
+          <div className='task-detail-date'>
+            <label className='task-detail-label'>Due date</label>
+            <DateInput date={this.state.dueDate} submit={
+              (date) => { this.setFieldAndSubmit('dueDate', date); }
+            } />
+          </div>
+        </div>
+
+        <div className='task-detail-notes'>
+
+        </div>
+
+        <div className='task-detail-log'>
+          {addLog}
+          {workLog}
+        </div>
       </div>
     );
   }
 
+  setFieldAndSubmit(field, value) {
+    if (value !== this.state[field]) {
+      const stateObject = {};
+      stateObject[field] = value;
+
+      this.setState(stateObject, () => {
+        this.updateTask(stateObject);
+      });
+    }
+  }
+
+  showLogForm() {
+    this.setState({ showLogForm: true });
+  }
+
+  closeLogForm() {
+    this.setState({ showLogForm: false });
+  }
+
   hasChanged() {    
     const propFields = {
-      title: this.props.task.title,
-      time: this.props.task.time,
-      effort: this.props.task.effort,
-      focus: this.props.task.focus,
-      category: this.props.task.category,
-      complete: this.props.task.complete,
-      startDate: this.props.task.startDate,
-      dueDate: this.props.task.dueDate,
+      title: this.props.title,
+      time: this.props.time,
+      effort: this.props.effort,
+      focus: this.props.focus,
+      category: this.props.category,
+      complete: this.props.complete,
+      startDate: this.props.startDate,
+      dueDate: this.props.dueDate,
     };
 
     const stateFields = {
@@ -189,53 +216,8 @@ class TaskDetail extends React.Component {
     }
   }
 
-  updateTask() {
-    const stateFields = {
-      title: this.state.title,
-      time: this.state.time,
-      effort: this.state.effort,
-      focus: this.state.focus,
-      category: this.state.category,
-      complete: this.state.complete,
-      startDate: this.state.startDate,
-      dueDate: this.state.dueDate,
-    };
-
-    // Send in the original task, plus whatever fields were edited
-    this.props.updateTask({...this.props.task, ...stateFields});
-  }
-
-  restrictInput(event) {
-    if (event.key !== undefined)  {
-      const key = event.key;
-
-      if (key !== 'ArrowLeft'
-          && key !== 'ArrowRight'
-          && key !== 'Backspace'
-          && key !== 'Delete'
-          && key !== 'Tab'
-          && key !== '.'
-          && key !== '0'
-          && key !== '1'
-          && key !== '2'
-          && key !== '3'
-          && key !== '4'
-          && key !== '5'
-          && key !== '6'
-          && key !== '7'
-          && key !== '8'
-          && key !== '9') {
-        event.preventDefault();
-        return false;
-      }
-    } else if (event.keyCode !== undefined) {
-      const key = event.keyCode;
-      if (!(key >= 48 && key <= 57) 
-          && (key !== 8 && key !== 46 && key !== 37 && key !== 39 && key !== 9 && key !== 190)) {
-        event.preventDefault();
-        return false;
-      }
-    }
+  updateTask(updateFields) {
+    this.props.updateTask(this.props._id, updateFields);
   }
 
   setLogDate(date) {
@@ -245,6 +227,7 @@ class TaskDetail extends React.Component {
   addWorkLog() {
     const log = {};
     log.date = this.state.logDate;
+    log.date.setSeconds(0);
     const logDesc = this.state.logDesc;
     const logTime = this.state.logTime;
 

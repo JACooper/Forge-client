@@ -104,9 +104,9 @@ const config = {
         test: /\.(jpg|png|svg)$/,
         loader: 'url-loader',
         options: {
-          // Images under this limit are inlined as base64 to reduce requests
+          // Images under 8kb are inlined as base64 to reduce requests
           // Images over the limit are loaded using file-loader
-          limit: 12000,
+          limit: 8192,
           name: '/assets/img/[name].[ext]',
         },
       },
