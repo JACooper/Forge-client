@@ -76,12 +76,10 @@ class DateInput extends React.Component {
           ref='inputText'
         />
         <button
-          type='button'
           className='date-input-show-calendar'
+          type='button'
           onClick={() => {this.toggleCalendar();}}
-        >
-          &#128197;
-        </button>
+        />
         {errorDisplay}
         {calendar}
       </div>

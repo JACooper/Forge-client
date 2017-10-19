@@ -1,14 +1,13 @@
 import React from 'react';
 import DateInput from './dateinput/DateInput.js';
-import DateTimeInput from './dateinput/DateTimeInput.js';
 import LogDetail from './LogDetail.js';
+import LogForm from './LogForm.js';
 
 class TaskDetail extends React.Component {
   constructor(props) {
     super(props);
 
     this.updateTask = this.updateTask.bind(this);
-    this.addWorkLog = this.addWorkLog.bind(this);
     this.showLogForm = this.showLogForm.bind(this);
     this.closeLogForm = this.closeLogForm.bind(this);
 
@@ -22,9 +21,6 @@ class TaskDetail extends React.Component {
       startDate: this.props.startDate,
       dueDate: this.props.dueDate,
       complete: this.props.complete,
-      logDate: new Date(),
-      logDesc: '',
-      logTime: '',
       // showLog: false,
       showLogForm: false,
       dirty: false,
@@ -56,41 +52,11 @@ class TaskDetail extends React.Component {
       }
     }
 
+    const addLogLabel = (this.state.showLogForm) ? (
+        <label className='detail-log-label'>Log date</label>
+      ) : (null);
     const addLog = (this.state.showLogForm) ? (
-      <div>
-        <DateTimeInput date={this.state.logDate} submit={this.setLogDate} />
-        <input
-          className='log-detail-desc'
-          type='text'
-          placeholder='Work log description'
-          value={this.state.logDesc}
-          onChange={(e) => { this.setState({ logDesc: e.target.value }); }}
-        />
-        <input
-          className='log-detail-time'
-          type='text'
-          placeholder='# hrs'
-          value={this.state.logTime}
-          onKeyDown={this.restrictInput}
-          onChange={(e) => { this.setState({ logTime: e.target.value }); }}
-        />
-
-        <button
-          className='add-detail-log'
-          type='button'
-          onClick={() => {this.addWorkLog();}}
-        >
-          Log work
-        </button>
-
-        <button
-          className='cancel-detail-log'
-          type='button'
-          onClick={() => {this.closeLogForm();}}
-        >
-          Cancel
-        </button>
-        </div>
+        <LogForm addLog={this.props.addLog} closeLogForm={this.closeLogForm} />
       ) : (
         <button
           className='show-detail-log'
@@ -160,6 +126,7 @@ class TaskDetail extends React.Component {
         </div>
 
         <div className='task-detail-log'>
+          {addLogLabel}
           {addLog}
           {workLog}
         </div>
@@ -220,29 +187,6 @@ class TaskDetail extends React.Component {
     this.props.updateTask(this.props._id, updateFields);
   }
 
-  setLogDate(date) {
-    this.setState({logDate: date});
-  }
-
-  addWorkLog() {
-    const log = {};
-    log.date = this.state.logDate;
-    log.date.setSeconds(0);
-    const logDesc = this.state.logDesc;
-    const logTime = this.state.logTime;
-
-    if (logDesc !== undefined && logDesc !== null && logDesc !== '') {
-      log.desc = logDesc;
-    }
-
-    if (logTime !== undefined && logTime !== null && logTime !== '') {
-      log.time = logTime;
-    }
-
-    if (log.date && (log.desc || log.time)) {
-      this.props.addLog(log);
-    }
-  }
 }
 
 export default TaskDetail;

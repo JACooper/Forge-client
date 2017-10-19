@@ -1,12 +1,9 @@
 // ---------- Dimensions ----------
 
-
+$date-input-background: #EEEEEE;
+$date-input-color: #555555;
 
 // ---------- Individual styling ----------
-
-.date-input-wrapper {
-
-}
 
 .date-error-text {
 	color: #CF000F;
@@ -14,12 +11,61 @@
 }
 
 .date-input-text {
+	height: 20px;
+	background-color: $date-input-background;
+	color: $date-input-color;
 
+	padding: 4px 6px;
+
+	border: 1px solid $flat-dark-gray;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+
+	vertical-align: bottom;
+	text-indent: 2px;
 }
 
 .date-input-show-calendar {
+	height: 30px;
+	width: 30px;
+	background-color: $date-input-background;
+
+	border: 1px solid $flat-dark-gray;
+	border-left-style: none;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+
+	vertical-align: bottom;
+	text-align: center;
+	line-height: 30px;
+
+	background-image: url('/assets/img/dateinput/calendar-20px.png');
+	background-repeat: no-repeat;
+	background-position: center;
+
+	&:focus {
+		outline: none;
+	}
+
 	&:hover {
 		cursor: pointer;
 	}
 }
 
+.datetime-input-wrapper {
+	.date-input-wrapper {
+		display: inline;
+	}
+}
+
+.datetime-dropdowns {
+	display: inline;
+	margin-left: 1px;
+
+	select {
+		height: 30px;
+		background-color: $date-input-background;
+		color: $date-input-color;
+		border-radius: 3px;
+	}
+}
