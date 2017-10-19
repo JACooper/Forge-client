@@ -18,16 +18,21 @@ class LogForm extends React.Component {
   render() {
     return (
       <div className='log-form-wrapper'>
+        <label className='log-datetime-label'>Log date</label>
         <DateTimeInput date={this.state.date} submit={this.setLogDate} />
+
+        <label className='log-desc-label'>Log description</label>
         <input
-          className='log-detail-desc'
+          className='log-form-desc'
           type='text'
           placeholder='Work log description'
           value={this.state.desc}
           onChange={(e) => { this.setState({ desc: e.target.value }); }}
         />
+
+        <label className='log-time-label'>Log hours</label>
         <input
-          className='log-detail-time'
+          className='log-form-time'
           type='text'
           placeholder='# hrs'
           value={this.state.time}

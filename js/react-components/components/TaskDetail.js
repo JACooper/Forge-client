@@ -52,9 +52,6 @@ class TaskDetail extends React.Component {
       }
     }
 
-    const addLogLabel = (this.state.showLogForm) ? (
-        <label className='detail-log-label'>Log date</label>
-      ) : (null);
     const addLog = (this.state.showLogForm) ? (
         <LogForm addLog={this.props.addLog} closeLogForm={this.closeLogForm} />
       ) : (
@@ -126,7 +123,6 @@ class TaskDetail extends React.Component {
         </div>
 
         <div className='task-detail-log'>
-          {addLogLabel}
           {addLog}
           {workLog}
         </div>
