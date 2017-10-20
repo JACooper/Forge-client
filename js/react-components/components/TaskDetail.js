@@ -2,6 +2,7 @@ import React from 'react';
 import DateInput from './dateinput/DateInput.js';
 import LogDetail from './LogDetail.js';
 import LogForm from './LogForm.js';
+import Rating from './Rating.js';
 
 class TaskDetail extends React.Component {
   constructor(props) {
@@ -39,63 +40,63 @@ class TaskDetail extends React.Component {
   // }
 
   render() {
-    const timeRating = [];
-    const effortRating = [];
-    const focusRating = [];
+    // const timeRating = [];
+    // const effortRating = [];
+    // const focusRating = [];
 
-    timeRating.push(<div className='task-detail-rating-full' key={1}/>);
-    effortRating.push(<div className='task-detail-rating-full' key={1}/>);
-    focusRating.push(<div className='task-detail-rating-full' key={1}/>);
+    // timeRating.push(<div className='task-detail-rating-full' key={1}/>);
+    // effortRating.push(<div className='task-detail-rating-full' key={1}/>);
+    // focusRating.push(<div className='task-detail-rating-full' key={1}/>);
 
-    for (let stars = 2; stars <= 3; stars++) {
-      if (stars <= this.state.time) {
-        timeRating.push(
-          <div
-            className='task-detail-rating-full task-detail-full-editable'
-            key={stars}
-            onClick={() => {this.changeDifficulty('time', stars, false);}}
-          />);
-      } else {
-        timeRating.push(
-          <div
-            className='task-detail-rating-empty task-detail-empty-editable'
-            key={stars}
-            onClick={() => {this.changeDifficulty('time', stars, true);}}
-          />);
-      }
+    // for (let stars = 2; stars <= 3; stars++) {
+    //   if (stars <= this.state.time) {
+    //     timeRating.push(
+    //       <div
+    //         className='task-detail-rating-full task-detail-full-editable'
+    //         key={stars}
+    //         onClick={() => {this.changeDifficulty('time', stars, false);}}
+    //       />);
+    //   } else {
+    //     timeRating.push(
+    //       <div
+    //         className='task-detail-rating-empty task-detail-empty-editable'
+    //         key={stars}
+    //         onClick={() => {this.changeDifficulty('time', stars, true);}}
+    //       />);
+    //   }
 
-      if (stars <= this.state.effort) {
-        effortRating.push(
-          <div
-            className='task-detail-rating-full task-detail-full-editable'
-            key={stars}
-            onClick={() => {this.changeDifficulty('effort', stars, false);}}
-          />);
-      } else {
-        effortRating.push(
-          <div
-            className='task-detail-rating-empty task-detail-empty-editable'
-            key={stars}
-            onClick={() => {this.changeDifficulty('effort', stars, true);}}
-          />);
-      }
+    //   if (stars <= this.state.effort) {
+    //     effortRating.push(
+    //       <div
+    //         className='task-detail-rating-full task-detail-full-editable'
+    //         key={stars}
+    //         onClick={() => {this.changeDifficulty('effort', stars, false);}}
+    //       />);
+    //   } else {
+    //     effortRating.push(
+    //       <div
+    //         className='task-detail-rating-empty task-detail-empty-editable'
+    //         key={stars}
+    //         onClick={() => {this.changeDifficulty('effort', stars, true);}}
+    //       />);
+    //   }
 
-      if (stars <= this.state.focus) {
-        focusRating.push(
-          <div
-            className='task-detail-rating-full task-detail-full-editable'
-            key={stars}
-            onClick={() => {this.changeDifficulty('focus', stars, false);}}
-          />);
-      } else {
-        focusRating.push(
-          <div
-            className='task-detail-rating-empty task-detail-empty-editable'
-            key={stars}
-            onClick={() => {this.changeDifficulty('focus', stars, true);}}
-          />);
-      }
-    }
+    //   if (stars <= this.state.focus) {
+    //     focusRating.push(
+    //       <div
+    //         className='task-detail-rating-full task-detail-full-editable'
+    //         key={stars}
+    //         onClick={() => {this.changeDifficulty('focus', stars, false);}}
+    //       />);
+    //   } else {
+    //     focusRating.push(
+    //       <div
+    //         className='task-detail-rating-empty task-detail-empty-editable'
+    //         key={stars}
+    //         onClick={() => {this.changeDifficulty('focus', stars, true);}}
+    //       />);
+    //   }
+    // }
 
     const categoryOptions = this.props.categories.map((category) => {
       return (<option key={category._id} className='category-option' value={category._id}>
@@ -152,21 +153,30 @@ class TaskDetail extends React.Component {
             <label className='task-detail-attribute-label'>Time</label>
             <div className='task-detail-attribute-rating'>
               <div className='task-detail-time-img' />
-              {timeRating}
+              <Rating
+                rating={this.state.time}
+                setRating={(stars) => {this.changeDifficulty('time', stars);}}
+              />
             </div>
           </div>
           <div className='task-detail-attribute'>
             <label className='task-detail-attribute-label'>Effort</label>
             <div className='task-detail-attribute-rating'>
               <div className='task-detail-effort-img' />
-              {effortRating}
+              <Rating
+                rating={this.state.effort}
+                setRating={(stars) => {this.changeDifficulty('effort', stars);}}
+              />
             </div>
           </div>
           <div className='task-detail-attribute'>
             <label className='task-detail-attribute-label'>Focus</label>
             <div className='task-detail-attribute-rating'>
               <div className='task-detail-focus-img' />
-              {focusRating}
+              <Rating
+                rating={this.state.focus}
+                setRating={(stars) => {this.changeDifficulty('focus', stars);}}
+              />
             </div>
           </div>
         </div>
@@ -175,13 +185,13 @@ class TaskDetail extends React.Component {
           <div className='task-detail-date'>
             <label className='task-detail-label'>Start date</label>
             <DateInput date={this.state.startDate} submit={
-              (date) => { this.setFieldAndSubmit('startDate', date); }
+              (date) => { this.setState({ startDate: date }); }
             } />
           </div>
           <div className='task-detail-date'>
             <label className='task-detail-label'>Due date</label>
             <DateInput date={this.state.dueDate} submit={
-              (date) => { this.setFieldAndSubmit('dueDate', date); }
+              (date) => { this.setState({ dueDate: date }); }
             } />
           </div>
         </div>
@@ -244,15 +254,10 @@ class TaskDetail extends React.Component {
     this.setState({ showLogForm: false });
   }
 
-  changeDifficulty(field, amount, add) {
-    const updateFields = {};
-    if (add) {
-      updateFields[field] = amount;
-      this.setState(updateFields);
-    } else {
-      updateFields[field] = amount - 1;
-      this.setState(updateFields);
-    }
+  changeDifficulty(field, amount) {
+    const updateField = {};
+    updateField[field] = amount;
+    this.setState(updateField);
   }
 
   updateTask() {
