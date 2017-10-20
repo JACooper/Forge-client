@@ -40,64 +40,6 @@ class TaskDetail extends React.Component {
   // }
 
   render() {
-    // const timeRating = [];
-    // const effortRating = [];
-    // const focusRating = [];
-
-    // timeRating.push(<div className='task-detail-rating-full' key={1}/>);
-    // effortRating.push(<div className='task-detail-rating-full' key={1}/>);
-    // focusRating.push(<div className='task-detail-rating-full' key={1}/>);
-
-    // for (let stars = 2; stars <= 3; stars++) {
-    //   if (stars <= this.state.time) {
-    //     timeRating.push(
-    //       <div
-    //         className='task-detail-rating-full task-detail-full-editable'
-    //         key={stars}
-    //         onClick={() => {this.changeDifficulty('time', stars, false);}}
-    //       />);
-    //   } else {
-    //     timeRating.push(
-    //       <div
-    //         className='task-detail-rating-empty task-detail-empty-editable'
-    //         key={stars}
-    //         onClick={() => {this.changeDifficulty('time', stars, true);}}
-    //       />);
-    //   }
-
-    //   if (stars <= this.state.effort) {
-    //     effortRating.push(
-    //       <div
-    //         className='task-detail-rating-full task-detail-full-editable'
-    //         key={stars}
-    //         onClick={() => {this.changeDifficulty('effort', stars, false);}}
-    //       />);
-    //   } else {
-    //     effortRating.push(
-    //       <div
-    //         className='task-detail-rating-empty task-detail-empty-editable'
-    //         key={stars}
-    //         onClick={() => {this.changeDifficulty('effort', stars, true);}}
-    //       />);
-    //   }
-
-    //   if (stars <= this.state.focus) {
-    //     focusRating.push(
-    //       <div
-    //         className='task-detail-rating-full task-detail-full-editable'
-    //         key={stars}
-    //         onClick={() => {this.changeDifficulty('focus', stars, false);}}
-    //       />);
-    //   } else {
-    //     focusRating.push(
-    //       <div
-    //         className='task-detail-rating-empty task-detail-empty-editable'
-    //         key={stars}
-    //         onClick={() => {this.changeDifficulty('focus', stars, true);}}
-    //       />);
-    //   }
-    // }
-
     const categoryOptions = this.props.categories.map((category) => {
       return (<option key={category._id} className='category-option' value={category._id}>
           {category.name}
@@ -123,11 +65,20 @@ class TaskDetail extends React.Component {
         </div>
       ) : (null);
 
-    // TODO: Should sort logs by date
+    const sortedLogs = (this.props.log) ?
+      Array.from(this.props.log).sort((log1, log2) => {
+        // Newest logs should appear first
+        return log2.date.getTime() - log1.date.getTime();
+      }) : (null);
+
+
     let logIndex = 0;
-    const workLog = (this.state.showLog && this.props.log) ? 
-      this.props.log.map((log) => {
-        return (<LogDetail key={log.date.getTime().toString() + logIndex++} log={log} />);
+    const workLog = (sortedLogs) ? 
+      sortedLogs.map((log) => {
+        return (<LogDetail
+            key={log.date.getTime().toString() + logIndex++}
+            log={log}
+          />);
       }) : (null);
 
     const logContainer = (this.state.showLog) ? (
