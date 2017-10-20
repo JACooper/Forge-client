@@ -1,7 +1,7 @@
 // ---------- Dimensions ----------
 
 $task-title-inset: 5px;
-$detail-item-inset: 60px;
+$detail-item-inset: 70px;
 $detail-item-bottom-offset: 15px;
 
 // ---------- Individual styling ----------
@@ -97,12 +97,26 @@ $detail-item-bottom-offset: 15px;
 	background-repeat: no-repeat;
 }
 
+.task-detail-full-editable {
+	&:hover {
+		cursor: pointer;
+		background: url('/assets/img/star-empty-20px.png');
+	}
+}
+
 .task-detail-rating-empty {
 	width: 20px;
 	height: 20px;
 
 	background: url('/assets/img/star-empty-20px.png');
 	background-repeat: no-repeat;
+}
+
+.task-detail-empty-editable {
+	&:hover {
+		cursor: pointer;
+		background: url('/assets/img/star-full-20px.png');
+	}
 }
 
 // ---------- Dates ----------

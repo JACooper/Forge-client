@@ -84,6 +84,7 @@ class LogForm extends React.Component {
   clickOutside(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.props.closeLogForm();
+      event.stopPropagation();
     }
   }
 

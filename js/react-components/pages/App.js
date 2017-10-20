@@ -47,6 +47,7 @@ class App extends React.Component {
     this.addCategory       = this.addCategory.bind(this);
     this.getCategories     = this.getCategories.bind(this);
 
+    this.toggleComplete = this.toggleComplete.bind(this);
     this.openDetail     = this.openDetail.bind(this);
     this.closeDetail    = this.closeDetail.bind(this);
     this.changeSortType = this.changeSortType.bind(this);
@@ -127,6 +128,7 @@ class App extends React.Component {
             emphasisValue  ={this.props.emphasis}
             updateTasks    ={this.getTasks}
             openDetail     ={this.openDetail}
+            toggleComplete ={this.toggleComplete}
             detailView     ={this.props.detailView}
             categories     ={this.props.categories}
             updatingTask   ={this.props.updatingTask}
@@ -183,6 +185,10 @@ class App extends React.Component {
 
   getTasks() {
     this.props.dispatch(TaskActions.getTasks());
+  }
+
+  toggleComplete(taskID) {
+    this.props.dispatch(TaskActions.toggleComplete(taskID));
   }
 
   openDetail(taskID) {
