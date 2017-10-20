@@ -70,9 +70,11 @@ class TaskList extends React.Component {
             key={task._id}
             categories={this.props.categories}
             updatingTask={this.props.updatingTask}
-            closeDetail={this.closeDetail}
+            closeDetail={this.props.closeDetail}
             updateTask={this.props.updateTask}
             addLog={this.props.addLog}
+            updateTaskSuccess={this.props.updateTaskSuccess}
+            addLogSuccess={this.props.addLogSuccess}
           />;
       } else {
         return <Task
@@ -86,7 +88,6 @@ class TaskList extends React.Component {
 
     return (
       <div className='task-list-wrapper'>
-        
         <div className='task-list'>
           {tasks}
         </div>

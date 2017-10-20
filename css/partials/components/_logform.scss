@@ -1,0 +1,104 @@
+// ---------- Dimensions ----------
+
+$detail-item-inset: 60px;
+
+// ---------- Individual styling ----------
+
+.log-form-wrapper {
+	@include fixed-center(50%, 40%);
+	z-index: 2;
+
+	background-color: $flat-white;
+	border-radius: 4px;
+	padding: 10px;
+
+	display: flex;
+	flex-direction: column;
+	margin-left: $detail-item-inset;
+
+	.datetime-input-wrapper {
+		margin-top: 2px;
+		margin-left: 4px;
+		margin-bottom: 4px;
+	}
+}
+
+.log-form-desc {
+	width: 210px;
+	height: 20px;
+	background-color: #EEEEEE;
+	color: #555555;
+
+	margin-top: 2px;
+	margin-left: 4px;
+	margin-bottom: 6px;
+	padding: 4px 6px;
+
+	border: 1px solid $flat-dark-gray;
+	border-radius: 3px;
+
+	vertical-align: bottom;
+	text-indent: 2px;
+}
+
+.log-form-time {
+	width: 210px;
+	height: 20px;
+	background-color: #EEEEEE;
+	color: #555555;
+
+	margin-top: 2px;
+	margin-right: 4px;
+	margin-bottom: 12px;
+	padding: 4px 6px;
+
+	border: 1px solid $flat-dark-gray;
+	border-radius: 3px;
+
+	vertical-align: bottom;
+	text-indent: 2px;
+}
+
+.log-form-controls {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+
+	margin-left: 4px;
+	margin-top: 3px;
+}
+
+.cancel-detail-log {
+	background: none;
+	border: none;
+
+	// width: 75px;
+	height: 30px;
+
+	&:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
+.add-detail-log {
+	display: inline;
+	background: none;
+	border: none;
+
+	width: 75px;
+	height: 30px;
+
+	background-color: $flat-dark-gray;
+	color: $flat-white;
+
+	border-radius: 3px;
+
+	margin-left: 8px;
+
+	&:hover {
+		background-color: $flat-mid-gray;
+		cursor: pointer;
+	}
+}

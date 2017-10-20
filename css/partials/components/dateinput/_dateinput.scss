@@ -11,6 +11,7 @@ $date-input-color: #555555;
 }
 
 .date-input-text {
+	width: 120px;
 	height: 20px;
 	background-color: $date-input-background;
 	color: $date-input-color;
@@ -60,7 +61,7 @@ $date-input-color: #555555;
 
 .datetime-dropdowns {
 	display: inline;
-	margin-left: 1px;
+	margin-left: 2px;
 
 	select {
 		height: 30px;

@@ -58,6 +58,12 @@ export default function reduce(state = initialState, action) {
       ...state,
       detailView: null,
     };
+
+  case 'SET_ACTIVE_CATEGORY':
+    return {
+      ...state,
+      detailView: null,
+    };
   }
 
   return state;

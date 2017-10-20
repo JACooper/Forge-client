@@ -5,6 +5,10 @@ class LogForm extends React.Component {
   constructor(props) {
     super(props);
 
+    // Set up references to detect when user clicks outside of calendar component
+    // See: https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
+    this.clickOutside = this.clickOutside.bind(this);
+
     this.addWorkLog = this.addWorkLog.bind(this);
     this.setLogDate = this.setLogDate.bind(this);
 
@@ -15,9 +19,25 @@ class LogForm extends React.Component {
     };
   }
 
+  componentWillMount() {
+    document.addEventListener('click', this.clickOutside);
+  }
+
+  componentWillUnount() {
+    document.removeEventListener('click', this.clickOutside);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.addLogSuccess !== this.props.addLogSuccess && newProps.addLogSuccess) {
+      this.props.closeLogForm();
+    }
+  }
+
+  // Description should be longer/bigger
+  // Hours should be shorter
   render() {
     return (
-      <div className='log-form-wrapper'>
+      <div className='log-form-wrapper' ref={(wrapper) => {this.wrapperRef = wrapper;}}>
         <label className='log-datetime-label'>Log date</label>
         <DateTimeInput date={this.state.date} submit={this.setLogDate} />
 
@@ -40,23 +60,31 @@ class LogForm extends React.Component {
           onChange={(e) => { this.setState({ time: e.target.value }); }}
         />
 
-        <button
-          className='add-detail-log'
-          type='button'
-          onClick={() => {this.addWorkLog();}}
-        >
-          Log work
-        </button>
+        <div className='log-form-controls'>
+          <button
+            className='cancel-detail-log'
+            type='button'
+            onClick={() => {this.props.closeLogForm();}}
+          >
+            Cancel
+          </button>
 
-        <button
-          className='cancel-detail-log'
-          type='button'
-          onClick={() => {this.props.closeLogForm();}}
-        >
-          Cancel
-        </button>
+          <button
+            className='add-detail-log'
+            type='button'
+            onClick={() => {this.addWorkLog();}}
+          >
+            Log work
+          </button>
+        </div>
       </div>
     );
+  }
+
+  clickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.props.closeLogForm();
+    }
   }
 
   setLogDate(date) {

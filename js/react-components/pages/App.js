@@ -101,7 +101,7 @@ class App extends React.Component {
         />
         {taskForm}
         <div className='main-view'>
-        <div className='sidebar'>
+          <div className='sidebar'>
             <TaskControls
               showComplete       ={this.props.showComplete}
               showTaskForm       ={this.showTaskForm}
@@ -133,6 +133,8 @@ class App extends React.Component {
             closeDetail    ={this.closeDetail}
             updateTask     ={this.updateTask}
             addLog         ={this.addLog}
+            updateTaskSuccess ={this.props.updateTaskSuccess}
+            addLogSuccess  ={this.props.addLogSuccess}
           />
         {lightbox}
         </div>
