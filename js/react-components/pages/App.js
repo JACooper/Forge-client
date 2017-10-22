@@ -86,23 +86,21 @@ class App extends React.Component {
     //   ) : (null);
     // }
 
-    const lightbox = (this.props.showTaskForm) ? (
-        <div className='lightbox-dim' />
-      ) : (null);
+    // const lightbox = (this.props.showTaskForm) ? (
+    //     <div className='lightbox-dim' />
+    //   ) : (null);
 
     const taskForm = (this.props.showTaskForm) ? (
       <TaskForm submit={this.submitTask} cancel={this.hideTaskForm} />
-    ) : (null);
+    ) : (<button className='add-task-button' type='button' onClick={this.showTaskForm}>Add task</button>);
 
     return (
       <div>
         <NavBar logout={this.logout}/>
-        {taskForm}
         <div className='main-view'>
           <div className='sidebar'>
             <TaskControls
               showComplete       ={this.props.showComplete}
-              showTaskForm       ={this.showTaskForm}
               toggleShowComplete ={this.toggleShowComplete}
               changeSortType     ={this.changeSortType}
               changeSortBy       ={this.changeSortBy}
@@ -116,26 +114,30 @@ class App extends React.Component {
               getCategories     ={this.getCategories}
             />
           </div>
-          <TaskList
-            tasks          ={this.props.tasks}
-            showComplete   ={this.props.showComplete}
-            activeCategory ={this.props.activeCategory}
-            sortTypeValue  ={this.props.sortType}
-            sortByValue    ={this.props.sortBy}
-            emphasisValue  ={this.props.emphasis}
-            updateTasks    ={this.getTasks}
-            openDetail     ={this.openDetail}
-            toggleComplete ={this.toggleComplete}
-            detailView     ={this.props.detailView}
-            categories     ={this.props.categories}
-            updatingTask   ={this.props.updatingTask}
-            closeDetail    ={this.closeDetail}
-            updateTask     ={this.updateTask}
-            addLog         ={this.addLog}
-            updateTaskSuccess ={this.props.updateTaskSuccess}
-            addLogSuccess  ={this.props.addLogSuccess}
-          />
-        {lightbox}
+          <div className='center-column'>
+            <div className='task-creation-wrapper'>
+              {taskForm}
+            </div>
+            <TaskList
+              tasks          ={this.props.tasks}
+              showComplete   ={this.props.showComplete}
+              activeCategory ={this.props.activeCategory}
+              sortTypeValue  ={this.props.sortType}
+              sortByValue    ={this.props.sortBy}
+              emphasisValue  ={this.props.emphasis}
+              updateTasks    ={this.getTasks}
+              openDetail     ={this.openDetail}
+              toggleComplete ={this.toggleComplete}
+              detailView     ={this.props.detailView}
+              categories     ={this.props.categories}
+              updatingTask   ={this.props.updatingTask}
+              closeDetail    ={this.closeDetail}
+              updateTask     ={this.updateTask}
+              addLog         ={this.addLog}
+              updateTaskSuccess ={this.props.updateTaskSuccess}
+              addLogSuccess  ={this.props.addLogSuccess}
+            />
+            </div>
         </div>
       </div>
     );

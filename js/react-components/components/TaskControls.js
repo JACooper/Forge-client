@@ -11,7 +11,6 @@ class TaskControls extends React.Component {
     return (
       <div className='task-controls-wrapper'>
         <div className='list-sort-controls'>
-          <input type='button' value='Create task' onClick={this.props.showTaskForm} />
           <label>Emphasize:</label>
           <select
             value={this.props.emphasisValue}

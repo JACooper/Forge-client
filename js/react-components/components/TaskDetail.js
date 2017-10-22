@@ -92,7 +92,7 @@ class TaskDetail extends React.Component {
         <input
           className='task-detail-title'
           type='text'
-          maxLength='70'
+          maxLength='50'
           value={this.state.title}
           onChange={(e) => {
             if (e.target.value !== '') {
