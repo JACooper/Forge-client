@@ -230,7 +230,7 @@ class TaskDetail extends React.Component {
       updateFields.focus = this.state.focus;
     }
 
-    if (this.state.category !== this.props.category) {
+    if (this.state.category._id !== this.props.category._id) {
       updateFields.category = this.state.category;
     }
 
