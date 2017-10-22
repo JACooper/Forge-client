@@ -36,7 +36,7 @@ class TaskForm extends React.Component {
             <label>Time</label>
             <div className='task-form-rating'>
               <div className='task-form-time-img'/>
-              <Rating rating={1} setRating={(stars) => {this.setState({time: stars});}} />
+              <Rating rating={this.state.time} setRating={(stars) => {this.setState({time: stars});}} />
             </div>
           </div>
 
@@ -44,7 +44,7 @@ class TaskForm extends React.Component {
             <label>Effort</label>
             <div className='task-form-rating'>              
               <div className='task-form-effort-img'/>
-              <Rating rating={1} setRating={(stars) => {this.setState({effort: stars});}} />
+              <Rating rating={this.state.effort} setRating={(stars) => {this.setState({effort: stars});}} />
             </div>
           </div>
 
@@ -52,7 +52,7 @@ class TaskForm extends React.Component {
             <label>Focus</label>
             <div className='task-form-rating'>
               <div className='task-form-focus-img'/>
-              <Rating rating={1} setRating={(stars) => {this.setState({focus: stars});}} />
+              <Rating rating={this.state.focus} setRating={(stars) => {this.setState({focus: stars});}} />
             </div>
           </div>
         </div>

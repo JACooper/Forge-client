@@ -179,12 +179,12 @@ class TaskDetail extends React.Component {
         </div>
 
         <div className='task-detail-log-controls'>
-          <button
-            className='toggle-detail-log'
-            type='button'
-            onClick={() => {this.setState({ showLog: !this.state.showLog }); }}
-          />
           <label className='toggle-detail-log-label'>
+            <button
+              className='toggle-detail-log'
+              type='button'
+              onClick={() => {this.setState({ showLog: !this.state.showLog }); }}
+            />
             {(this.state.showLog) ? 'Hide log' : 'Show log'}
           </label>
 

@@ -1,6 +1,6 @@
 // ---------- Dimensions ----------
 
-$task-list-width: 650px;
+$center-column-width: 650px;
 
 // ---------- Mixins ----------
 
@@ -10,8 +10,8 @@ $task-list-width: 650px;
 
 .task-list-wrapper {
 	// Dimensions
-	width: $task-list-width;
-	height: 100%;
+	// width: calc(#{$center-column-width} - 20px});
+	width: 100%;
 }
 
 .task-list {	
@@ -20,6 +20,4 @@ $task-list-width: 650px;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-
-	width: 100%;
 }

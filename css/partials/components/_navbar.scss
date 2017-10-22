@@ -1,20 +1,21 @@
 // ---------- Dimensions ----------
 
-$navbar-height: 40px;
+$navbar-height: 60px;
+$navbar-border-height: 3px;
 $sidebar-width: 200px;
-$task-list-width: 650px;
+$center-column-width: 650px;
 
 // ---------- Individual styling ----------
 
 .navbar-wrapper {
-	height: 60px;
+	height: $navbar-height;
 
 	background-color: #F7F7F7;
-	border-bottom: 3px solid #E3E3E3;
+	border-bottom: $navbar-border-height solid #E3E3E3;
 }
 
 .nav-content-wrapper {
-	max-width: calc(#{$sidebar-width} + #{$task-list-width});
+	max-width: calc(#{$sidebar-width} + #{$center-column-width});
 	height: 100%;
 	margin: auto;
 
@@ -28,7 +29,7 @@ $task-list-width: 650px;
 	width: 50px;
 	height: 50px;
 
-	margin-left: 10px;
+	// margin-left: 10px;
 	border-radius: 5px;
 
 	background-color: #C0C0C0;

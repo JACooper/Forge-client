@@ -11,10 +11,27 @@ $sidebar-width: 200px;
 
 .task-controls-wrapper {
 	width: $sidebar-width;
+
+	margin-top: 15px;
 }
 
 .list-sort-controls {
 	
+}
+
+.list-sort-dropdown {
+	height: 30px;
+	width: 165px;
+
+	background-color: #EEEEEE;
+	color: #555555;
+	
+	margin-top: 2px;
+	margin-bottom: 6px;
+	margin-left: 4px;
+
+	border: 1px solid $flat-dark-gray;
+	border-radius: 3px;
 }
 
 .category-list-wrapper {

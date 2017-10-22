@@ -31,7 +31,8 @@ $task-toggle-size: 30px;
 	width: 100%;
 	height: $task-height;
 
-	margin-bottom: 5px;
+	border-bottom: 1px solid #E3E3E3;
+	padding-bottom: 10px;
 
 	&:hover {
 		background-color: $flat-gray;
@@ -42,7 +43,7 @@ $task-toggle-size: 30px;
 .task-title {
 	display: inline-block;
 	margin-top: 5px;
-	margin-left: 5px;
+	margin-left: 10px;
 	font-size: 13pt;
 }
 
@@ -93,7 +94,7 @@ $task-toggle-size: 30px;
 .task-time {
 	@include task-attribute();
 
-	margin-left: 15px;
+	margin-left: 20px;
 }
 
 .task-effort {

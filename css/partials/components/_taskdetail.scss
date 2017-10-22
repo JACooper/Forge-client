@@ -12,7 +12,9 @@ $detail-item-bottom-offset: 15px;
 
 	width: 100%;
 
-	margin-bottom: 10px;
+	padding-bottom: 10px;
+	
+	border-bottom: 1px solid #E3E3E3;
 }
 
 .task-detail-title {
@@ -239,8 +241,15 @@ $detail-item-bottom-offset: 15px;
 }
 
 .toggle-detail-log-label {
+	display: flex;
+	align-items: center;
+
 	margin-right: auto;
 	margin-left: 5px;
+
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .show-log-form {

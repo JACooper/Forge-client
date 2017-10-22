@@ -1,8 +1,14 @@
 // ---------- Dimensions ----------
 
-$navbar-height: 40px;
+$navbar-height: 60px;
+$navbar-border-height: 3px;
+$center-column-width: 650px;
 
 // ---------- Individual styling ----------
+
+.app-wrapper {
+	overflow-y: auto;
+}
 
 .main-view {
 	// Flexbox properties
@@ -13,7 +19,7 @@ $navbar-height: 40px;
 	
 	// Dimensions
 	width: 850px;
-	height: calc(100vh - #{$navbar-height});
+	height: calc(100vh - calc(#{$navbar-height} + #{$navbar-border-height}));
 
 	// Placing
 	margin: auto;
@@ -23,6 +29,10 @@ $navbar-height: 40px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	width: $center-column-width;
+	min-height: 100%;
+	background-color: #FAFAFA;
 }
 
 .task-creation-wrapper {

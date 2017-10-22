@@ -95,7 +95,7 @@ class App extends React.Component {
     ) : (<button className='add-task-button' type='button' onClick={this.showTaskForm}>Add task</button>);
 
     return (
-      <div>
+      <div className='app-wrapper'>
         <NavBar logout={this.logout}/>
         <div className='main-view'>
           <div className='sidebar'>
