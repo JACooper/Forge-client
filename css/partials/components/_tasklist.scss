@@ -1,6 +1,6 @@
 // ---------- Dimensions ----------
 
-
+$task-list-width: 650px;
 
 // ---------- Mixins ----------
 
@@ -10,7 +10,8 @@
 
 .task-list-wrapper {
 	// Dimensions
-	width: 650px;
+	width: $task-list-width;
+	height: 100%;
 }
 
 .task-list {	

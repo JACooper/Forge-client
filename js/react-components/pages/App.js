@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // import TaskDetail from '../components/TaskDetail.js';
+import NavBar from '../components/NavBar.js';
 import TaskForm from '../components/TaskForm.js';
 import TaskList from '../components/TaskList.js';
 import CategoryList from '../components/CategoryList.js';
@@ -95,11 +96,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <input
-          type='button'
-          value='Logout'
-          onClick={this.logout}
-        />
+        <NavBar logout={this.logout}/>
         {taskForm}
         <div className='main-view'>
           <div className='sidebar'>

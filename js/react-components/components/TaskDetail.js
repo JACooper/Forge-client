@@ -67,7 +67,7 @@ class TaskDetail extends React.Component {
 
     const sortedLogs = (this.props.log) ?
       Array.from(this.props.log).sort((log1, log2) => {
-        // Newest logs should appear first
+        // Newest logs appear first
         return log2.date.getTime() - log1.date.getTime();
       }) : (null);
 

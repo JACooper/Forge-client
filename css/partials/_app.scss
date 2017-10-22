@@ -1,6 +1,6 @@
 // ---------- Dimensions ----------
 
-
+$navbar-height: 40px;
 
 // ---------- Individual styling ----------
 
@@ -13,6 +13,7 @@
 	
 	// Dimensions
 	width: 850px;
+	height: calc(100vh - #{$navbar-height});
 
 	// Placing
 	margin: auto;
