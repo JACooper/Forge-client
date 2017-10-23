@@ -20,6 +20,7 @@ import * as ViewActions from '../../redux/actions/viewActions.js';
     updateTaskSuccess : store.task.updateTaskSuccess,
     updatingTask      : store.task.updatingTask,
 
+    showDropdown : store.view.showDropdown,
     showTaskForm : store.view.showTaskForm,
     showComplete : store.view.showComplete,
     detailView   : store.view.detailView,
@@ -35,6 +36,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.toggleDropdown     = this.toggleDropdown.bind(this);
+    this.logout             = this.logout.bind(this);
+
     this.showTaskForm       = this.showTaskForm.bind(this);
     this.hideTaskForm       = this.hideTaskForm.bind(this);
     this.toggleShowComplete = this.toggleShowComplete.bind(this);
@@ -42,7 +46,6 @@ class App extends React.Component {
     this.getTasks           = this.getTasks.bind(this);
     this.updateTask         = this.updateTask.bind(this);
     this.addLog             = this.addLog.bind(this);
-    this.logout             = this.logout.bind(this);
     
     this.setActiveCategory = this.setActiveCategory.bind(this);
     this.addCategory       = this.addCategory.bind(this);
@@ -96,7 +99,11 @@ class App extends React.Component {
 
     return (
       <div className='app-wrapper'>
-        <NavBar logout={this.logout}/>
+        <NavBar
+          showDropdown={this.props.showDropdown}
+          toggleDropdown={this.toggleDropdown}
+          logout={this.logout}
+        />
         <div className='main-view'>
           <div className='sidebar'>
             <TaskControls
@@ -141,6 +148,10 @@ class App extends React.Component {
         </div>
       </div>
     );
+  }
+
+  toggleDropdown() {
+    this.props.dispatch(ViewActions.toggleDropdown());
   }
 
   logout() {

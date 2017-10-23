@@ -6,8 +6,6 @@ class TaskControls extends React.Component {
   }
 
   render() {
-    const completeViewText = (this.props.showComplete) ? 'Hide complete' : 'Show complete';
-
     return (
       <div className='task-controls-wrapper'>
         <div className='list-sort-controls'>
@@ -53,7 +51,15 @@ class TaskControls extends React.Component {
             </select>
           </div>
 
-          <button type='button' onClick={this.props.toggleShowComplete}>{completeViewText}</button>
+          <label className='list-reveal-complete-label'>
+            <input
+              className='list-reveal-complete'
+              type='checkbox'
+              checked={this.props.showComplete}
+              onClick={this.props.toggleShowComplete}
+            />
+            Show complete
+          </label>
         </div>
       </div>
     );

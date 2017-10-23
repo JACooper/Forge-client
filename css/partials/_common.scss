@@ -20,7 +20,7 @@ $flat-black          : #303030;
 
 $flat-blue           : #4183D7;
 
-$flat-background     : #ECECEC;
+$flat-background     : #F6F6F6;
 
 // ---------- Typography ----------
 
@@ -83,6 +83,10 @@ $detail-size       : 10pt;
 * {
 	margin  : 0;
 	padding : 0;
+}
+
+html {
+	overflow-y: auto;
 }
 
 body {

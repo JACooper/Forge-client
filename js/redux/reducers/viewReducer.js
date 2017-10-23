@@ -1,4 +1,5 @@
 const initialState = {
+  showDropdown: false,
   showTaskForm: false,
   showComplete: false,
   detailView: null,
@@ -10,6 +11,12 @@ const initialState = {
 export default function reduce(state = initialState, action) {
   switch (action.type) {
   
+  case 'TOGGLE_DROPDOWN':
+    return {
+      ...state,
+      showDropdown: !state.showDropdown,
+    };
+
   case 'ADD_TASK_SUCCESS':
     return {
       ...state,

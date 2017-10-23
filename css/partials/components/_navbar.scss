@@ -12,6 +12,9 @@ $center-column-width: 650px;
 
 	background-color: #F7F7F7;
 	border-bottom: $navbar-border-height solid #E3E3E3;
+
+	// To prevent page content moving when scrollbars are added
+	padding-left: calc(100vw - 100%);
 }
 
 .nav-content-wrapper {
@@ -38,6 +41,59 @@ $center-column-width: 650px;
 	background-position: center;
 }
 
-.settings-wrapper {
-	margin-right: 10px;
+.nav-settings-button {
+	border: none;
+	background: none;
+
+	width: 40px;
+	height: 40px;
+
+	background-image: url('/assets/img/settings-40px.png');
+	background-repeat: no-repeat;
+	background-position: center;
+
+	&:hover {
+		cursor: pointer;
+		background-image: url('/assets/img/settings-hover-40px.png');
+	}
+}
+
+
+.settings-dropdown-wrapper {
+	position: absolute;
+	width: 150px;
+
+	background-color: #F9F9F9;
+
+	border: 2px solid #E3E3E3;
+	border-radius: 3px;
+	// margin-left: -20px;
+}
+
+.settings-dropdown-list {
+	list-style-type: none;
+}
+
+.settings-dropdown-item {
+	margin: 2px;
+	padding: 2px;
+	display: flex;
+	align-items: center;
+
+	&:hover {
+		cursor: pointer;
+		background-color: #555555;
+		color: #EEEEEE;
+		object-position: 0px -20px; 
+		
+		.settings-dropdown-icon {
+			object-position: 0px -20px;
+		}
+	}
+}
+
+.settings-dropdown-icon {
+	@include set-dimensions(20px, 20px);
+	object-fit: none;
+	object-position: 0 0;
 }
