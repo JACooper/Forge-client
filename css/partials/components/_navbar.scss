@@ -1,0 +1,99 @@
+// ---------- Dimensions ----------
+
+$navbar-height: 60px;
+$navbar-border-height: 3px;
+$sidebar-width: 200px;
+$center-column-width: 650px;
+
+// ---------- Individual styling ----------
+
+.navbar-wrapper {
+	height: $navbar-height;
+
+	background-color: #F7F7F7;
+	border-bottom: $navbar-border-height solid #E3E3E3;
+
+	// To prevent page content moving when scrollbars are added
+	padding-left: calc(100vw - 100%);
+}
+
+.nav-content-wrapper {
+	max-width: calc(#{$sidebar-width} + #{$center-column-width});
+	height: 100%;
+	margin: auto;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nav-logo {
+	width: 50px;
+	height: 50px;
+
+	// margin-left: 10px;
+	border-radius: 5px;
+
+	background-color: #C0C0C0;
+	background-image: url('/assets/img/logo-50px.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.nav-settings-button {
+	border: none;
+	background: none;
+
+	width: 40px;
+	height: 40px;
+
+	background-image: url('/assets/img/settings-40px.png');
+	background-repeat: no-repeat;
+	background-position: center;
+
+	&:hover {
+		cursor: pointer;
+		background-image: url('/assets/img/settings-hover-40px.png');
+	}
+}
+
+
+.settings-dropdown-wrapper {
+	position: absolute;
+	width: 150px;
+
+	background-color: #F9F9F9;
+
+	border: 2px solid #E3E3E3;
+	border-radius: 3px;
+	// margin-left: -20px;
+}
+
+.settings-dropdown-list {
+	list-style-type: none;
+}
+
+.settings-dropdown-item {
+	margin: 2px;
+	padding: 2px;
+	display: flex;
+	align-items: center;
+
+	&:hover {
+		cursor: pointer;
+		background-color: #555555;
+		color: #EEEEEE;
+		object-position: 0px -20px; 
+		
+		.settings-dropdown-icon {
+			object-position: 0px -20px;
+		}
+	}
+}
+
+.settings-dropdown-icon {
+	@include set-dimensions(20px, 20px);
+	object-fit: none;
+	object-position: 0 0;
+}

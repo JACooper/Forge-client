@@ -35,6 +35,7 @@ class Auth extends React.Component {
 
     const confirmationField = this.props.loginState ? (null) : (
       <input
+      className='auth-input-field'
         type='password'
         value={this.state.confirmation}
         placeholder='Confirm password'
@@ -43,27 +44,55 @@ class Auth extends React.Component {
     );
 
     const errorText = (this.props.loginError) ? (
-      <p className='login-error-text'>{this.props.loginError}</p>
+      <p className='auth-error-text'>{this.props.loginError}</p>
     ) : (null);
 
     return (
-      <div>
-        <input
-          type='text'
-          value={this.state.email}
-          placeholder='Email address'
-          onChange={(e) => {this.setState({email: e.target.value});}}
-        />
-        <input
-          type='password'
-          value={this.state.password}
-          placeholder='Password'
-          onChange={(e) => {this.setState({password: e.target.value});}}
-        />
-        {confirmationField}
-        <input type='button' value={actionButtonText} onClick={this.authAction}/>
-        <input type='button' value={toggleButtonText} onClick={this.swapState}/>
-        {errorText}
+      <div className='auth-wrapper'>
+        <div className='auth-nav-wrapper'>
+          <div className='auth-nav-content'>
+            <div className='nav-logo'>
+            </div>
+            <button
+                className='auth-swap'
+                type='button'
+                onClick={this.swapState}
+            >
+              {toggleButtonText}
+            </button>
+          </div>
+        </div>
+
+        <div className='auth-main'>
+          <div>
+            <h1 className='auth-title'>Forge</h1>
+            <h3 className='auth-tagline'>a better you</h3>
+          </div>
+          <div className='auth-form'>
+            <input
+            className='auth-input-field'
+              type='text'
+              value={this.state.email}
+              placeholder='Email address'
+              onChange={(e) => {this.setState({email: e.target.value});}}
+            />
+            <input
+            className='auth-input-field'
+              type='password'
+              value={this.state.password}
+              placeholder='Password'
+              onChange={(e) => {this.setState({password: e.target.value});}}
+            />
+            {confirmationField}
+            <input
+              className='auth-action'
+              type='button'
+              value={actionButtonText}
+              onClick={this.authAction}
+            />
+            {errorText}
+          </div>
+        </div>
       </div>
     );
   }

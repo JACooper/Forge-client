@@ -1,6 +1,7 @@
 import React from 'react';
 
 import DateInput from './dateinput/DateInput.js';
+import Rating from './Rating.js';
 
 class TaskForm extends React.Component {
   constructor(props) {
@@ -25,49 +26,61 @@ class TaskForm extends React.Component {
           className='task-form-title'
           type='text'
           value={this.state.title}
-          placeholder='Enter a new task'
+          maxLength="50"
+          placeholder='New task'
           onChange={(e) => {this.setState({title: e.target.value});}}
         />
-        <label>Time rating: </label>
-        <input
-          className='task-form-time'
-          type='number'
-          value={this.state.time}
-          min='1'
-          max='3'
-          onChange={(e) => {this.setState({time: e.target.value});}}
-        />
-        <label>Effort rating: </label>
-        <input
-          className='task-form-effort'
-          type='number'
-          value={this.state.effort}
-          min='1'
-          max='3'
-          onChange={(e) => {this.setState({effort: e.target.value});}}
-        />
-        <label>Focus rating: </label>
-        <input
-          className='task-form-focus'
-          type='number'
-          value={this.state.focus}
-          min='1'
-          max='3'
-          onChange={(e) => {this.setState({focus: e.target.value});}}
-        />
+        
+        <div className='task-form-attributes'>
+          <div className='task-form-attribute'>
+            <label>Time</label>
+            <div className='task-form-rating'>
+              <div className='task-form-time-img'/>
+              <Rating rating={this.state.time} setRating={(stars) => {this.setState({time: stars});}} />
+            </div>
+          </div>
 
-        <label id='start-date-label'>Start Date (optional):</label>
-        <DateInput
-          date={this.state.startDate}
-          submit={(startDate) => {this.setState({ startDate });}} />
+          <div className='task-form-attribute'>
+            <label>Effort</label>
+            <div className='task-form-rating'>              
+              <div className='task-form-effort-img'/>
+              <Rating rating={this.state.effort} setRating={(stars) => {this.setState({effort: stars});}} />
+            </div>
+          </div>
 
-        <label id='due-date-label'>Due Date (optional):</label>
-        <DateInput
-          date={this.state.dueDate}
-          submit={(dueDate) => {this.setState({ dueDate });}} />
+          <div className='task-form-attribute'>
+            <label>Focus</label>
+            <div className='task-form-rating'>
+              <div className='task-form-focus-img'/>
+              <Rating rating={this.state.focus} setRating={(stars) => {this.setState({focus: stars});}} />
+            </div>
+          </div>
+        </div>
 
-        <input type='button' value='Submit task' onClick={this.submit}/>
-        <input type='button' value='Cancel' onClick={this.props.cancel}/>
+        <div className='task-form-dates'>
+          <div className='task-form-date'>
+            <label>Start Date (optional):</label>
+            <DateInput
+              date={this.state.startDate}
+              submit={(startDate) => {this.setState({ startDate });}} />
+          </div>
+
+          <div className='task-form-date'>
+            <label>Due Date (optional):</label>
+            <DateInput
+              date={this.state.dueDate}
+              submit={(dueDate) => {this.setState({ dueDate });}} />
+          </div>
+        </div>
+
+        <div className='task-form-controls'>
+          <button className='task-form-cancel' type='button' onClick={this.props.cancel}>
+            Cancel
+          </button>
+          <button className='task-form-submit' type='button' onClick={this.submit}>
+            Submit
+          </button>
+        </div>
       </div>
     );
   }

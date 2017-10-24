@@ -14,12 +14,13 @@ $alt-color-dark      : #B0003A;
 
 $flat-white          : #FAFAFA;
 $flat-gray           : #E0E0E0;
+$flat-mid-gray       : #A0A0A0;
 $flat-dark-gray      : #808080;
 $flat-black          : #303030;
 
 $flat-blue           : #4183D7;
 
-$flat-background     : #ECECEC;
+$flat-background     : #F6F6F6;
 
 // ---------- Typography ----------
 
@@ -84,10 +85,14 @@ $detail-size       : 10pt;
 	padding : 0;
 }
 
+html {
+	overflow-y: auto;
+}
+
 body {
 	background-color : $flat-background;
 	font-family      : $primary-font;
-	font-size        : $content-size;
+	font-size        : $detail-size;
 }
 
 .form-input {

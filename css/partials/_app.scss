@@ -1,8 +1,14 @@
 // ---------- Dimensions ----------
 
-
+$navbar-height: 60px;
+$navbar-border-height: 3px;
+$center-column-width: 650px;
 
 // ---------- Individual styling ----------
+
+.app-wrapper {
+	// overflow-y: auto;
+}
 
 .main-view {
 	// Flexbox properties
@@ -13,9 +19,55 @@
 	
 	// Dimensions
 	width: 850px;
+	height: calc(100vh - calc(#{$navbar-height} + #{$navbar-border-height}));
 
 	// Placing
 	margin: auto;
+	// To prevent page content moving when scrollbars are added
+	padding-left: calc(100vw - 100%);
 }
 
+.center-column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
+	width: $center-column-width;
+	min-height: 100%;
+	background-color: #FAFAFA;
+
+	border-left: 1px solid #E3E3E3;
+	border-right: 1px solid #E3E3E3;
+}
+
+.task-creation-wrapper {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	width: 100%;
+	min-height: 50px;
+
+	background-color: $flat-white;
+
+	border-bottom: 2px solid #E3E3E3;
+}
+
+.add-task-button {
+	border: none;
+	background: none;
+
+	width: 75px;
+	height: 30px;
+
+	background-color: $flat-dark-gray;
+	color: $flat-white;
+
+	margin-left: 20px;
+	border-radius: 5px;
+
+	&:hover {
+		background-color: $flat-mid-gray;
+		cursor: pointer;
+	}
+}

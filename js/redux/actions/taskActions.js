@@ -34,12 +34,12 @@ const getTasks = () => {
   };
 };
 
-const updateTask = (task) => {
+const updateTask = (taskId, updatedFields) => {
   return (dispatch) => {
     dispatch({ type: 'UPDATE_TASK_START' });
     superagent
       .post('/update')
-      .send({ task })
+      .send({ id: taskId, ...updatedFields })
       .then((response) => {
         const task = populateTaskDate(response.body.task);
         dispatch({ type: 'UPDATE_TASK_SUCCESS', data: { task } });

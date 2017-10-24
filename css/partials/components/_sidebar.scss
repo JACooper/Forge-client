@@ -6,15 +6,51 @@ $sidebar-width: 200px;
 
 .sidebar {
 	width: $sidebar-width;
-	margin-right: 6px;
+	// margin-right: 6px;
 }
 
 .task-controls-wrapper {
 	width: $sidebar-width;
+
+	margin-top: 15px;
 }
 
 .list-sort-controls {
 	
+}
+
+.list-sort-dropdown {
+	height: 30px;
+	width: 165px;
+
+	background-color: #EEEEEE;
+	color: #555555;
+	
+	margin-top: 2px;
+	margin-bottom: 6px;
+	margin-left: 4px;
+
+	border: 1px solid $flat-dark-gray;
+	border-radius: 3px;
+}
+
+.list-reveal-complete-label {
+	display: flex;
+	align-items: center;
+
+	// margin-left: 4px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.list-reveal-complete {
+	margin-right: 5px;
+
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .category-list-wrapper {
@@ -22,10 +58,12 @@ $sidebar-width: 200px;
 	margin-top: 10px;
 	padding-top: 10px;
 	border-top: 1px solid $flat-dark-gray;
+	font-size: 11pt;
 }
 
 .category-item {
 	margin: 2px;
+	padding: 2px;
 	border-radius: 4px;
 	
 	&:hover {
@@ -35,11 +73,30 @@ $sidebar-width: 200px;
 }
 
 .active-category {
-	@include set-colors($flat-dark-gray, $flat-white);
+	background-color: $flat-white;
+	font-weight: bold;
 	border-radius: 4px;
 
 	&:hover {
-		background-color: $flat-dark-gray;
+		background-color: $flat-white;
 		cursor: default;
 	}
+}
+
+.new-category-input {
+	height: 20px;
+	width: 165px;
+
+	background-color: #EEEEEE;
+	color: #555555;
+
+	margin-top: 5px;
+	padding: 4px 6px;
+
+	border: 1px solid $flat-dark-gray;
+	border-radius: 3px;
+
+	font-size: 10pt;
+
+	text-indent: 2px;
 }

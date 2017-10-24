@@ -76,12 +76,10 @@ class DateInput extends React.Component {
           ref='inputText'
         />
         <button
-          type='button'
           className='date-input-show-calendar'
+          type='button'
           onClick={() => {this.toggleCalendar();}}
-        >
-          &#128197;
-        </button>
+        />
         {errorDisplay}
         {calendar}
       </div>
@@ -176,11 +174,10 @@ class DateInput extends React.Component {
 
         this.validateDate(day, month, year);
       } else {
-        this.setState({
-          error: 'Invalid date',
-        });
+        this.setState({ error: 'Invalid date' });
       }
     } else {
+      this.setState({ error: null });
       this.props.submit(null);
     }
   }
@@ -191,13 +188,10 @@ class DateInput extends React.Component {
        || month !== returnDate.getMonth()
        || day !== returnDate.getDate()
        || year !== returnDate.getFullYear()) {
-      this.setState({
-        error: 'Invalid date',
-      });
+      this.setState({ error: 'Invalid date' });
     } else {
-      this.setState({
-        error: null,
-      });
+      returnDate.setSeconds(0);
+      this.setState({ error: null });
       this.props.submit(returnDate);
     }
   }

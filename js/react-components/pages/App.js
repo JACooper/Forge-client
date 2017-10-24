@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import TaskDetail from '../components/TaskDetail.js';
+// import TaskDetail from '../components/TaskDetail.js';
+import NavBar from '../components/NavBar.js';
 import TaskForm from '../components/TaskForm.js';
 import TaskList from '../components/TaskList.js';
 import CategoryList from '../components/CategoryList.js';
@@ -19,6 +20,7 @@ import * as ViewActions from '../../redux/actions/viewActions.js';
     updateTaskSuccess : store.task.updateTaskSuccess,
     updatingTask      : store.task.updatingTask,
 
+    showDropdown : store.view.showDropdown,
     showTaskForm : store.view.showTaskForm,
     showComplete : store.view.showComplete,
     detailView   : store.view.detailView,
@@ -34,6 +36,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.toggleDropdown     = this.toggleDropdown.bind(this);
+    this.logout             = this.logout.bind(this);
+
     this.showTaskForm       = this.showTaskForm.bind(this);
     this.hideTaskForm       = this.hideTaskForm.bind(this);
     this.toggleShowComplete = this.toggleShowComplete.bind(this);
@@ -41,12 +46,12 @@ class App extends React.Component {
     this.getTasks           = this.getTasks.bind(this);
     this.updateTask         = this.updateTask.bind(this);
     this.addLog             = this.addLog.bind(this);
-    this.logout             = this.logout.bind(this);
     
     this.setActiveCategory = this.setActiveCategory.bind(this);
     this.addCategory       = this.addCategory.bind(this);
     this.getCategories     = this.getCategories.bind(this);
 
+    this.toggleComplete = this.toggleComplete.bind(this);
     this.openDetail     = this.openDetail.bind(this);
     this.closeDetail    = this.closeDetail.bind(this);
     this.changeSortType = this.changeSortType.bind(this);
@@ -60,51 +65,49 @@ class App extends React.Component {
       this.closeTaskForm();
     }
 
-    if (newProps.updateTaskSuccess !== this.props.updateTaskSuccess
-      && newProps.updateTaskSuccess) {
-      this.closeDetail();
-    }
+    // if (newProps.updateTaskSuccess !== this.props.updateTaskSuccess
+    //   && newProps.updateTaskSuccess) {
+    //   this.closeDetail();
+    // }
   }
 
   render() {
-    let taskDetail = null;
-    if (this.props.detailView) {
-      const taskToView = this.props.tasks.find((task) => {
-        return task._id === this.props.detailView;
-      });
-      taskDetail = (taskToView !== undefined) ? (
-        <TaskDetail
-          task={taskToView}
-          categories={this.props.categories}
-          updatingTask={this.props.updatingTask}
-          closeDetail={this.closeDetail}
-          updateTask={this.updateTask}
-          addLog={this.addLog}
-        />
-      ) : (null);
-    }
+    // let taskDetail = null;
+    // if (this.props.detailView) {
+    //   const taskToView = this.props.tasks.find((task) => {
+    //     return task._id === this.props.detailView;
+    //   });
+    //   taskDetail = (taskToView !== undefined) ? (
+    //     <TaskDetail
+    //       task={taskToView}
+    //       categories={this.props.categories}
+    //       updatingTask={this.props.updatingTask}
+    //       closeDetail={this.closeDetail}
+    //       updateTask={this.updateTask}
+    //       addLog={this.addLog}
+    //     />
+    //   ) : (null);
+    // }
 
-    const lightbox = (this.props.detailView || this.props.showTaskForm) ? (
-        <div className='lightbox-dim' />
-      ) : (null);
+    // const lightbox = (this.props.showTaskForm) ? (
+    //     <div className='lightbox-dim' />
+    //   ) : (null);
 
     const taskForm = (this.props.showTaskForm) ? (
       <TaskForm submit={this.submitTask} cancel={this.hideTaskForm} />
-    ) : (null);
+    ) : (<button className='add-task-button' type='button' onClick={this.showTaskForm}>Add task</button>);
 
     return (
-      <div>
-        <input
-          type='button'
-          value='Logout'
-          onClick={this.logout}
+      <div className='app-wrapper'>
+        <NavBar
+          showDropdown={this.props.showDropdown}
+          toggleDropdown={this.toggleDropdown}
+          logout={this.logout}
         />
-        {taskForm}
         <div className='main-view'>
-        <div className='sidebar'>
+          <div className='sidebar'>
             <TaskControls
               showComplete       ={this.props.showComplete}
-              showTaskForm       ={this.showTaskForm}
               toggleShowComplete ={this.toggleShowComplete}
               changeSortType     ={this.changeSortType}
               changeSortBy       ={this.changeSortBy}
@@ -118,22 +121,37 @@ class App extends React.Component {
               getCategories     ={this.getCategories}
             />
           </div>
-          <TaskList
-            tasks          ={this.props.tasks}
-            showComplete   ={this.props.showComplete}
-            activeCategory ={this.props.activeCategory}
-            sortTypeValue  ={this.props.sortType}
-            sortByValue    ={this.props.sortBy}
-            emphasisValue  ={this.props.emphasis}
-            updateTasks    ={this.getTasks}
-            openDetail     ={this.openDetail}
-            openDetail     ={this.openDetail}
-          />
-        {lightbox}
-        {taskDetail}
+          <div className='center-column'>
+            <div className='task-creation-wrapper'>
+              {taskForm}
+            </div>
+            <TaskList
+              tasks          ={this.props.tasks}
+              showComplete   ={this.props.showComplete}
+              activeCategory ={this.props.activeCategory}
+              sortTypeValue  ={this.props.sortType}
+              sortByValue    ={this.props.sortBy}
+              emphasisValue  ={this.props.emphasis}
+              updateTasks    ={this.getTasks}
+              openDetail     ={this.openDetail}
+              toggleComplete ={this.toggleComplete}
+              detailView     ={this.props.detailView}
+              categories     ={this.props.categories}
+              updatingTask   ={this.props.updatingTask}
+              closeDetail    ={this.closeDetail}
+              updateTask     ={this.updateTask}
+              addLog         ={this.addLog}
+              updateTaskSuccess ={this.props.updateTaskSuccess}
+              addLogSuccess  ={this.props.addLogSuccess}
+            />
+            </div>
         </div>
       </div>
     );
+  }
+
+  toggleDropdown() {
+    this.props.dispatch(ViewActions.toggleDropdown());
   }
 
   logout() {
@@ -179,6 +197,10 @@ class App extends React.Component {
     this.props.dispatch(TaskActions.getTasks());
   }
 
+  toggleComplete(taskID) {
+    this.props.dispatch(TaskActions.toggleComplete(taskID));
+  }
+
   openDetail(taskID) {
     this.props.dispatch(ViewActions.openDetail(taskID));
   }
@@ -187,8 +209,8 @@ class App extends React.Component {
     this.props.dispatch(ViewActions.closeDetail());
   }
 
-  updateTask(taskParams) {
-    this.props.dispatch(TaskActions.updateTask(taskParams));
+  updateTask(taskId, updatedFields) {
+    this.props.dispatch(TaskActions.updateTask(taskId, updatedFields));
   }
 
   addLog(log) {

@@ -1,3 +1,9 @@
+const toggleDropdown = () => {
+  return {
+    type: 'TOGGLE_DROPDOWN',
+  };
+};
+
 const showTaskForm = () => {
   return {
     type: 'SHOW_TASK_FORM',
@@ -51,6 +57,7 @@ const changeEmphasis = (emphasis) => {
 };
 
 export {
+  toggleDropdown,
   showTaskForm,
   hideTaskForm,
   toggleShowComplete,

@@ -1,0 +1,43 @@
+// ---------- Dimensions ----------
+
+
+
+// ---------- Individual styling ----------
+
+.rating-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.rating-inert {
+	width: 20px;
+	height: 20px;
+
+	background-image: url('/assets/img/star-full-20px.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.rating-full {
+	width: 20px;
+	height: 20px;
+
+	background-image: url('/assets/img/star-full-20px.png');
+	background-repeat: no-repeat;
+	background-position: center;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.rating-empty {
+	width: 20px;
+	height: 20px;
+
+	background-image: url('/assets/img/star-empty-20px.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}

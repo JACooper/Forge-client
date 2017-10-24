@@ -2,35 +2,151 @@
 
 $task-form-width: 650px;
 $task-form-height: 650px;
+$task-form-item-inset: 70px;
+$task-form-item-offset: 15px;
 
 // ---------- Individual styling ----------
 
 .task-form-wrapper {
-	@include fixed-center();
-	@include set-dimensions($task-form-width, $task-form-height);
+	// @include fixed-center();
+	// @include set-dimensions($task-form-width, $task-form-height);
+
+	width: 100%;
 
 	background-color: $flat-white;
 
 	border-radius: 5px;
-	z-index: 2;	// Ensure detail appears in front of lightbox
+	// z-index: 2;	// Ensure detail appears in front of lightbox
 }
 
 .task-form-title {
+	width: 400px;
+	height: 20px;
+
+	background-color: #EEEEEE;
+	color: #555555;
+
+	margin-top: 15px;
+	margin-left: 40px;
+	margin-bottom: $task-form-item-offset;
+	padding: 4px 6px;
+
+	border: 1px solid $flat-dark-gray;
+	border-radius: 3px;
+
+	font-size: 10pt;
+
+	// vertical-align: bottom;
+	text-indent: 2px;
+}
+
+.task-form-attributes {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+
+	margin-bottom: $task-form-item-offset;
+}
+
+.task-form-attribute {
 
 }
 
-.task-form-time {
-
+.task-form-rating {
+	margin-top: 3px;
+	margin-left: 10px;
+	display: flex;
+	align-items: flex-end;
 }
 
-.task-form-effort {
+.task-form-time-img {
+	width: 30px;
+	height: 30px;
 
+	margin-right: 5px;
+
+	background: url('/assets/img/time-30px.png');
+	background-repeat: no-repeat;
 }
 
-.task-form-focus {
+.task-form-effort-img {
+	width: 30px;
+	height: 30px;
 
+	margin-right: 5px;
+
+	background: url('/assets/img/effort-30px.png');
+	background-repeat: no-repeat;
 }
 
-#start-date-label {
+.task-form-focus-img {
+	width: 30px;
+	height: 30px;
 
+	margin-right: 5px;
+
+	background: url('/assets/img/focus-30px.png');
+	background-repeat: no-repeat;
+}
+
+.task-form-dates {
+	display: flex;
+	flex-direction: row;
+	align-items: top;
+
+	margin-bottom: $task-form-item-offset;
+}
+
+.task-form-date {
+	margin-left: $task-form-item-inset;
+
+	.date-input-wrapper {
+		margin-top: 2px;
+		margin-left: 4px;
+	}
+}
+
+.task-form-controls {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+
+	margin-right: 40px;
+	margin-bottom: $task-form-item-offset;
+}
+
+.task-form-cancel {
+	background: none;
+	border: none;
+
+	// width: 75px;
+	height: 30px;
+
+	&:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
+.task-form-submit {
+	display: inline;
+	background: none;
+	border: none;
+
+	width: 75px;
+	height: 30px;
+
+	background-color: $flat-dark-gray;
+	color: $flat-white;
+
+	border-radius: 5px;
+
+	margin-left: 15px;
+
+	&:hover {
+		background-color: $flat-mid-gray;
+		cursor: pointer;
+	}
 }

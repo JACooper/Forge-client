@@ -1,263 +1,250 @@
 import React from 'react';
 import DateInput from './dateinput/DateInput.js';
 import LogDetail from './LogDetail.js';
+import LogForm from './LogForm.js';
+import Rating from './Rating.js';
 
 class TaskDetail extends React.Component {
   constructor(props) {
     super(props);
 
     this.updateTask = this.updateTask.bind(this);
-    this.restrictInput = this.restrictInput.bind(this);
-    this.addWorkLog = this.addWorkLog.bind(this);
+    this.showLogForm = this.showLogForm.bind(this);
+    this.closeLogForm = this.closeLogForm.bind(this);
+    this.changeDifficulty = this.changeDifficulty.bind(this);
+
+    let showLogDefault = false;
+    if (this.props.log && this.props.log.length < 4) {
+      showLogDefault = true;
+    }
 
     // Only use task props for initial state - subsequent form data should come from user input
     this.state = {
-      title: this.props.task.title,
-      time: this.props.task.time,
-      effort: this.props.task.effort,
-      focus: this.props.task.focus,
-      category: this.props.task.category,
-      startDate: this.props.task.startDate,
-      dueDate: this.props.task.dueDate,
-      complete: this.props.task.complete,
-      logDate: new Date(),
-      logDesc: '',
-      logTime: '',
-      dirty: false,
+      title: this.props.title,
+      time: this.props.time,
+      effort: this.props.effort,
+      focus: this.props.focus,
+      category: this.props.category,
+      startDate: this.props.startDate,
+      dueDate: this.props.dueDate,
+      complete: this.props.complete,
+      showLog: showLogDefault,
+      showLogForm: false,
     };
   }
 
+  // componentWillReceiveProps(newProps) {
+  //   if (newProps.updateTaskSuccess !== this.props.updateTaskSuccess && newProps.updateTaskSuccess) {
+  //     this.props.closeDetail();
+  //   }
+  // }
+
   render() {
-    let time = '';
-    let effort = '';
-    let focus = '';
-
-    for (let stars = 1; stars <= 3; stars++) {
-      if (stars <= this.state.time) {
-        time += '\u2605';
-      } else {
-        time += '\u2606';
-      }
-
-      if (stars <= this.state.effort) {
-        effort += '\u2605';
-      } else {
-        effort += '\u2606';
-      }
-
-      if (stars <= this.state.focus) {
-        focus += '\u2605';
-      } else {
-        focus += '\u2606';
-      }
-    }
-
     const categoryOptions = this.props.categories.map((category) => {
       return (<option key={category._id} className='category-option' value={category._id}>
           {category.name}
         </option>);
     });
 
-    let logIndex = 0;
-    const workLog = (this.props.task.log) ? 
-      this.props.task.log.map((log) => {
-        return (<LogDetail key={log.date.getTime().toString() + logIndex++} log={log} />);
+    const showFormButton = (this.state.showLog) ? (
+      <button
+          className='show-log-form'
+          type='button'
+          onClick={() => {this.showLogForm();}}
+        />
+      ) : (null);
+
+    const logForm = (this.state.showLogForm) ? (
+        <div className='log-form-modal-wrapper'>
+          <div className='lightbox-dim' />
+          <LogForm
+            addLogSuccess={this.props.addLogSuccess}
+            addLog={this.props.addLog}
+            closeLogForm={this.closeLogForm}
+          />
+        </div>
+      ) : (null);
+
+    const sortedLogs = (this.props.log) ?
+      Array.from(this.props.log).sort((log1, log2) => {
+        // Newest logs appear first
+        return log2.date.getTime() - log1.date.getTime();
       }) : (null);
 
-    const toggleButtonClass = (this.state.complete) ? 'mark-uncomplete-button' : 'mark-complete-button';
-    let updateClasses = 'task-detail-update';
-    if (!this.state.dirty || this.props.updatingTask){
-      updateClasses += ' update-disabled';
-    }
+
+    let logIndex = 0;
+    const workLog = (sortedLogs) ? 
+      sortedLogs.map((log) => {
+        return (<LogDetail
+            key={log.date.getTime().toString() + logIndex++}
+            log={log}
+          />);
+      }) : (null);
+
+    const logContainer = (this.state.showLog) ? (
+        <div className='task-detail-log'>
+          {workLog}
+        </div>
+      ) : (null);
 
     return (
       <div className='task-detail-wrapper'>
         <input
           className='task-detail-title'
           type='text'
+          maxLength='50'
           value={this.state.title}
           onChange={(e) => {
-            this.setState({title: e.target.value},
-            () => {setTimeout(() => {this.hasChanged();}, 500);});
-          }}
-        />
-        <p className='task-detail-time'>Time: {time}</p>
-        <p className='task-detail-effort'>Effort: {effort}</p>
-        <p className='task-detail-focus'>Focus: {focus}</p>
+            if (e.target.value !== '') {
+              this.setState({ title: e.target.value });
+            }
+          }} />
+        <div className='task-detail-attributes'>
+          <div className='task-detail-attribute'>
+            <label className='task-detail-attribute-label'>Time</label>
+            <div className='task-detail-attribute-rating'>
+              <div className='task-detail-time-img' />
+              <Rating
+                rating={this.state.time}
+                setRating={(stars) => {this.changeDifficulty('time', stars);}}
+              />
+            </div>
+          </div>
+          <div className='task-detail-attribute'>
+            <label className='task-detail-attribute-label'>Effort</label>
+            <div className='task-detail-attribute-rating'>
+              <div className='task-detail-effort-img' />
+              <Rating
+                rating={this.state.effort}
+                setRating={(stars) => {this.changeDifficulty('effort', stars);}}
+              />
+            </div>
+          </div>
+          <div className='task-detail-attribute'>
+            <label className='task-detail-attribute-label'>Focus</label>
+            <div className='task-detail-attribute-rating'>
+              <div className='task-detail-focus-img' />
+              <Rating
+                rating={this.state.focus}
+                setRating={(stars) => {this.changeDifficulty('focus', stars);}}
+              />
+            </div>
+          </div>
+        </div>
 
-        <label className='task-detail-label'>Start date</label>
-        <DateInput date={this.state.startDate} submit={this.setStartDate} />
-        <label className='task-detail-label'>Due date</label>
-        <DateInput date={this.state.dueDate} submit={this.setDueDate} />
+        <div className='task-detail-dates'>
+          <div className='task-detail-date'>
+            <label className='task-detail-label'>Start date</label>
+            <DateInput date={this.state.startDate} submit={
+              (date) => { this.setState({ startDate: date }); }
+            } />
+          </div>
+          <div className='task-detail-date'>
+            <label className='task-detail-label'>Due date</label>
+            <DateInput date={this.state.dueDate} submit={
+              (date) => { this.setState({ dueDate: date }); }
+            } />
+          </div>
+        </div>
 
-        <select
-          className='category-dropdown'
-          value={this.state.category._id}
-          onChange={(e) => {
-            this.setState({category: e.target.value},
-            () => {setTimeout(() => {this.hasChanged();}, 500);});
-          }}
-        >
-          {categoryOptions}
-        </select>
-        
-        <button
-          className={toggleButtonClass}
-          type='button'
-          onClick={() => {
-            this.setState({complete: !this.state.complete},
-            () => {setTimeout(() => {this.hasChanged();}, 500);});
-          }}
-        >
-          &#10004;
-        </button>
+        <div className='task-detail-category'>
+          <label className='task-detail-category-label'>Category</label>
+          <select
+            className='task-detail-category-dropdown'
+            value={this.state.category._id}
+            onChange={(e) => {
+              this.setState({category: e.target.value});
+            }}
+          >
+            {categoryOptions}
+          </select>
+        </div>
 
-        <button
-          className={updateClasses}
-          type='button'
-          disabled={!this.state.dirty}
-          onClick={this.updateTask}
-        >
-          Update task
-        </button>
+        <div className='task-detail-submit-controls'>
+          <button
+            className='task-detail-cancel'
+            type='button'
+            onClick={() => {this.props.closeDetail();}}
+          >
+            Cancel
+          </button>
 
-        <DateInput date={this.state.logDate} submit={this.setLogDate} />
-        <input
-          className='log-detail-desc'
-          type='text'
-          placeholder='Work log description'
-          value={this.state.logDesc}
-          onChange={(e) => { this.setState({ logDesc: e.target.value }); }}
-        />
-        <input
-          className='log-detail-time'
-          type='text'
-          placeholder='# hrs'
-          value={this.state.logTime}
-          onKeyDown={this.restrictInput}
-          onChange={(e) => { this.setState({ logTime: e.target.value }); }}
-        />
+          <button
+            className='task-detail-save'
+            type='button'
+            onClick={() => {this.updateTask();}}
+          >
+            Save
+          </button>
+        </div>
 
-        <button
-          className='add-detail-log'
-          type='button'
-          onClick={() => {this.addWorkLog();}}
-        >
-          Log work
-        </button>
+        <div className='task-detail-log-controls'>
+          <label className='toggle-detail-log-label'>
+            <button
+              className='toggle-detail-log'
+              type='button'
+              onClick={() => {this.setState({ showLog: !this.state.showLog }); }}
+            />
+            {(this.state.showLog) ? 'Hide log' : 'Show log'}
+          </label>
 
-        {workLog}
+          {showFormButton}
+        </div>
 
-        <button
-          className='close-detail-view'
-          type='button'
-          onClick={() => {this.props.closeDetail();}}
-        >
-          &times;
-        </button>
+        {logForm}
+        {logContainer}
       </div>
     );
   }
 
-  hasChanged() {    
-    const propFields = {
-      title: this.props.task.title,
-      time: this.props.task.time,
-      effort: this.props.task.effort,
-      focus: this.props.task.focus,
-      category: this.props.task.category,
-      complete: this.props.task.complete,
-      startDate: this.props.task.startDate,
-      dueDate: this.props.task.dueDate,
-    };
+  showLogForm() {
+    this.setState({ showLogForm: true });
+  }
 
-    const stateFields = {
-      title: this.state.title,
-      time: this.state.time,
-      effort: this.state.effort,
-      focus: this.state.focus,
-      category: this.state.category,
-      complete: this.state.complete,
-      startDate: this.state.startDate,
-      dueDate: this.state.dueDate,
-    };
+  closeLogForm() {
+    this.setState({ showLogForm: false });
+  }
 
-    if (JSON.stringify(stateFields) === JSON.stringify(propFields)) {
-      this.setState({ dirty: false });
-    } else {
-      this.setState({ dirty: true });
-    }
+  changeDifficulty(field, amount) {
+    const updateField = {};
+    updateField[field] = amount;
+    this.setState(updateField);
   }
 
   updateTask() {
-    const stateFields = {
-      title: this.state.title,
-      time: this.state.time,
-      effort: this.state.effort,
-      focus: this.state.focus,
-      category: this.state.category,
-      complete: this.state.complete,
-      startDate: this.state.startDate,
-      dueDate: this.state.dueDate,
-    };
+    const updateFields = {};
 
-    // Send in the original task, plus whatever fields were edited
-    this.props.updateTask({...this.props.task, ...stateFields});
-  }
-
-  restrictInput(event) {
-    if (event.key !== undefined)  {
-      const key = event.key;
-
-      if (key !== 'ArrowLeft'
-          && key !== 'ArrowRight'
-          && key !== 'Backspace'
-          && key !== 'Delete'
-          && key !== 'Tab'
-          && key !== '.'
-          && key !== '0'
-          && key !== '1'
-          && key !== '2'
-          && key !== '3'
-          && key !== '4'
-          && key !== '5'
-          && key !== '6'
-          && key !== '7'
-          && key !== '8'
-          && key !== '9') {
-        event.preventDefault();
-        return false;
-      }
-    } else if (event.keyCode !== undefined) {
-      const key = event.keyCode;
-      if (!(key >= 48 && key <= 57) 
-          && (key !== 8 && key !== 46 && key !== 37 && key !== 39 && key !== 9 && key !== 190)) {
-        event.preventDefault();
-        return false;
-      }
-    }
-  }
-
-  setLogDate(date) {
-    this.setState({logDate: date});
-  }
-
-  addWorkLog() {
-    const log = {};
-    log.date = this.state.logDate;
-    const logDesc = this.state.logDesc;
-    const logTime = this.state.logTime;
-
-    if (logDesc !== undefined && logDesc !== null && logDesc !== '') {
-      log.desc = logDesc;
+    if (this.state.title !== this.props.title) {
+      updateFields.title = this.state.title;
     }
 
-    if (logTime !== undefined && logTime !== null && logTime !== '') {
-      log.time = logTime;
+    if (this.state.time !== this.props.time) {
+      updateFields.time = this.state.time;
     }
 
-    if (log.date && (log.desc || log.time)) {
-      this.props.addLog(log);
+    if (this.state.effort !== this.props.effort) {
+      updateFields.effort = this.state.effort;
+    }
+
+    if (this.state.focus !== this.props.focus) {
+      updateFields.focus = this.state.focus;
+    }
+
+    if (this.state.category._id !== this.props.category._id) {
+      updateFields.category = this.state.category;
+    }
+
+    if (this.state.startDate !== this.props.startDate) {
+      updateFields.startDate = this.state.startDate;
+    }
+
+    if (this.state.dueDate !== this.props.dueDate) {
+      updateFields.dueDate = this.state.dueDate;
+    }
+
+    // If no fields were updated, don't bother
+    if (Object.keys(updateFields).length > 0){
+      this.props.updateTask(this.props._id, updateFields);
     }
   }
 }

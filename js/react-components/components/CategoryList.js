@@ -54,7 +54,7 @@ class CategoryList extends React.Component {
           type='text'
           placeholder='New category. . .'
           value={this.state.newCategoryName}
-          maxLength="19"
+          maxLength="20"
           onChange={(e) => {
             this.setState({newCategoryName: e.target.value});
           }}
