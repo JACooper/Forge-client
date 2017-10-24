@@ -1,4 +1,5 @@
 import React from 'react';
+import logoutImg from '../../../build/assets/img/logout-20px.png';
 
 class SettingsDropdown extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class SettingsDropdown extends React.Component {
       <div className='settings-dropdown-wrapper' ref={(wrapper) => {this.wrapperRef = wrapper;}}>
         <ul className='settings-dropdown-list'>
           <li className='settings-dropdown-item' onClick={this.props.logout}>
-            <img className='settings-dropdown-icon' src='/assets/img/logout-20px.png' alt=''/>
+            <img className='settings-dropdown-icon' src={logoutImg} alt=''/>
             Logout
           </li>
         </ul>
