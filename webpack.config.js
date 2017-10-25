@@ -66,22 +66,6 @@ const config = {
         ]
       },
       {
-        test: /\.less$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function() {
-                return [autoprefixer]
-              }
-            }
-          },
-          { loader: 'less-loader' }
-        ]
-      },
-      {
         test: /\.(jpg|png|svg)$/,
         loader: 'url-loader',
         options: {
