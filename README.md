@@ -28,7 +28,7 @@ Additionally, this command watches files and automatically recompiles when it de
 npm run webpack-prod
 ```
 
-This will compile and minify the source. To compile and test locally (of limited use unless you mock or remove logins), run
+This will compile and minify the source, as well as generate a app-bundle.js.map file. Serve this file with app-bundle.js to enable source mapping in the client (i.e. the debugger will show you source instead of minified code). You probably don't want to serve this to normal users. To compile and test locally (of limited use unless you mock or remove logins), run
 
 ```
 npm start
