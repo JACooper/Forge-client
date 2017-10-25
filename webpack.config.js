@@ -11,25 +11,6 @@ const config = {
     filename: '[name]-bundle.js',
     path: path.resolve(__dirname + '/build')
   },
-  devServer: {
-    port: 8080
-  },
-  // Waiting to include commons chunk until it's needed
-  // plugins: [
-  //   // If you create multiple bundles with "overlapping" code, this will take
-  //   //  that code and put it into a common bundle, allowing fewer re-downloads
-  //   new webpack.optimize.CommonsChunkPlugin({
-  //     name: 'common',
-  //     file: 'common.js'
-  //   }),
-  //   // For production - specifies React should get built in production mode
-  //   new webpack.DefinePlugin({
-  //     'process.env': {
-  //       NODE_ENV: JSON.stringify('production')
-  //     }
-  //   }),
-  //   new webpack.optimize.UglifyJsPlugin()
-  // ],
   module: {
     rules: [
       {
