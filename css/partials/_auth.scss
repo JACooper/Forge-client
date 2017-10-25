@@ -8,28 +8,28 @@ $navbar-border-height: 3px;
 .auth-nav-wrapper {
 	width: 100%;
 	height: $auth-nav-height;
-
 	background-color: #F7F7F7;
+
 	border-bottom: $navbar-border-height solid #E3E3E3;
 }
 
 .auth-nav-content {
 	max-width: 850px;
 	height: 100%;
-	margin: auto;
 
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+
+	margin: auto;
 }
 
 .auth-main {
+	height: calc(100vh - calc(#{$auth-nav-height} + #{$navbar-border-height}));
+
 	display: flex;
 	justify-content: space-around;
-	// align-items: center;
-
-	height: calc(100vh - calc(#{$auth-nav-height} + #{$navbar-border-height}));
 
 	background: url('/assets/img/auth-background.png');
 	background-repeat: no-repeat;
@@ -38,51 +38,35 @@ $navbar-border-height: 3px;
 
 .auth-title {
 	color: #FAFAFA;
-
 	margin-top: 300px;
 	font-size: 52pt;
 }
 
 .auth-tagline {
 	color: #D7D7D7;
-
 	margin-left: 35px;
 	font-size: 40pt;
 }
 
-// .auth-hero {
-// 	@include set-dimensions(300px, 300px);
-
-// 	border-radius: 12px;
-
-// 	background: url('/assets/img/logo-hero.png');
-// 	background-repeat: no-repeat;
-// 	background-position: center;
-// 	background-color: #C0C0C0;
-// }
-
 .auth-form {
+	background-color: rgba(0, 0, 0, 0.2);
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
-	// background-color: #FAFAFA;
-	// border: 1px solid #C0C0C0;
-	
-	background-color: rgba(0, 0, 0, 0.2);
-	border-radius: 10px;
-
 	margin-top: 300px;
 	margin-bottom: auto;
 	padding: 25px;
+	
+	border-radius: 10px;
 }
 
 .auth-input-field {
   	width: 320px;
 
-  	background-color: rgba(0, 0, 0, 0);
-  	color: #E3E3E3;
+  	@include set-colors(rgba(0, 0, 0, 0), #E3E3E3);
 
   	padding: 2px 7px;
   	margin-bottom: 25px;
@@ -102,15 +86,12 @@ $navbar-border-height: 3px;
 }
 
 .auth-action {
-	border: none;
 	background: none;
+	border: none;
 
 	width: 90px;
-
 	color: #E3E3E3;
-
 	padding: 4px 10px;
-
 	border: 2px solid #E3E3E3;
 
 	font-size: 12pt;
@@ -118,14 +99,13 @@ $navbar-border-height: 3px;
 
 	&:hover {
 		cursor: pointer;
-		background-color: #E3E3E3;
-		color: #555555;
+		@include set-colors(#E3E3E3, #555555);
 	}
 }
 
 .auth-swap {
-	border: none;
 	background: none;
+	border: none;
 
 	font-size: 13pt;
 	font-family: 'Montserrat', sans-serif;

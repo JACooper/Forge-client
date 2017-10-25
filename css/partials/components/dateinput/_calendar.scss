@@ -8,10 +8,11 @@ $calendar-header-height: 30px;
 // ---------- Individual styling ----------
 
 .calendar-wrapper {
-	position: absolute;
 	width: $calendar-width;
-	z-index: 3;
 	background-color: white;
+	
+	position: absolute;
+	z-index: 3;
 	
 	border: 1px solid $flat-dark-gray;
 	border-radius: 3px;
@@ -20,8 +21,8 @@ $calendar-header-height: 30px;
 .month-picker {
 	@include set-dimensions($calendar-width, $calendar-header-height);
 	background-color: white;
+	
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
 
 	line-height: $calendar-header-height;
@@ -42,7 +43,9 @@ $calendar-header-height: 30px;
 
 .week-header {
 	@include set-dimensions($calendar-width, $calendar-header-height);
+
 	background-color: $flat-gray;
+	
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-template-rows: $day-row;
@@ -56,18 +59,15 @@ $calendar-header-height: 30px;
 	text-align: center;
 }
 
-.calendar-dates {
-
-}
-
 .calendar-input-week {
+	width: $calendar-width;
+	
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-template-rows: $day-row;
 	justify-items: center;
 	align-items: center;
 	
-	width: $calendar-width;
 	margin-bottom: 4px;
 	text-align: center;
 }

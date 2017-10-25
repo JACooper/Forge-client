@@ -15,7 +15,7 @@ const config = {
     rules: [
       {
         enforce: "pre",  // Force eslint to run before babel
-        test: /\.(js|jsx)$/,
+        test: /\.(js)$/,
         include: path.join(__dirname, 'js'),
         loader: 'eslint-loader',
         options: {
@@ -23,7 +23,7 @@ const config = {
         }
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js)$/,
         include: path.join(__dirname, 'js'),
         loader: 'babel-loader',
         options: { 

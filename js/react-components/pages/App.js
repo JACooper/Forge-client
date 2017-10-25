@@ -98,7 +98,7 @@ class App extends React.Component {
     ) : (<button className='add-task-button' type='button' onClick={this.showTaskForm}>Add task</button>);
 
     return (
-      <div className='app-wrapper'>
+      <div>
         <NavBar
           showDropdown={this.props.showDropdown}
           toggleDropdown={this.toggleDropdown}

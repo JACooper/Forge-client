@@ -15,7 +15,6 @@ class CalendarInput extends React.Component {
     // Set up references to detect when user clicks outside of calendar component
     // See: https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
     this.clickOutside = this.clickOutside.bind(this);
-
     this.getMonthString = this.getMonthString.bind(this);
 
     const currentDate = (this.props.date) ? this.props.date : new Date();
@@ -95,25 +94,27 @@ class CalendarInput extends React.Component {
     return (
       <div className='calendar-wrapper' ref={(wrapper) => {this.wrapperRef = wrapper;}}>
         <div className='month-picker'>
-          <button
-            className='month-adjust'
-            onClick={() => {
+          <button className='month-adjust' onClick={
+            () => {
               if (this.state.month === 0) {
                 this.setState({ month: 11, year: this.state.year - 1 });
               } else {
                 this.setState({ month: (this.state.month - 1) });
               }
-            }}>&lt;</button>
+            }}>
+              &lt;
+            </button>
           <span className='curr-month'>{this.getMonthString()} {this.state.year}</span>
-          <button
-            className='month-adjust'
-            onClick={() => {
+          <button className='month-adjust' onClick={
+            () => {
               if (this.state.month === 11) {
                 this.setState({ month: 0, year: this.state.year + 1 });
               } else {
                 this.setState({month: (this.state.month + 1)});
               }
-            }}>&gt;</button>
+            }}>
+              &gt;
+            </button>
         </div>
 
         <div className='week-header'>
@@ -126,9 +127,7 @@ class CalendarInput extends React.Component {
           <span className='week-header-day'>Sat</span>
         </div>
 
-        <div className='calendar-dates'>
-          {calendarDates}
-        </div>
+        {calendarDates}
       </div>
     );
   }

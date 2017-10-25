@@ -51,11 +51,9 @@ class DateInput extends React.Component {
 
   render() {
     const calendar = (this.state.displayCalendar) ? (
-        <CalendarInput
-          selectDate={this.selectDate}
-          date={this.props.date}
-          closeCalendar={() => {this.setState({displayCalendar: false});}}
-        />
+        <CalendarInput selectDate={this.selectDate} date={this.props.date} closeCalendar={
+          () => {this.setState({displayCalendar: false});}
+        }/>
       ) : (null);
 
     const errorDisplay = (this.state.error) ? (
@@ -75,11 +73,9 @@ class DateInput extends React.Component {
           onBlur={() => {this.validateInput();}}
           ref='inputText'
         />
-        <button
-          className='date-input-show-calendar'
-          type='button'
-          onClick={() => {this.toggleCalendar();}}
-        />
+        <button className='date-input-show-calendar' type='button' onClick={
+          () => {this.toggleCalendar();}
+        }/>
         {errorDisplay}
         {calendar}
       </div>

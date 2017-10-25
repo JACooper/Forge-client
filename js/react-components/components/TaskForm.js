@@ -32,7 +32,7 @@ class TaskForm extends React.Component {
         />
         
         <div className='task-form-attributes'>
-          <div className='task-form-attribute'>
+          <div>
             <label>Time</label>
             <div className='task-form-rating'>
               <div className='task-form-time-img'/>
@@ -40,7 +40,7 @@ class TaskForm extends React.Component {
             </div>
           </div>
 
-          <div className='task-form-attribute'>
+          <div>
             <label>Effort</label>
             <div className='task-form-rating'>              
               <div className='task-form-effort-img'/>
@@ -48,7 +48,7 @@ class TaskForm extends React.Component {
             </div>
           </div>
 
-          <div className='task-form-attribute'>
+          <div>
             <label>Focus</label>
             <div className='task-form-rating'>
               <div className='task-form-focus-img'/>

@@ -2,20 +2,13 @@
 
 $center-column-width: 650px;
 
-// ---------- Mixins ----------
-
-
-
 // ---------- Individual styling ----------
 
 .task-list-wrapper {
-	// Dimensions
-	// width: calc(#{$center-column-width} - 20px});
 	width: 100%;
 }
 
 .task-list {	
-	// Flexbox properties
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;

@@ -82,22 +82,6 @@ const toggleComplete = (taskID) => {
   };
 };
 
-const changeCategory = (taskID, categoryID) => {
-  return (dispatch) => {
-    dispatch({ type: 'CHANGE_CATEGORY_START' });
-    superagent
-      .post('/changeCategory')
-      .send({ taskID, categoryID })
-      .then((response) => {
-        const task = populateTaskDate(response.body.task);
-        dispatch({ type: 'CHANGE_CATEGORY_SUCCESS', data: { task }});
-      })
-      .catch((error) => {
-        dispatch({ type: 'CHANGE_CATEGORY_FAILURE', data: { error } });
-      });
-  };
-};
-
 const populateTaskDate = (_task) => {  
   const task = _task;
   task.startDate = (task.startDate) ? new Date(task.startDate) : null;
@@ -117,5 +101,4 @@ export {
   updateTask,
   addLog,
   toggleComplete,
-  changeCategory,
 };

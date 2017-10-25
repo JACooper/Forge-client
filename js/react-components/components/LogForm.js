@@ -8,7 +8,6 @@ class LogForm extends React.Component {
     // Set up references to detect when user clicks outside of calendar component
     // See: https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
     this.clickOutside = this.clickOutside.bind(this);
-
     this.addWorkLog = this.addWorkLog.bind(this);
     this.setLogDate = this.setLogDate.bind(this);
 
@@ -61,19 +60,15 @@ class LogForm extends React.Component {
         />
 
         <div className='log-form-controls'>
-          <button
-            className='cancel-detail-log'
-            type='button'
-            onClick={() => {this.props.closeLogForm();}}
-          >
+          <button className='cancel-detail-log' type='button' onClick={
+            () => {this.props.closeLogForm();}
+          }>
             Cancel
           </button>
 
-          <button
-            className='add-detail-log'
-            type='button'
-            onClick={() => {this.addWorkLog();}}
-          >
+          <button className='add-detail-log' type='button' onClick={
+            () => {this.addWorkLog();}
+          }>
             Log work
           </button>
         </div>

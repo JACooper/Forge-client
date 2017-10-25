@@ -7,22 +7,17 @@ $detail-item-bottom-offset: 15px;
 // ---------- Individual styling ----------
 
 .task-detail-wrapper {
-	background-color: $flat-white;
-	font-size: 10pt;
-
 	width: 100%;
-
+	background-color: $flat-white;
 	padding-bottom: 10px;
-	
 	border-bottom: 1px solid #E3E3E3;
+	font-size: 10pt;
 }
 
 .task-detail-title {
-	background-color: $flat-white;
-	font-size: 13pt;
-	font-family: $primary-font;
-	
 	width: calc(100% - calc(#{$task-title-inset} * 2));
+	background-color: $flat-white;
+	
 	margin-top: 5px;
 	margin-left: $task-title-inset;
 
@@ -30,6 +25,9 @@ $detail-item-bottom-offset: 15px;
 	border-bottom-color: #6B6B6B;
 	border-bottom-width: 2px;
 	border-bottom-style: solid;
+
+	font-size: 13pt;
+	font-family: $primary-font;
 
 	&:focus {
 		outline: none;
@@ -40,7 +38,6 @@ $detail-item-bottom-offset: 15px;
 
 .task-detail-attributes {
 	display: flex;
-	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
 
@@ -48,52 +45,41 @@ $detail-item-bottom-offset: 15px;
 	margin-bottom: $detail-item-bottom-offset;
 }
 
-.task-detail-attribute {
-
-}
-
 .task-detail-attribute-rating {
-	margin-top: 3px;
-	margin-left: 10px;
 	display: flex;
 	align-items: flex-end;
+	margin-top: 3px;
+	margin-left: 10px;
 }
 
 .task-detail-time-img {
-	width: 20px;
-	height: 20px;
+	@include set-dimensions(20px, 20px);
 
 	margin-right: 5px;
-
 	background: url('/assets/img/time-20px.png');
 	background-repeat: no-repeat;
 }
 
 .task-detail-effort-img {
 	display: inline-block;
-	width: 20px;
-	height: 20px;
+	@include set-dimensions(20px, 20px);
 
 	margin-right: 5px;
-
 	background: url('/assets/img/effort-20px.png');
 	background-repeat: no-repeat;
 }
 
 .task-detail-focus-img {
 	display: inline-block;
-	width: 20px;
-	height: 20px;
+	@include set-dimensions(20px, 20px);
 
 	margin-right: 5px;
-
 	background: url('/assets/img/focus-20px.png');
 	background-repeat: no-repeat;
 }
 
 .task-detail-rating-full {
-	width: 20px;
-	height: 20px;
+	@include set-dimensions(20px, 20px);
 
 	background: url('/assets/img/star-full-20px.png');
 	background-repeat: no-repeat;
@@ -107,8 +93,7 @@ $detail-item-bottom-offset: 15px;
 }
 
 .task-detail-rating-empty {
-	width: 20px;
-	height: 20px;
+	@include set-dimensions(20px, 20px);
 
 	background: url('/assets/img/star-empty-20px.png');
 	background-repeat: no-repeat;
@@ -125,7 +110,6 @@ $detail-item-bottom-offset: 15px;
 
 .task-detail-dates {
 	display: flex;
-	flex-direction: row;
 	align-items: top;
 
 	margin-bottom: $detail-item-bottom-offset;
@@ -151,13 +135,10 @@ $detail-item-bottom-offset: 15px;
 }
 
 .task-detail-category-dropdown {
+	@include set-dimensions(165px, 30px);
+	@include set-colors(#EEEEEE, #555555);
+
 	display: block;
-
-	height: 30px;
-	width: 165px;
-
-	background-color: #EEEEEE;
-	color: #555555;
 	
 	margin-top: 2px;
 	margin-bottom: 6px;
@@ -171,10 +152,8 @@ $detail-item-bottom-offset: 15px;
 
 .task-detail-submit-controls {
 	display: flex;
-	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
-
 	margin-right: 40px;
 }
 
@@ -182,33 +161,27 @@ $detail-item-bottom-offset: 15px;
 	background: none;
 	border: none;
 
-	// width: 75px;
 	height: 30px;
 
 	&:hover {
-		text-decoration: underline;
 		cursor: pointer;
+		text-decoration: underline;
 	}
 }
 
 .task-detail-save {
-	display: inline;
 	background: none;
 	border: none;
 
-	width: 75px;
-	height: 30px;
-
-	background-color: $flat-dark-gray;
-	color: $flat-white;
-
+	@include set-dimensions(75px, 30px);
+	@include set-colors($flat-dark-gray, $flat-white);
+	display: inline;
+	margin-left: 15px;
 	border-radius: 5px;
 
-	margin-left: 15px;
-
 	&:hover {
-		background-color: $flat-mid-gray;
 		cursor: pointer;
+		background-color: $flat-mid-gray;
 	}
 }
 
@@ -218,16 +191,14 @@ $detail-item-bottom-offset: 15px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
 	margin-top: 5px;
 }
 
 .toggle-detail-log {
-	border: none;
 	background: none;
+	border: none;
 
-	width: 25px;
-	height: 25px;
+	@include set-dimensions(25px, 25px);
 
 	margin-left: 6px;
 
@@ -253,11 +224,10 @@ $detail-item-bottom-offset: 15px;
 }
 
 .show-log-form {
-	border: none;
 	background: none;
+	border: none;
 
-	width: 25px;
-	height: 25px;
+	@include set-dimensions(25px, 25px);
 
 	margin-right: 6px;
 
@@ -275,31 +245,30 @@ $detail-item-bottom-offset: 15px;
 
 	margin-top: 2px;
 	margin-bottom: 4px;
-
-	// border-top: 1px solid #C0C0C0;
 }
 
 .lightbox-dim {
-	position   : fixed;
-	top        : 0;
-	left       : 0;
-	right      : 0;
-	bottom     : 0;
-	background : rgba(0, 0, 0, 0.5);
-	z-index    : 1;	// So that overlay covers most components
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1;	// So that overlay covers most components
 }
 
 .log-detail-wrapper {
 	width: calc(100% - 4px);
-	margin-left: 2px;
 
 	display: grid;
 	grid-template-columns: 160px auto 50px;
 	align-items: center;
 
-	border-top: 1px #C0C0C0 solid;
 	margin-bottom: 7px;
+	margin-left: 2px;
 	padding-top: 3px;
+	
+	border-top: 1px #C0C0C0 solid;
 }
 
 .log-detail-date {

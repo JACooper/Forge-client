@@ -19,17 +19,16 @@ class CategoryList extends React.Component {
   render() {
     const categories = this.props.categories.map((category) => {
       if (category.name === this.props.activeCategory) {
-        return (<p
-          key={category._id}
-          className='category-item active-category'>
+        return (
+          <p key={category._id} className='category-item active-category'>
             {category.name}
           </p>);
       }
 
-      return (<p
-        key={category._id}
-        className='category-item'
-        onClick={() => {this.setActive(category.name);}}>
+      return (
+        <p key={category._id} className='category-item' onClick={
+          () => {this.setActive(category.name);}
+        }>
           {category.name}
         </p>);
     });
@@ -39,10 +38,10 @@ class CategoryList extends React.Component {
       allCategoryClass += ' active-category';
     }
 
-    categories.unshift(<p
-      key='AllCategories'
-      className={allCategoryClass}
-      onClick={() => {this.setActive('');}}>
+    categories.unshift(
+      <p key='AllCategories' className={allCategoryClass} onClick={
+        () => {this.setActive('');}
+      }>
         All Categories
       </p>);
 

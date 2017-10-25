@@ -37,8 +37,6 @@ const logout = () => {
     sessionStorage.clear();
     dispatch({ type: 'LOGOUT' });
     superagent.get('/logout');
-    // Framework to return case for unsuccessful logouts. . .
-    //  perhaps excessive, but leaving it here for now
   };
 };
 

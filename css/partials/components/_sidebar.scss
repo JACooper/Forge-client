@@ -6,29 +6,18 @@ $sidebar-width: 200px;
 
 .sidebar {
 	width: $sidebar-width;
-	// margin-right: 6px;
 }
 
 .task-controls-wrapper {
 	width: $sidebar-width;
-
 	margin-top: 15px;
 }
 
-.list-sort-controls {
-	
-}
-
 .list-sort-dropdown {
-	height: 30px;
-	width: 165px;
+	@include set-dimensions(165px, 30px);
+	@include set-colors(#EEEEEE, #555555);
 
-	background-color: #EEEEEE;
-	color: #555555;
-	
-	margin-top: 2px;
-	margin-bottom: 6px;
-	margin-left: 4px;
+	margin: 2px 0 6px 4px;
 
 	border: 1px solid $flat-dark-gray;
 	border-radius: 3px;
@@ -37,8 +26,6 @@ $sidebar-width: 200px;
 .list-reveal-complete-label {
 	display: flex;
 	align-items: center;
-
-	// margin-left: 4px;
 
 	&:hover {
 		cursor: pointer;
@@ -84,11 +71,8 @@ $sidebar-width: 200px;
 }
 
 .new-category-input {
-	height: 20px;
-	width: 165px;
-
-	background-color: #EEEEEE;
-	color: #555555;
+	@include set-dimensions(165px, 20px);
+	@include set-colors(#EEEEEE, #555555);
 
 	margin-top: 5px;
 	padding: 4px 6px;
@@ -97,6 +81,5 @@ $sidebar-width: 200px;
 	border-radius: 3px;
 
 	font-size: 10pt;
-
 	text-indent: 2px;
 }

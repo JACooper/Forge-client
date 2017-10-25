@@ -48,7 +48,7 @@ class Auth extends React.Component {
     ) : (null);
 
     return (
-      <div className='auth-wrapper'>
+      <div>
         <div className='auth-nav-wrapper'>
           <div className='auth-nav-content'>
             <div className='nav-logo'>

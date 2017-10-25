@@ -17,11 +17,7 @@ class NavBar extends React.Component {
           <div className='nav-logo'>
           </div>
           <div className='nav-settings'>
-            <button
-              className='nav-settings-button'
-              type='button'
-              onClick={this.props.toggleDropdown}
-            />
+            <button className='nav-settings-button' type='button' onClick={this.props.toggleDropdown}/>
             {settings}
           </div>
         </div>

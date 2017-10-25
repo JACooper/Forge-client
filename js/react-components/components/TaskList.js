@@ -6,12 +6,12 @@ class TaskList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.sortSum    = this.sortSum.bind(this);
-    this.sortTime   = this.sortTime.bind(this);
+    this.sortSum = this.sortSum.bind(this);
+    this.sortTime = this.sortTime.bind(this);
     this.sortEffort = this.sortEffort.bind(this);
-    this.sortFocus  = this.sortFocus.bind(this);
-    this.sortStart  = this.sortStart.bind(this);
-    this.sortDue    = this.sortDue.bind(this);
+    this.sortFocus = this.sortFocus.bind(this);
+    this.sortStart = this.sortStart.bind(this);
+    this.sortDue = this.sortDue.bind(this);
   }
 
   componentWillMount() {

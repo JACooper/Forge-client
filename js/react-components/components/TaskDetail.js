@@ -33,12 +33,6 @@ class TaskDetail extends React.Component {
     };
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   if (newProps.updateTaskSuccess !== this.props.updateTaskSuccess && newProps.updateTaskSuccess) {
-  //     this.props.closeDetail();
-  //   }
-  // }
-
   render() {
     const categoryOptions = this.props.categories.map((category) => {
       return (<option key={category._id} className='category-option' value={category._id}>
@@ -47,11 +41,7 @@ class TaskDetail extends React.Component {
     });
 
     const showFormButton = (this.state.showLog) ? (
-      <button
-          className='show-log-form'
-          type='button'
-          onClick={() => {this.showLogForm();}}
-        />
+      <button className='show-log-form' type='button' onClick={() => {this.showLogForm();}}/>
       ) : (null);
 
     const logForm = (this.state.showLogForm) ? (
@@ -100,34 +90,31 @@ class TaskDetail extends React.Component {
             }
           }} />
         <div className='task-detail-attributes'>
-          <div className='task-detail-attribute'>
+          <div>
             <label className='task-detail-attribute-label'>Time</label>
             <div className='task-detail-attribute-rating'>
               <div className='task-detail-time-img' />
-              <Rating
-                rating={this.state.time}
-                setRating={(stars) => {this.changeDifficulty('time', stars);}}
-              />
+              <Rating rating={this.state.time} setRating={
+                (stars) => {this.changeDifficulty('time', stars);}
+              }/>
             </div>
           </div>
-          <div className='task-detail-attribute'>
+          <div>
             <label className='task-detail-attribute-label'>Effort</label>
             <div className='task-detail-attribute-rating'>
               <div className='task-detail-effort-img' />
-              <Rating
-                rating={this.state.effort}
-                setRating={(stars) => {this.changeDifficulty('effort', stars);}}
-              />
+              <Rating rating={this.state.effort} setRating={
+                (stars) => {this.changeDifficulty('effort', stars);}
+              }/>
             </div>
           </div>
-          <div className='task-detail-attribute'>
+          <div>
             <label className='task-detail-attribute-label'>Focus</label>
             <div className='task-detail-attribute-rating'>
               <div className='task-detail-focus-img' />
-              <Rating
-                rating={this.state.focus}
-                setRating={(stars) => {this.changeDifficulty('focus', stars);}}
-              />
+              <Rating rating={this.state.focus} setRating={
+                (stars) => {this.changeDifficulty('focus', stars);}
+              }/>
             </div>
           </div>
         </div>
@@ -137,57 +124,46 @@ class TaskDetail extends React.Component {
             <label className='task-detail-label'>Start date</label>
             <DateInput date={this.state.startDate} submit={
               (date) => { this.setState({ startDate: date }); }
-            } />
+            }/>
           </div>
           <div className='task-detail-date'>
             <label className='task-detail-label'>Due date</label>
             <DateInput date={this.state.dueDate} submit={
               (date) => { this.setState({ dueDate: date }); }
-            } />
+            }/>
           </div>
         </div>
 
         <div className='task-detail-category'>
           <label className='task-detail-category-label'>Category</label>
-          <select
-            className='task-detail-category-dropdown'
-            value={this.state.category._id}
-            onChange={(e) => {
-              this.setState({category: e.target.value});
-            }}
-          >
+          <select className='task-detail-category-dropdown' value={this.state.category._id} onChange={
+            (e) => {this.setState({category: e.target.value});}
+          }>
             {categoryOptions}
           </select>
         </div>
 
         <div className='task-detail-submit-controls'>
-          <button
-            className='task-detail-cancel'
-            type='button'
-            onClick={() => {this.props.closeDetail();}}
-          >
+          <button className='task-detail-cancel' type='button' onClick={
+            () => {this.props.closeDetail();}
+          }>
             Cancel
           </button>
 
-          <button
-            className='task-detail-save'
-            type='button'
-            onClick={() => {this.updateTask();}}
-          >
+          <button className='task-detail-save' type='button' onClick={
+            () => {this.updateTask();}
+          }>
             Save
           </button>
         </div>
 
         <div className='task-detail-log-controls'>
           <label className='toggle-detail-log-label'>
-            <button
-              className='toggle-detail-log'
-              type='button'
-              onClick={() => {this.setState({ showLog: !this.state.showLog }); }}
-            />
+            <button className='toggle-detail-log' type='button' onClick={
+              () => {this.setState({ showLog: !this.state.showLog });}
+            }/>
             {(this.state.showLog) ? 'Hide log' : 'Show log'}
           </label>
-
           {showFormButton}
         </div>
 
@@ -243,7 +219,7 @@ class TaskDetail extends React.Component {
     }
 
     // If no fields were updated, don't bother
-    if (Object.keys(updateFields).length > 0){
+    if (Object.keys(updateFields).length > 0) {
       this.props.updateTask(this.props._id, updateFields);
     }
   }

@@ -22,12 +22,12 @@ class CalendarInputWeek extends React.Component {
         classes += ' current-day';
       }
 
-      return <p
-        key={`day${day.date}${day.month}`}
-        className={classes}
-        onClick={() => {this.props.selectDate(day.date, day.month, day.year);}}>
+      return (
+        <p className={classes} key={`day${day.date}${day.month}`} onClick={
+          () => {this.props.selectDate(day.date, day.month, day.year);}
+        }>
           {day.date}
-        </p>;
+        </p>);
     });
 
     return (

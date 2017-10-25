@@ -9,7 +9,6 @@ $center-column-width: 650px;
 
 .navbar-wrapper {
 	height: $navbar-height;
-
 	background-color: #F7F7F7;
 	border-bottom: $navbar-border-height solid #E3E3E3;
 
@@ -20,19 +19,18 @@ $center-column-width: 650px;
 .nav-content-wrapper {
 	max-width: calc(#{$sidebar-width} + #{$center-column-width});
 	height: 100%;
-	margin: auto;
 
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+
+	margin: auto;
 }
 
 .nav-logo {
-	width: 50px;
-	height: 50px;
+	@include set-dimensions(50px, 50px);
 
-	// margin-left: 10px;
 	border-radius: 5px;
 
 	background-color: #C0C0C0;
@@ -42,11 +40,10 @@ $center-column-width: 650px;
 }
 
 .nav-settings-button {
-	border: none;
 	background: none;
+	border: none;
 
-	width: 40px;
-	height: 40px;
+	@include set-dimensions(40px, 40px);
 
 	background-image: url('/assets/img/settings-40px.png');
 	background-repeat: no-repeat;
@@ -60,14 +57,11 @@ $center-column-width: 650px;
 
 
 .settings-dropdown-wrapper {
-	position: absolute;
 	width: 150px;
-
 	background-color: #F9F9F9;
-
+	position: absolute;
 	border: 2px solid #E3E3E3;
 	border-radius: 3px;
-	// margin-left: -20px;
 }
 
 .settings-dropdown-list {
@@ -75,15 +69,14 @@ $center-column-width: 650px;
 }
 
 .settings-dropdown-item {
-	margin: 2px;
-	padding: 2px;
 	display: flex;
 	align-items: center;
+	margin: 2px;
+	padding: 2px;
 
 	&:hover {
 		cursor: pointer;
-		background-color: #555555;
-		color: #EEEEEE;
+		@include set-colors(#555555, #EEEEEE);
 		object-position: 0px -20px; 
 		
 		.settings-dropdown-icon {
