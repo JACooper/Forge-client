@@ -21,7 +21,6 @@ $center-column-width: 650px;
 	height: 100%;
 
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 
@@ -43,18 +42,20 @@ $center-column-width: 650px;
 	background: none;
 	border: none;
 
-	@include set-dimensions(40px, 40px);
-
-	background-image: url('/assets/img/settings-40px.png');
-	background-repeat: no-repeat;
-	background-position: center;
+	img {
+		@include set-dimensions(40px, 40px);
+		object-fit: none;
+		object-position: 0 0;
+	}
 
 	&:hover {
 		cursor: pointer;
-		background-image: url('/assets/img/settings-hover-40px.png');
+
+		img {
+			object-position: 0px -40px;
+		}
 	}
 }
-
 
 .settings-dropdown-wrapper {
 	width: 150px;
@@ -77,7 +78,6 @@ $center-column-width: 650px;
 	&:hover {
 		cursor: pointer;
 		@include set-colors(#555555, #EEEEEE);
-		object-position: 0px -20px; 
 		
 		.settings-dropdown-icon {
 			object-position: 0px -20px;

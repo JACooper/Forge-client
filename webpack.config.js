@@ -62,7 +62,7 @@ const config = {
               }
             }
           },
-          { loader: 'sass-loader' }
+          { loader: 'sass-loader' },
         ]
       },
       {
