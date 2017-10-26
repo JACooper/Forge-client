@@ -35,34 +35,33 @@ const config = {
         }
       },
       {
-        test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function() {
-                return [autoprefixer]
-              }
-            }
-          },
-        ]
-      },
-      {
         test: /\.scss$/,
         use: [
           { loader: 'style-loader' },
-          { loader: 'css-loader' },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            }
+          },
           {
             loader: 'postcss-loader',
             options: {
+              sourceMap: true,
               plugins: function() {
                 return [autoprefixer]
               }
             }
           },
-          { loader: 'sass-loader' },
+          // resolve-url-loader allos relative url() pathing in .scss files
+          // this allows inlining those images using url-loader and css-loader
+          { loader: 'resolve-url-loader' },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            }
+          },
         ]
       },
       {

@@ -1,6 +1,5 @@
 import React from 'react';
 import SettingsDropdown from './SettingsDropdown.js';
-import settingsIcon from '../../../build/assets/img/settings-40px.png';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -18,9 +17,7 @@ class NavBar extends React.Component {
           <div className='nav-logo'>
           </div>
           <div className='nav-settings'>
-            <button className='nav-settings-button' type='button' onClick={this.props.toggleDropdown}>
-              <img src={settingsIcon} alt=''/>
-            </button>
+            <button className='nav-settings-button' type='button' onClick={this.props.toggleDropdown}/>
             {settings}
           </div>
         </div>

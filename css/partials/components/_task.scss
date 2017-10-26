@@ -55,13 +55,13 @@ $task-toggle-size: 30px;
 	margin-top: calc(calc(#{$task-height} / 2) - calc(#{$task-toggle-size} / 2));
 	margin-right: 5px;
 
-	background-image: url('/assets/img/toggle-checked-30px.png');
+	background-image: url('../../../build/assets/img/toggle-checked-30px.png');
 	background-position: center;
 	background-repeat: no-repeat;
 
 	&:hover {
 		cursor: pointer;
-		background-image: url('/assets/img/toggle-empty-30px.png');
+		background-image: url('../../../build/assets/img/toggle-empty-30px.png');
 	}
 }
 
@@ -75,13 +75,13 @@ $task-toggle-size: 30px;
 	margin-top: calc(calc(#{$task-height} / 2) - calc(#{$task-toggle-size} / 2));
 	margin-right: 5px;
 
-	background-image: url('/assets/img/toggle-empty-30px.png');
+	background-image: url('../../../build/assets/img/toggle-empty-30px.png');
 	background-position: center;
 	background-repeat: no-repeat;
 
 	&:hover {
 		cursor: pointer;
-		background-image: url('/assets/img/toggle-checked-30px.png');
+		background-image: url('../../../build/assets/img/toggle-checked-30px.png');
 	}
 }
 
@@ -102,7 +102,7 @@ $task-toggle-size: 30px;
 	@include task-img();
 
 	width: 20px;
-	background: url('/assets/img/time-20px.png');
+	background: url('../../../build/assets/img/time-20px.png');
 	background-repeat: no-repeat;
 }
 
@@ -110,7 +110,7 @@ $task-toggle-size: 30px;
 	@include task-img();
 
 	width: 20px;
-	background: url('/assets/img/effort-20px.png');
+	background: url('../../../build/assets/img/effort-20px.png');
 	background-repeat: no-repeat;
 }
 
@@ -118,20 +118,20 @@ $task-toggle-size: 30px;
 	@include task-img();
 
 	width: 20px;
-	background: url('/assets/img/focus-20px.png');
+	background: url('../../../build/assets/img/focus-20px.png');
 	background-repeat: no-repeat;
 }
 
 .task-rating-full {
 	@include set-dimensions(15px, 15px);
 
-	background: url('/assets/img/star-full-15px.png');
+	background: url('../../../build/assets/img/star-full-15px.png');
 	background-repeat: no-repeat;
 }
 
 .task-rating-empty {
 	@include set-dimensions(15px, 15px);
 
-	background: url('/assets/img/star-empty-15px.png');
+	background: url('../../../build/assets/img/star-empty-15px.png');
 	background-repeat: no-repeat;
 }

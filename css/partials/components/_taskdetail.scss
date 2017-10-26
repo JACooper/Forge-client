@@ -56,7 +56,7 @@ $detail-item-bottom-offset: 15px;
 	@include set-dimensions(20px, 20px);
 
 	margin-right: 5px;
-	background: url('/assets/img/time-20px.png');
+	background: url('../../../build/assets/img/time-20px.png');
 	background-repeat: no-repeat;
 }
 
@@ -65,7 +65,7 @@ $detail-item-bottom-offset: 15px;
 	@include set-dimensions(20px, 20px);
 
 	margin-right: 5px;
-	background: url('/assets/img/effort-20px.png');
+	background: url('../../../build/assets/img/effort-20px.png');
 	background-repeat: no-repeat;
 }
 
@@ -74,35 +74,35 @@ $detail-item-bottom-offset: 15px;
 	@include set-dimensions(20px, 20px);
 
 	margin-right: 5px;
-	background: url('/assets/img/focus-20px.png');
+	background: url('../../../build/assets/img/focus-20px.png');
 	background-repeat: no-repeat;
 }
 
 .task-detail-rating-full {
 	@include set-dimensions(20px, 20px);
 
-	background: url('/assets/img/star-full-20px.png');
+	background: url('../../../build/assets/img/star-full-20px.png');
 	background-repeat: no-repeat;
 }
 
 .task-detail-full-editable {
 	&:hover {
 		cursor: pointer;
-		background: url('/assets/img/star-empty-20px.png');
+		background: url('../../../build/assets/img/star-empty-20px.png');
 	}
 }
 
 .task-detail-rating-empty {
 	@include set-dimensions(20px, 20px);
 
-	background: url('/assets/img/star-empty-20px.png');
+	background: url('../../../build/assets/img/star-empty-20px.png');
 	background-repeat: no-repeat;
 }
 
 .task-detail-empty-editable {
 	&:hover {
 		cursor: pointer;
-		background: url('/assets/img/star-full-20px.png');
+		background: url('../../../build/assets/img/star-full-20px.png');
 	}
 }
 

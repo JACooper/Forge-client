@@ -47,21 +47,21 @@ $task-form-item-offset: 15px;
 .task-form-time-img {
 	@include set-dimensions(30px, 30px);
 	margin-right: 5px;
-	background: url('/assets/img/time-30px.png');
+	background: url('../../../build/assets/img/time-30px.png');
 	background-repeat: no-repeat;
 }
 
 .task-form-effort-img {
 	@include set-dimensions(30px, 30px);
 	margin-right: 5px;
-	background: url('/assets/img/effort-30px.png');
+	background: url('../../../build/assets/img/effort-30px.png');
 	background-repeat: no-repeat;
 }
 
 .task-form-focus-img {
 	@include set-dimensions(30px, 30px);
 	margin-right: 5px;
-	background: url('/assets/img/focus-30px.png');
+	background: url('../../../build/assets/img/focus-30px.png');
 	background-repeat: no-repeat;
 }
 

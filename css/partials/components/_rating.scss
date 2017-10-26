@@ -13,7 +13,7 @@
 .rating-inert {
 	@include set-dimensions(20px, 20px);
 
-	background-image: url('/assets/img/star-full-20px.png');
+	background-image: url('../../../build/assets/img/star-full-20px.png');
 	background-repeat: no-repeat;
 	background-position: center;
 }
@@ -21,7 +21,7 @@
 .rating-full {
 	@include set-dimensions(20px, 20px);
 
-	background-image: url('/assets/img/star-full-20px.png');
+	background-image: url('../../../build/assets/img/star-full-20px.png');
 	background-repeat: no-repeat;
 	background-position: center;
 
@@ -33,7 +33,7 @@
 .rating-empty {
 	@include set-dimensions(20px, 20px);
 
-	background-image: url('/assets/img/star-empty-20px.png');
+	background-image: url('../../../build/assets/img/star-empty-20px.png');
 	background-repeat: no-repeat;
 	background-position: center;
 }

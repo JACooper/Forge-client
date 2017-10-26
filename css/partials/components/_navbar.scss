@@ -33,7 +33,7 @@ $center-column-width: 650px;
 	border-radius: 5px;
 
 	background-color: #C0C0C0;
-	background-image: url('/assets/img/logo-50px.png');
+	background-image: url('../../../build/assets/img/logo-50px.png');
 	background-repeat: no-repeat;
 	background-position: center;
 }
@@ -42,18 +42,12 @@ $center-column-width: 650px;
 	background: none;
 	border: none;
 
-	img {
-		@include set-dimensions(40px, 40px);
-		object-fit: none;
-		object-position: 0 0;
-	}
+	@include set-dimensions(40px, 40px);
+	background: url('../../../build/assets/img/settings-40px.png');
 
 	&:hover {
 		cursor: pointer;
-
-		img {
-			object-position: 0px -40px;
-		}
+		background-position-y: 40px;
 	}
 }
 
