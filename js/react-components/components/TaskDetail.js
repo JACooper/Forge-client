@@ -137,7 +137,12 @@ class TaskDetail extends React.Component {
         <div className='task-detail-category'>
           <label className='task-detail-category-label'>Category</label>
           <select className='task-detail-category-dropdown' value={this.state.category._id} onChange={
-            (e) => {this.setState({category: e.target.value});}
+            (e) => {
+              const category = this.props.categories.find((category) => {
+                return category._id === e.target.value;
+              });
+              this.setState({ category });
+            }
           }>
             {categoryOptions}
           </select>
