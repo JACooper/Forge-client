@@ -53,7 +53,7 @@ const config = {
               }
             }
           },
-          // resolve-url-loader allos relative url() pathing in .scss files
+          // resolve-url-loader allows relative url() pathing in .scss files
           // this allows inlining those images using url-loader and css-loader
           { loader: 'resolve-url-loader' },
           {
