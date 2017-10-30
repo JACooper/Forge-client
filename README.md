@@ -4,6 +4,12 @@ Forge client
 Client repository for Forge, a task tracking app that helps you prioritize on the things you can do right now. Most solutions, be they simple todo lists or complex kanban workflows, operate under the principle of the user conforming to the application model. Forge takes a different approach: tasks are assigned difficulties in three categories (time, effort, and focus), and are presented to the user based on what they specify they're prepared to tackle at that point in their day.
 
 
+Server
+------
+
+The source for the server can be found [here](https://github.com/JACooper/Forge).
+
+
 Stack
 -----
 
